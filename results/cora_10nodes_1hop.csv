@@ -1,0 +1,79 @@
+GroundTruth,Parsed Value,Prompt,Response
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 1
+Edgelist: [(0, 633), (0, 1862), (0, 2582), (1862, 2582)]
+Node to Label Mapping : 
+Node 0: Label 3| Node 633: Label 3| Node 1862: Label ?| Node 2582: Label 3| ```
+            ""","""Label of Node 1862 = 3"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 2
+Edgelist: [(1, 2), (1, 652), (1, 654)]
+Node to Label Mapping : 
+Node 1: Label 4| Node 2: Label ?| Node 652: Label 4| Node 654: Label 4| ```
+            ""","""Label of Node 2 = 4"""
+3,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 3
+Edgelist: [(1, 2), (2, 332), (2, 1454), (2, 1666), (2, 1986)]
+Node to Label Mapping : 
+Node 1: Label 4| Node 2: Label 4| Node 1666: Label 3| Node 1986: Label 3| Node 332: Label ?| Node 1454: Label 4| ```
+            ""","""Label of Node 332 = 4"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 4
+Edgelist: [(2544, 3)]
+Node to Label Mapping : 
+Node 2544: Label ?| Node 3: Label 0| ```
+            ""","""Label of Node = 0"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 5
+Edgelist: [(2176, 4), (2176, 1016), (2176, 1256), (2176, 2175), (1761, 4), (1761, 1256), (1761, 2175), (4, 1016), (4, 1256), (4, 2175), (1256, 1016), (1256, 2175)]
+Node to Label Mapping : 
+Node 2176: Label 3| Node 1761: Label 2| Node 4: Label ?| Node 1256: Label 3| Node 1016: Label 3| Node 2175: Label 2| ```
+            ""","""Based on the given edge connectivity and label information, we can predict the label of Node 4.
+
+From the given information, we can see that Node 4 is connected to Node 1016, Node 1256, and Node 2175. 
+
+Looking at the labels of the connected nodes, we can observe that Node 1016, Node 1256, and Node 2175 all have the label 3. 
+
+Therefore, we can predict that the label of Node 4 is also 3.
+
+Label of Node 4 = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 6
+Edgelist: [(2546, 5), (1659, 5), (1659, 1629), (1629, 5)]
+Node to Label Mapping : 
+Node 2546: Label 2| Node 1659: Label ?| Node 1629: Label 2| Node 5: Label 2| ```
+            ""","""Label of Node = 2"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 7
+Edgelist: [(1602, 6), (1602, 1416), (6, 373), (6, 1042), (6, 1416), (1042, 373)]
+Node to Label Mapping : 
+Node 1602: Label ?| Node 6: Label 0| Node 1416: Label 0| Node 1042: Label 0| Node 373: Label 0| ```
+            ""","""Label of Node = 0"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 8
+Edgelist: [(208, 7)]
+Node to Label Mapping : 
+Node 208: Label ?| Node 7: Label 3| ```
+            ""","""Label of Node 208 = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 9
+Edgelist: [(8, 269), (8, 281), (8, 1996)]
+Node to Label Mapping : 
+Node 8: Label ?| Node 281: Label 3| Node 1996: Label 3| Node 269: Label 3| ```
+            ""","""Label of Node = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 10
+Edgelist: [(9, 723), (9, 2614), (723, 2614)]
+Node to Label Mapping : 
+Node 9: Label 2| Node 723: Label 2| Node 2614: Label ?| ```
+            ""","""Label of Node 2614 = 2"""
