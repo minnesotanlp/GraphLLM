@@ -1,0 +1,701 @@
+GroundTruth,Parsed Value,Prompt,Response
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 1
+Edgelist: Node 384 is connected to Node 1623. Node 384 is connected to Node 1624. 
+Node to Label Mapping : 
+Node 384: Label 1| Node 1624: Label ?| Node 1623: Label 1| ```
+            ""","""Label of Node 1624 = 1"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 2
+Edgelist: Node 72 is connected to Node 1103. Node 72 is connected to Node 1358. Node 1358 is connected to Node 1103. 
+Node to Label Mapping : 
+Node 72: Label 2| Node 1358: Label 2| Node 1103: Label ?| ```
+            ""","""Label of Node 1103 = 2"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 3
+Edgelist: Node 1221 is connected to Node 729. Node 1221 is connected to Node 981. Node 1221 is connected to Node 1577. Node 1221 is connected to Node 1607. Node 1221 is connected to Node 1949. 
+Node to Label Mapping : 
+Node 1221: Label ?| Node 1607: Label 3| Node 1577: Label 3| Node 981: Label 3| Node 729: Label 3| Node 1949: Label 3| ```
+            ""","""Label of Node 1221 = 3"""
+2,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 4
+Edgelist: Node 2456 is connected to Node 672. Node 2456 is connected to Node 817. 
+Node to Label Mapping : 
+Node 2456: Label 5| Node 817: Label 2| Node 672: Label ?| ```
+            ""","""Label of Node 672 = 5"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 5
+Edgelist: Node 2403 is connected to Node 836. Node 708 is connected to Node 836. Node 836 is connected to Node 519. Node 836 is connected to Node 1013. Node 836 is connected to Node 1131. Node 836 is connected to Node 1343. Node 836 is connected to Node 1572. Node 836 is connected to Node 2078. 
+Node to Label Mapping : 
+Node 2403: Label 3| Node 708: Label 3| Node 836: Label 3| Node 1572: Label 1| Node 519: Label 1| Node 1131: Label ?| Node 1013: Label 0| Node 2078: Label 3| Node 1343: Label 4| ```
+            ""","""Label of Node 1131 = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 6
+Edgelist: Node 1473 is connected to Node 165. Node 1473 is connected to Node 598. Node 1473 is connected to Node 2706. Node 1473 is connected to Node 2707. Node 165 is connected to Node 598. Node 165 is connected to Node 2706. Node 165 is connected to Node 2707. Node 2706 is connected to Node 2707. Node 2707 is connected to Node 598. 
+Node to Label Mapping : 
+Node 1473: Label ?| Node 165: Label 3| Node 2706: Label 3| Node 2707: Label 3| Node 598: Label 3| ```
+            ""","""Label of Node = 3"""
+0,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 7
+Edgelist: Node 1595 is connected to Node 2246. 
+Node to Label Mapping : 
+Node 1595: Label 3| Node 2246: Label ?| ```
+            ""","""Label of Node 2246 = 3"""
+3,6,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 8
+Edgelist: Node 1894 is connected to Node 1215. Node 1131 is connected to Node 1215. Node 270 is connected to Node 1215. Node 1203 is connected to Node 1215. 
+Node to Label Mapping : 
+Node 1894: Label ?| Node 1131: Label 3| Node 270: Label 0| Node 1203: Label 0| Node 1215: Label 6| ```
+            ""","""Label of Node 1894 = 6"""
+5,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 9
+Edgelist: Node 1377 is connected to Node 1840. Node 1377 is connected to Node 2068. Node 1377 is connected to Node 2069. Node 1377 is connected to Node 2070. Node 1377 is connected to Node 2388. Node 2069 is connected to Node 2070. 
+Node to Label Mapping : 
+Node 1377: Label 5| Node 1840: Label ?| Node 2068: Label 0| Node 2069: Label 0| Node 2070: Label 0| Node 2388: Label 5| ```
+            ""","""Label of Node 1840 = 0"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 10
+Edgelist: Node 2207 is connected to Node 2241. Node 2241 is connected to Node 500. Node 2241 is connected to Node 1191. Node 2241 is connected to Node 1503. Node 2241 is connected to Node 1957. Node 2241 is connected to Node 2242. 
+Node to Label Mapping : 
+Node 2207: Label 3| Node 2241: Label 3| Node 2242: Label 3| Node 1957: Label 3| Node 1191: Label 3| Node 500: Label ?| Node 1503: Label 3| ```
+            ""","""Label of Node 500 = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 11
+Edgelist: Node 1185 is connected to Node 2590. Node 1498 is connected to Node 1469. Node 1498 is connected to Node 2590. Node 1469 is connected to Node 2590. 
+Node to Label Mapping : 
+Node 1185: Label ?| Node 1498: Label 3| Node 1469: Label 3| Node 2590: Label 3| ```
+            ""","""Label of Node = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 12
+Edgelist: Node 1664 is connected to Node 455. Node 1664 is connected to Node 2147. Node 2146 is connected to Node 374. Node 2146 is connected to Node 2147. Node 2147 is connected to Node 374. Node 2147 is connected to Node 455. Node 2147 is connected to Node 658. Node 2147 is connected to Node 2486. Node 455 is connected to Node 2486. 
+Node to Label Mapping : 
+Node 1664: Label 3| Node 2146: Label 3| Node 2147: Label 3| Node 455: Label 3| Node 658: Label ?| Node 374: Label 3| Node 2486: Label 3| ```
+            ""","""Label of Node 658 = 3"""
+5,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 13
+Edgelist: Node 1896 is connected to Node 1897. Node 1897 is connected to Node 1903. 
+Node to Label Mapping : 
+Node 1896: Label ?| Node 1897: Label 5| Node 1903: Label 5| ```
+            ""","""Label of Node 1896 = 5"""
+2,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 14
+Edgelist: Node 2058 is connected to Node 635. 
+Node to Label Mapping : 
+Node 2058: Label 5| Node 635: Label ?| ```
+            ""","""Label of Node = 5"""
+3,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 15
+Edgelist: Node 760 is connected to Node 2459. Node 2689 is connected to Node 2459. 
+Node to Label Mapping : 
+Node 760: Label 2| Node 2689: Label 2| Node 2459: Label ?| ```
+            ""","""Label of Node 2459 = 2"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 16
+Edgelist: Node 488 is connected to Node 2547. Node 515 is connected to Node 2547. 
+Node to Label Mapping : 
+Node 488: Label 4| Node 515: Label 4| Node 2547: Label ?| ```
+            ""","""Label of Node 2547 = 4"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 17
+Edgelist: Node 38 is connected to Node 862. Node 733 is connected to Node 862. 
+Node to Label Mapping : 
+Node 38: Label ?| Node 733: Label 0| Node 862: Label 4| ```
+            ""","""Label of Node = 4"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 18
+Edgelist: Node 1714 is connected to Node 1358. Node 1714 is connected to Node 1727. Node 188 is connected to Node 1727. Node 1358 is connected to Node 1727. 
+Node to Label Mapping : 
+Node 1714: Label 2| Node 188: Label 2| Node 1358: Label ?| Node 1727: Label 2| ```
+            ""","""Label of Node 1358 = 2"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 19
+Edgelist: Node 168 is connected to Node 167. Node 168 is connected to Node 2437. Node 168 is connected to Node 2438. Node 2437 is connected to Node 167. Node 2437 is connected to Node 2438. 
+Node to Label Mapping : 
+Node 168: Label 3| Node 2437: Label ?| Node 2438: Label 3| Node 167: Label 3| ```
+            ""","""Label of Node 2437 = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 20
+Edgelist: Node 1763 is connected to Node 155. Node 1763 is connected to Node 817. Node 1763 is connected to Node 1358. Node 1763 is connected to Node 1736. Node 1736 is connected to Node 155. Node 1736 is connected to Node 817. Node 1736 is connected to Node 1358. Node 1358 is connected to Node 155. Node 817 is connected to Node 155. 
+Node to Label Mapping : 
+Node 1763: Label 2| Node 1736: Label 2| Node 1358: Label 2| Node 817: Label ?| Node 155: Label 2| ```
+            ""","""Label of Node 817 = 2"""
+0,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 21
+Edgelist: Node 1538 is connected to Node 1131. Node 1538 is connected to Node 1133. Node 1538 is connected to Node 1500. Node 1538 is connected to Node 2185. Node 2185 is connected to Node 1131. Node 2185 is connected to Node 1133. Node 2185 is connected to Node 1500. Node 1930 is connected to Node 1131. Node 436 is connected to Node 1131. Node 1215 is connected to Node 1131. Node 836 is connected to Node 1131. Node 838 is connected to Node 242. Node 838 is connected to Node 1131. Node 838 is connected to Node 2280. Node 1224 is connected to Node 1131. Node 1224 is connected to Node 2155. Node 1500 is connected to Node 1131. Node 1500 is connected to Node 1133. Node 1121 is connected to Node 1131. Node 1121 is connected to Node 1655. Node 2280 is connected to Node 242. Node 2280 is connected to Node 1131. Node 2281 is connected to Node 1131. Node 490 is connected to Node 1131. Node 1131 is connected to Node 242. Node 1131 is connected to Node 510. Node 1131 is connected to Node 1133. Node 1131 is connected to Node 1655. Node 1131 is connected to Node 1909. Node 1131 is connected to Node 2155. Node 1131 is connected to Node 2282. Node 1131 is connected to Node 2283. Node 2282 is connected to Node 1655. 
+Node to Label Mapping : 
+Node 1538: Label 5| Node 2185: Label 5| Node 1930: Label 0| Node 436: Label 3| Node 1215: Label 6| Node 836: Label 3| Node 838: Label ?| Node 1224: Label 0| Node 1500: Label 5| Node 1121: Label 3| Node 2280: Label 0| Node 2281: Label 5| Node 490: Label 5| Node 1131: Label 3| Node 2155: Label 0| Node 1133: Label 5| Node 2282: Label 3| Node 2283: Label 3| Node 242: Label 0| Node 1909: Label 0| Node 1655: Label 0| Node 510: Label 3| ```
+            ""","""Label of Node = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 22
+Edgelist: Node 1833 is connected to Node 797. Node 1833 is connected to Node 1035. Node 1833 is connected to Node 1834. 
+Node to Label Mapping : 
+Node 1833: Label 2| Node 1834: Label 1| Node 1035: Label 2| Node 797: Label ?| ```
+            ""","""Label of Node 797 = 2"""
+0,6,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 23
+Edgelist: Node 777 is connected to Node 702. 
+Node to Label Mapping : 
+Node 777: Label ?| Node 702: Label 6| ```
+            ""","""Label of Node 777 = 6"""
+2,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 24
+Edgelist: Node 567 is connected to Node 631. Node 2358 is connected to Node 631. 
+Node to Label Mapping : 
+Node 567: Label 2| Node 2358: Label 3| Node 631: Label ?| ```
+            ""","""Label of Node = 3"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 25
+Edgelist: Node 2056 is connected to Node 408. Node 2056 is connected to Node 734. Node 2056 is connected to Node 1841. Node 525 is connected to Node 347. Node 525 is connected to Node 408. Node 315 is connected to Node 408. Node 1841 is connected to Node 408. Node 1841 is connected to Node 734. Node 408 is connected to Node 347. Node 408 is connected to Node 734. 
+Node to Label Mapping : 
+Node 2056: Label 0| Node 525: Label ?| Node 315: Label 0| Node 1841: Label 0| Node 408: Label 0| Node 347: Label 0| Node 734: Label 0| ```
+            ""","""Label of Node 525 = 0"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 26
+Edgelist: Node 1410 is connected to Node 1203. Node 424 is connected to Node 1203. Node 2155 is connected to Node 1203. Node 461 is connected to Node 1203. Node 1842 is connected to Node 1203. Node 1203 is connected to Node 382. Node 1203 is connected to Node 1215. 
+Node to Label Mapping : 
+Node 1410: Label 0| Node 424: Label 5| Node 2155: Label 0| Node 461: Label ?| Node 1842: Label 5| Node 1203: Label 0| Node 382: Label 3| Node 1215: Label 6| ```
+            ""","""Label of Node 461 = 0"""
+1,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 27
+Edgelist: Node 2169 is connected to Node 1547. 
+Node to Label Mapping : 
+Node 2169: Label 2| Node 1547: Label ?| ```
+            ""","""Label of Node = 2"""
+2,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 28
+Edgelist: Node 2176 is connected to Node 4. Node 2176 is connected to Node 595. Node 2176 is connected to Node 982. Node 2176 is connected to Node 1016. Node 2176 is connected to Node 1091. Node 2176 is connected to Node 1256. Node 2176 is connected to Node 1382. Node 2176 is connected to Node 2175. Node 1091 is connected to Node 982. Node 1091 is connected to Node 1256. Node 4 is connected to Node 1016. Node 4 is connected to Node 1256. Node 4 is connected to Node 2175. Node 1256 is connected to Node 595. Node 1256 is connected to Node 982. Node 1256 is connected to Node 1016. Node 1256 is connected to Node 2175. Node 595 is connected to Node 1016. Node 982 is connected to Node 2175. 
+Node to Label Mapping : 
+Node 2176: Label 3| Node 1091: Label 3| Node 4: Label 3| Node 1382: Label 3| Node 1256: Label 3| Node 595: Label 3| Node 982: Label 3| Node 1016: Label 3| Node 2175: Label ?| ```
+            ""","""Label of Node 2175 = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 29
+Edgelist: Node 1249 is connected to Node 1483. Node 1249 is connected to Node 2556. Node 1249 is connected to Node 2558. 
+Node to Label Mapping : 
+Node 1249: Label 2| Node 1483: Label ?| Node 2556: Label 2| Node 2558: Label 2| ```
+            ""","""Label of Node 1483 = 2"""
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 30
+Edgelist: Node 1505 is connected to Node 36. Node 1505 is connected to Node 1146. Node 1505 is connected to Node 1552. Node 1505 is connected to Node 2107. Node 36 is connected to Node 1146. Node 36 is connected to Node 1552. Node 36 is connected to Node 1640. Node 36 is connected to Node 1781. Node 36 is connected to Node 2094. Node 36 is connected to Node 2106. Node 36 is connected to Node 2107. Node 2106 is connected to Node 2094. Node 1781 is connected to Node 2107. 
+Node to Label Mapping : 
+Node 1505: Label 1| Node 36: Label 1| Node 2106: Label 1| Node 1640: Label 1| Node 2094: Label 1| Node 1552: Label 1| Node 1781: Label 1| Node 1146: Label 1| Node 2107: Label ?| ```
+            ""","""Label of Node 2107 = 1"""
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 31
+Edgelist: Node 1346 is connected to Node 519. Node 1346 is connected to Node 1670. Node 133 is connected to Node 1670. Node 1670 is connected to Node 303. Node 1670 is connected to Node 308. Node 1670 is connected to Node 519. 
+Node to Label Mapping : 
+Node 1346: Label 1| Node 133: Label 1| Node 1670: Label 1| Node 519: Label 1| Node 303: Label ?| Node 308: Label 1| ```
+            ""","""Label of Node 303 = 1"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 32
+Edgelist: Node 1384 is connected to Node 1229. Node 1384 is connected to Node 1358. Node 1229 is connected to Node 1358. 
+Node to Label Mapping : 
+Node 1384: Label 2| Node 1229: Label ?| Node 1358: Label 2| ```
+            ""","""Label of Node 1229 = 2"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 33
+Edgelist: Node 1693 is connected to Node 1391. 
+Node to Label Mapping : 
+Node 1693: Label 0| Node 1391: Label ?| ```
+            ""","""Label of Node = 0"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 34
+Edgelist: Node 2490 is connected to Node 94. Node 2490 is connected to Node 2263. Node 1015 is connected to Node 2263. Node 94 is connected to Node 2263. 
+Node to Label Mapping : 
+Node 2490: Label 4| Node 1015: Label 4| Node 94: Label 0| Node 2263: Label ?| ```
+            ""","""Label of Node 2263 = 4"""
+6,6 : <predicted label>,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 35
+Edgelist: Node 712 is connected to Node 850. Node 712 is connected to Node 1464. Node 712 is connected to Node 2480. Node 850 is connected to Node 1464. 
+Node to Label Mapping : 
+Node 712: Label ?| Node 2480: Label 6| Node 850: Label 6| Node 1464: Label 6| ```
+            ""","""Label of Node = 6 : <predicted label>"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 36
+Edgelist: Node 824 is connected to Node 1831. 
+Node to Label Mapping : 
+Node 824: Label 2| Node 1831: Label ?| ```
+            ""","""Label of Node = 2"""
+5,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 37
+Edgelist: Node 2178 is connected to Node 88. Node 2178 is connected to Node 415. Node 2178 is connected to Node 1309. Node 995 is connected to Node 1309. Node 2015 is connected to Node 88. Node 2015 is connected to Node 1309. Node 1288 is connected to Node 88. Node 1288 is connected to Node 1309. Node 490 is connected to Node 1309. Node 1338 is connected to Node 1309. Node 1677 is connected to Node 88. Node 1677 is connected to Node 415. Node 1677 is connected to Node 1309. Node 1741 is connected to Node 88. Node 1741 is connected to Node 1309. Node 851 is connected to Node 88. Node 851 is connected to Node 415. Node 851 is connected to Node 1309. Node 1882 is connected to Node 88. Node 1882 is connected to Node 1309. Node 2102 is connected to Node 1309. Node 2103 is connected to Node 1309. Node 88 is connected to Node 415. Node 88 is connected to Node 1309. Node 1625 is connected to Node 1309. Node 1309 is connected to Node 61. Node 1309 is connected to Node 415. 
+Node to Label Mapping : 
+Node 2178: Label 5| Node 995: Label 5| Node 2015: Label 6| Node 1288: Label 6| Node 490: Label 5| Node 1338: Label 5| Node 1677: Label 5| Node 1741: Label 3| Node 851: Label 0| Node 1882: Label 5| Node 2102: Label 5| Node 2103: Label 5| Node 88: Label 0| Node 1625: Label 2| Node 1309: Label ?| Node 61: Label 0| Node 415: Label 0| ```
+            ""","""Label of Node 1309 = 5"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 38
+Edgelist: Node 2699 is connected to Node 2630. Node 1957 is connected to Node 2630. 
+Node to Label Mapping : 
+Node 2699: Label 3| Node 1957: Label 3| Node 2630: Label ?| ```
+            ""","""Label of Node = 3"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 39
+Edgelist: Node 194 is connected to Node 1050. Node 194 is connected to Node 1451. Node 194 is connected to Node 2564. Node 1379 is connected to Node 1380. Node 1379 is connected to Node 2564. Node 1380 is connected to Node 1050. Node 1380 is connected to Node 2564. Node 2564 is connected to Node 1050. Node 2564 is connected to Node 1451. 
+Node to Label Mapping : 
+Node 194: Label ?| Node 1379: Label 4| Node 1380: Label 4| Node 2564: Label 4| Node 1451: Label 4| Node 1050: Label 4| ```
+            ""","""Label of Node 194 = 4"""
+3,? : 3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 40
+Edgelist: Node 944 is connected to Node 2138. 
+Node to Label Mapping : 
+Node 944: Label ?| Node 2138: Label 3| ```
+            ""","""Label of Node 944 = ? : 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 41
+Edgelist: Node 486 is connected to Node 2077. Node 1704 is connected to Node 2077. Node 2076 is connected to Node 2075. Node 2076 is connected to Node 2077. Node 14 is connected to Node 2075. Node 14 is connected to Node 2077. Node 2075 is connected to Node 1020. Node 2075 is connected to Node 2077. Node 1020 is connected to Node 2077. 
+Node to Label Mapping : 
+Node 486: Label 3| Node 1704: Label 3| Node 2076: Label ?| Node 14: Label 3| Node 2075: Label 3| Node 1020: Label 3| Node 2077: Label 3| ```
+            ""","""Label of Node 2076 = 3"""
+2,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 42
+Edgelist: Node 1072 is connected to Node 342. Node 1512 is connected to Node 342. 
+Node to Label Mapping : 
+Node 1072: Label ?| Node 1512: Label 5| Node 342: Label 1| ```
+            ""","""Label of Node = 5"""
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 43
+Edgelist: Node 878 is connected to Node 2326. Node 1998 is connected to Node 2326. Node 1782 is connected to Node 2326. Node 1142 is connected to Node 2326. 
+Node to Label Mapping : 
+Node 878: Label 5| Node 1998: Label 5| Node 1782: Label ?| Node 1142: Label 1| Node 2326: Label 1| ```
+            ""","""Label of Node 1782 = 1"""
+4,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 44
+Edgelist: Node 2329 is connected to Node 397. Node 1096 is connected to Node 397. Node 397 is connected to Node 665. Node 397 is connected to Node 879. 
+Node to Label Mapping : 
+Node 2329: Label 1| Node 1096: Label 3| Node 397: Label 3| Node 879: Label 3| Node 665: Label ?| ```
+            ""","""Label of Node 665 = 3"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 45
+Edgelist: Node 1794 is connected to Node 798. Node 1794 is connected to Node 1381. Node 1794 is connected to Node 1795. Node 1794 is connected to Node 1796. Node 1795 is connected to Node 798. Node 1795 is connected to Node 1796. Node 1381 is connected to Node 798. 
+Node to Label Mapping : 
+Node 1794: Label 4| Node 1795: Label ?| Node 1796: Label 4| Node 1381: Label 4| Node 798: Label 4| ```
+            ""","""Label of Node 1795 = 4"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 46
+Edgelist: Node 713 is connected to Node 1044. 
+Node to Label Mapping : 
+Node 713: Label 3| Node 1044: Label ?| ```
+            ""","""Label of Node 1044 = 3"""
+0,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 47
+Edgelist: Node 1416 is connected to Node 1921. Node 1921 is connected to Node 315. Node 1921 is connected to Node 827. 
+Node to Label Mapping : 
+Node 1416: Label 0| Node 1921: Label ?| Node 315: Label 0| Node 827: Label 3| ```
+            ""","""Label of Node = 3"""
+4,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 48
+Edgelist: Node 1671 is connected to Node 2137. Node 2137 is connected to Node 1394. Node 2137 is connected to Node 1487. 
+Node to Label Mapping : 
+Node 1671: Label ?| Node 2137: Label 0| Node 1394: Label 5| Node 1487: Label 6| ```
+            ""","""Label of Node = 0"""
+3,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 49
+Edgelist: Node 456 is connected to Node 544. Node 456 is connected to Node 2347. Node 544 is connected to Node 2347. Node 2347 is connected to Node 1692. 
+Node to Label Mapping : 
+Node 456: Label 0| Node 544: Label 0| Node 2347: Label 0| Node 1692: Label ?| ```
+            ""","""Label of Node 1692 = 0"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 50
+Edgelist: Node 2529 is connected to Node 959. 
+Node to Label Mapping : 
+Node 2529: Label 3| Node 959: Label ?| ```
+            ""","""Label of Node = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 51
+Edgelist: Node 1577 is connected to Node 1054. Node 1577 is connected to Node 1099. Node 1099 is connected to Node 1054. Node 1099 is connected to Node 1607. 
+Node to Label Mapping : 
+Node 1577: Label 3| Node 1099: Label 3| Node 1054: Label ?| Node 1607: Label 3| ```
+            ""","""Label of Node 1054 = 3"""
+6,6,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 52
+Edgelist: Node 1676 is connected to Node 1074. Node 1676 is connected to Node 1501. Node 1487 is connected to Node 1501. Node 1074 is connected to Node 1501. Node 116 is connected to Node 1501. Node 2228 is connected to Node 1501. Node 2228 is connected to Node 2395. Node 1399 is connected to Node 1501. Node 2395 is connected to Node 1501. 
+Node to Label Mapping : 
+Node 1676: Label 6| Node 1487: Label ?| Node 1074: Label 6| Node 116: Label 6| Node 2228: Label 6| Node 1399: Label 6| Node 2395: Label 6| Node 1501: Label 6| ```
+            ""","""Label of Node 1487 = 6"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 53
+Edgelist: Node 1225 is connected to Node 1450. Node 1225 is connected to Node 2579. 
+Node to Label Mapping : 
+Node 1225: Label ?| Node 1450: Label 3| Node 2579: Label 3| ```
+            ""","""Label of Node = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 54
+Edgelist: Node 1282 is connected to Node 684. Node 684 is connected to Node 1358. 
+Node to Label Mapping : 
+Node 1282: Label ?| Node 684: Label 2| Node 1358: Label 2| ```
+            ""","""Label of Node = 2"""
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 55
+Edgelist: Node 384 is connected to Node 1623. Node 384 is connected to Node 1624. 
+Node to Label Mapping : 
+Node 384: Label ?| Node 1624: Label 1| Node 1623: Label 1| ```
+            ""","""Label of Node = 1"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 56
+Edgelist: Node 2346 is connected to Node 1469. Node 2346 is connected to Node 1692. Node 2346 is connected to Node 2349. Node 2349 is connected to Node 1469. Node 2349 is connected to Node 1498. Node 2349 is connected to Node 1692. Node 2349 is connected to Node 2358. Node 756 is connected to Node 1469. Node 756 is connected to Node 1692. Node 2358 is connected to Node 1469. Node 1498 is connected to Node 1469. Node 1498 is connected to Node 2590. Node 1692 is connected to Node 1469. Node 1469 is connected to Node 2590. 
+Node to Label Mapping : 
+Node 2346: Label 3| Node 2349: Label 3| Node 756: Label ?| Node 2358: Label 3| Node 1498: Label 3| Node 1692: Label 3| Node 1469: Label 3| Node 2590: Label 3| ```
+            ""","""Label of Node 756 = 3"""
+5,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 57
+Edgelist: Node 1538 is connected to Node 1842. Node 2405 is connected to Node 120. Node 2405 is connected to Node 816. Node 2405 is connected to Node 1842. Node 2405 is connected to Node 1979. Node 2405 is connected to Node 1980. Node 2405 is connected to Node 2281. Node 2281 is connected to Node 1842. Node 816 is connected to Node 120. Node 816 is connected to Node 1842. Node 816 is connected to Node 1980. Node 1842 is connected to Node 120. Node 1842 is connected to Node 1013. Node 1842 is connected to Node 1203. Node 1842 is connected to Node 1655. Node 1842 is connected to Node 1979. Node 1842 is connected to Node 1980. Node 1979 is connected to Node 1980. 
+Node to Label Mapping : 
+Node 1538: Label 5| Node 2405: Label 3| Node 2281: Label 5| Node 816: Label 5| Node 1842: Label ?| Node 1203: Label 0| Node 1013: Label 0| Node 1655: Label 0| Node 120: Label 5| Node 1979: Label 5| Node 1980: Label 5| ```
+            ""","""Label of Node 1842 = 5"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 58
+Edgelist: Node 2571 is connected to Node 1386. Node 1386 is connected to Node 727. Node 1386 is connected to Node 2570. Node 2570 is connected to Node 727. 
+Node to Label Mapping : 
+Node 2571: Label 3| Node 1386: Label 3| Node 2570: Label 3| Node 727: Label ?| ```
+            ""","""Label of Node 727 = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 59
+Edgelist: Node 833 is connected to Node 1130. Node 833 is connected to Node 1641. Node 833 is connected to Node 2495. Node 1641 is connected to Node 2495. Node 1130 is connected to Node 2495. Node 2494 is connected to Node 2495. 
+Node to Label Mapping : 
+Node 833: Label 3| Node 1641: Label ?| Node 1130: Label 3| Node 2494: Label 3| Node 2495: Label 3| ```
+            ""","""Label of Node 1641 = 3"""
+1,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 60
+Edgelist: Node 1505 is connected to Node 330. Node 330 is connected to Node 91. Node 330 is connected to Node 2123. Node 91 is connected to Node 2123. 
+Node to Label Mapping : 
+Node 1505: Label ?| Node 330: Label 4| Node 91: Label 4| Node 2123: Label 4| ```
+            ""","""Label of Node = 4"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 61
+Edgelist: Node 2530 is connected to Node 871. Node 867 is connected to Node 657. Node 867 is connected to Node 871. Node 867 is connected to Node 1229. Node 871 is connected to Node 657. Node 871 is connected to Node 1229. Node 871 is connected to Node 2652. Node 1229 is connected to Node 657. 
+Node to Label Mapping : 
+Node 2530: Label 2| Node 867: Label 2| Node 871: Label 2| Node 1229: Label 2| Node 657: Label 2| Node 2652: Label ?| ```
+            ""","""Label of Node 2652 = 2"""
+5,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 62
+Edgelist: Node 424 is connected to Node 436. Node 424 is connected to Node 1203. 
+Node to Label Mapping : 
+Node 424: Label ?| Node 1203: Label 0| Node 436: Label 3| ```
+            ""","""Label of Node = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 63
+Edgelist: Node 1830 is connected to Node 889. Node 1830 is connected to Node 1067. Node 1830 is connected to Node 1513. Node 1830 is connected to Node 2045. 
+Node to Label Mapping : 
+Node 1830: Label 2| Node 1513: Label 2| Node 1067: Label ?| Node 889: Label 2| Node 2045: Label 1| ```
+            ""","""Label of Node 1067 = 2"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 64
+Edgelist: Node 1257 is connected to Node 2677. Node 956 is connected to Node 2677. 
+Node to Label Mapping : 
+Node 1257: Label 4| Node 956: Label ?| Node 2677: Label 4| ```
+            ""","""Label of Node = 4"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 65
+Edgelist: Node 1740 is connected to Node 1627. Node 1229 is connected to Node 1308. Node 1229 is connected to Node 1627. Node 1627 is connected to Node 59. Node 1627 is connected to Node 1308. 
+Node to Label Mapping : 
+Node 1740: Label 2| Node 1229: Label 2| Node 1627: Label 2| Node 59: Label 2| Node 1308: Label ?| ```
+            ""","""Label of Node 1308 = 2"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 66
+Edgelist: Node 104 is connected to Node 401. Node 104 is connected to Node 1065. Node 1065 is connected to Node 401. Node 1065 is connected to Node 1096. Node 1096 is connected to Node 401. Node 1160 is connected to Node 401. Node 1160 is connected to Node 733. Node 401 is connected to Node 54. Node 401 is connected to Node 733. 
+Node to Label Mapping : 
+Node 104: Label 1| Node 1065: Label 3| Node 1096: Label 3| Node 1160: Label 3| Node 401: Label ?| Node 54: Label 1| Node 733: Label 0| ```
+            ""","""Label of Node 401 = 3"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 67
+Edgelist: Node 1510 is connected to Node 1046. Node 1510 is connected to Node 1162. Node 1510 is connected to Node 1202. Node 1510 is connected to Node 2387. Node 2387 is connected to Node 1046. 
+Node to Label Mapping : 
+Node 1510: Label ?| Node 1162: Label 4| Node 1202: Label 4| Node 2387: Label 4| Node 1046: Label 4| ```
+            ""","""Label of Node = 4"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 68
+Edgelist: Node 1508 is connected to Node 1405. Node 1508 is connected to Node 1894. Node 229 is connected to Node 1053. Node 229 is connected to Node 1405. Node 229 is connected to Node 1894. Node 1894 is connected to Node 1405. Node 1405 is connected to Node 1053. 
+Node to Label Mapping : 
+Node 1508: Label 3| Node 229: Label ?| Node 1894: Label 3| Node 1405: Label 3| Node 1053: Label 3| ```
+            ""","""Label of Node 229 = 3"""
+5,2272 : ?,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 69
+Edgelist: Node 2272 is connected to Node 1441. 
+Node to Label Mapping : 
+Node 2272: Label ?| Node 1441: Label 5| ```
+            ""","""Label of Node = 2272 : ?"""
+0,2194 : 0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 70
+Edgelist: Node 2194 is connected to Node 214. 
+Node to Label Mapping : 
+Node 2194: Label ?| Node 214: Label 0| ```
+            ""","""Label of Node = 2194 : 0"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 71
+Edgelist: Node 1026 is connected to Node 2531. 
+Node to Label Mapping : 
+Node 1026: Label ?| Node 2531: Label 3| ```
+            ""","""Label of Node = 3"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 72
+Edgelist: Node 1322 is connected to Node 63. 
+Node to Label Mapping : 
+Node 1322: Label ?| Node 63: Label 4| ```
+            ""","""Label of Node = 4"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 73
+Edgelist: Node 310 is connected to Node 150. Node 914 is connected to Node 150. Node 1942 is connected to Node 150. 
+Node to Label Mapping : 
+Node 310: Label 3| Node 914: Label 3| Node 1942: Label ?| Node 150: Label 3| ```
+            ""","""Label of Node 1942 = 3"""
+6,6,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 74
+Edgelist: Node 2394 is connected to Node 2397. 
+Node to Label Mapping : 
+Node 2394: Label ?| Node 2397: Label 6| ```
+            ""","""Label of Node 2394 = 6"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 75
+Edgelist: Node 2597 is connected to Node 915. Node 2597 is connected to Node 2415. Node 1035 is connected to Node 915. Node 1035 is connected to Node 1740. Node 1740 is connected to Node 915. Node 2415 is connected to Node 915. 
+Node to Label Mapping : 
+Node 2597: Label 2| Node 1035: Label 2| Node 1740: Label 2| Node 2415: Label ?| Node 915: Label 2| ```
+            ""","""Label of Node 2415 = 2"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 76
+Edgelist: Node 512 is connected to Node 172. Node 512 is connected to Node 240. Node 512 is connected to Node 756. Node 512 is connected to Node 1472. Node 512 is connected to Node 1692. Node 1472 is connected to Node 240. Node 1472 is connected to Node 756. Node 1472 is connected to Node 1692. Node 172 is connected to Node 240. Node 172 is connected to Node 756. Node 172 is connected to Node 1692. Node 240 is connected to Node 756. Node 240 is connected to Node 1692. Node 756 is connected to Node 1692. 
+Node to Label Mapping : 
+Node 512: Label 3| Node 1472: Label 3| Node 172: Label 3| Node 240: Label ?| Node 756: Label 3| Node 1692: Label 3| ```
+            ""","""Label of Node 240 = 3"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 77
+Edgelist: Node 552 is connected to Node 2201. Node 2201 is connected to Node 95. Node 2201 is connected to Node 2199. Node 2199 is connected to Node 95. 
+Node to Label Mapping : 
+Node 552: Label 2| Node 2201: Label ?| Node 2199: Label 0| Node 95: Label 0| ```
+            ""","""Label of Node 2201 = 0"""
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 78
+Edgelist: Node 2377 is connected to Node 372. Node 1834 is connected to Node 372. Node 1710 is connected to Node 372. Node 626 is connected to Node 372. 
+Node to Label Mapping : 
+Node 2377: Label ?| Node 1834: Label 1| Node 1710: Label 2| Node 626: Label 2| Node 372: Label 1| ```
+            ""","""Label of Node 372 = 1"""
+5,? : 5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 79
+Edgelist: Node 2644 is connected to Node 1885. 
+Node to Label Mapping : 
+Node 2644: Label ?| Node 1885: Label 5| ```
+            ""","""Label of Node 2644 = ? : 5"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 80
+Edgelist: Node 2688 is connected to Node 1554. Node 2688 is connected to Node 1657. Node 1657 is connected to Node 1554. Node 1657 is connected to Node 2686. Node 1554 is connected to Node 2686. 
+Node to Label Mapping : 
+Node 2688: Label 3| Node 1657: Label ?| Node 1554: Label 3| Node 2686: Label 3| ```
+            ""","""Label of Node = 3"""
+4,? : 4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 81
+Edgelist: Node 1443 is connected to Node 1350. 
+Node to Label Mapping : 
+Node 1443: Label ?| Node 1350: Label 4| ```
+            ""","""Label of Node 1443 = ? : 4"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 82
+Edgelist: Node 194 is connected to Node 1050. Node 194 is connected to Node 1451. Node 194 is connected to Node 2564. Node 1379 is connected to Node 1380. Node 1379 is connected to Node 2564. Node 1380 is connected to Node 1050. Node 1380 is connected to Node 2564. Node 2564 is connected to Node 1050. Node 2564 is connected to Node 1451. 
+Node to Label Mapping : 
+Node 194: Label 4| Node 1379: Label 4| Node 1380: Label 4| Node 2564: Label ?| Node 1451: Label 4| Node 1050: Label 4| ```
+            ""","""Label of Node 2564 = 4"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 83
+Edgelist: Node 1259 is connected to Node 2342. 
+Node to Label Mapping : 
+Node 1259: Label ?| Node 2342: Label 0| ```
+            ""","""Label of Node = 0"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 84
+Edgelist: Node 640 is connected to Node 1090. Node 640 is connected to Node 1598. Node 1090 is connected to Node 1093. Node 1090 is connected to Node 1147. Node 1090 is connected to Node 1598. Node 1090 is connected to Node 2367. Node 1093 is connected to Node 1598. Node 1093 is connected to Node 2367. Node 1147 is connected to Node 1598. Node 1147 is connected to Node 2367. Node 1598 is connected to Node 2367. 
+Node to Label Mapping : 
+Node 640: Label 3| Node 1090: Label 3| Node 1093: Label ?| Node 1147: Label 3| Node 1598: Label 3| Node 2367: Label 3| ```
+            ""","""Label of Node 1093 = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 85
+Edgelist: Node 1762 is connected to Node 111. Node 1762 is connected to Node 758. Node 1762 is connected to Node 1358. Node 1358 is connected to Node 111. Node 1358 is connected to Node 758. Node 1358 is connected to Node 1169. Node 111 is connected to Node 758. Node 111 is connected to Node 1169. Node 111 is connected to Node 2492. Node 111 is connected to Node 2643. Node 1169 is connected to Node 2492. Node 758 is connected to Node 2492. 
+Node to Label Mapping : 
+Node 1762: Label 2| Node 1358: Label 2| Node 111: Label 2| Node 1169: Label 2| Node 2643: Label 2| Node 758: Label ?| Node 2492: Label 2| ```
+            ""","""Label of Node 758 = 2"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 86
+Edgelist: Node 1697 is connected to Node 2253. 
+Node to Label Mapping : 
+Node 1697: Label ?| Node 2253: Label 3| ```
+            ""","""Label of Node = 3"""
+6,2604 : 6,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 87
+Edgelist: Node 2604 is connected to Node 127. 
+Node to Label Mapping : 
+Node 2604: Label ?| Node 127: Label 6| ```
+            ""","""Label of Node = 2604 : 6"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 88
+Edgelist: Node 1633 is connected to Node 1096. Node 1096 is connected to Node 397. Node 1096 is connected to Node 401. Node 1096 is connected to Node 411. Node 1096 is connected to Node 1065. Node 1065 is connected to Node 401. 
+Node to Label Mapping : 
+Node 1633: Label 3| Node 1096: Label 3| Node 1065: Label 3| Node 397: Label 3| Node 401: Label 3| Node 411: Label ?| ```
+            ""","""Label of Node 411 = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 89
+Edgelist: Node 740 is connected to Node 1002. Node 740 is connected to Node 2033. Node 1002 is connected to Node 2033. Node 2033 is connected to Node 788. Node 2033 is connected to Node 1336. 
+Node to Label Mapping : 
+Node 740: Label 4| Node 1002: Label ?| Node 2033: Label 3| Node 788: Label 3| Node 1336: Label 4| ```
+            ""","""Label of Node 1002 = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 90
+Edgelist: Node 640 is connected to Node 2420. 
+Node to Label Mapping : 
+Node 640: Label 3| Node 2420: Label ?| ```
+            ""","""Label of Node = 3"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 91
+Edgelist: Node 273 is connected to Node 374. Node 273 is connected to Node 846. Node 374 is connected to Node 846. 
+Node to Label Mapping : 
+Node 273: Label 3| Node 374: Label ?| Node 846: Label 3| ```
+            ""","""Label of Node 374 = 3"""
+0,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 92
+Edgelist: Node 715 is connected to Node 2291. 
+Node to Label Mapping : 
+Node 715: Label 4| Node 2291: Label ?| ```
+            ""","""Label of Node = 4"""
+3,690 : 3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 93
+Edgelist: Node 690 is connected to Node 311. 
+Node to Label Mapping : 
+Node 690: Label ?| Node 311: Label 3| ```
+            ""","""Label of Node = 690 : 3"""
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 94
+Edgelist: Node 1064 is connected to Node 394. Node 1064 is connected to Node 2351. Node 1064 is connected to Node 2352. Node 394 is connected to Node 2351. 
+Node to Label Mapping : 
+Node 1064: Label 4| Node 394: Label 4| Node 2352: Label 4| Node 2351: Label ?| ```
+            ""","""Label of Node 2351 = 4"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 95
+Edgelist: Node 681 is connected to Node 1445. Node 681 is connected to Node 1446. Node 1445 is connected to Node 1446. 
+Node to Label Mapping : 
+Node 681: Label ?| Node 1445: Label 3| Node 1446: Label 3| ```
+            ""","""Label of Node 681 = 3"""
+2,2,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 96
+Edgelist: Node 2512 is connected to Node 569. 
+Node to Label Mapping : 
+Node 2512: Label 2| Node 569: Label ?| ```
+            ""","""Label of Node = 2"""
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 97
+Edgelist: Node 2505 is connected to Node 406. 
+Node to Label Mapping : 
+Node 2505: Label 1| Node 406: Label ?| ```
+            ""","""Label of Node = 1"""
+0,0,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 98
+Edgelist: Node 475 is connected to Node 2219. 
+Node to Label Mapping : 
+Node 475: Label 0| Node 2219: Label ?| ```
+            ""","""Label of Node = 0"""
+1,1,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 99
+Edgelist: Node 139 is connected to Node 660. Node 139 is connected to Node 1623. Node 660 is connected to Node 1623. 
+Node to Label Mapping : 
+Node 139: Label 1| Node 660: Label 1| Node 1623: Label ?| ```
+            ""","""Label of Node 1623 = 1"""
+3,3,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Graph 100
+Edgelist: Node 1095 is connected to Node 298. Node 1095 is connected to Node 1325. Node 1000 is connected to Node 1325. Node 327 is connected to Node 1325. Node 327 is connected to Node 2063. Node 298 is connected to Node 1325. Node 2247 is connected to Node 1325. Node 1325 is connected to Node 2063. 
+Node to Label Mapping : 
+Node 1095: Label 3| Node 1000: Label 3| Node 327: Label 3| Node 298: Label 3| Node 2247: Label 3| Node 1325: Label ?| Node 2063: Label 3| ```
+            ""","""Label of Node 1325 = 3"""

@@ -105,14 +105,16 @@ def generate_node_label_dict(graph, node_with_question_mark):
         node_label_dict[node]=label
     return ground_truth, node_label_dict
         
-def generate_text_for_prompt(i, graph):
+def generate_text_for_prompt(i, graph, edge_text_flag):
     text = ""
     ground_truth = ""
     text+= f"Graph {i+1}"+"\n"
     edge_list = generate_edgelist(graph)
-
-    #edge_list_converted = generate_textual_edgelist(edge_list)
-    text+="Edgelist: "+str(edge_list)+"\n"
+    if edge_text_flag:
+        edge_list_converted = generate_textual_edgelist(edge_list)
+        text+="Edgelist: "+str(edge_list_converted)+"\n"
+    else:
+        text+="Edgelist: "+str(edge_list)+"\n"
     # Randomly choose a node to have a "?" label
     node_with_question_mark = random.choice(list(graph.nodes()))
     ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark)
@@ -132,8 +134,26 @@ def parse_response(response, delimiter):
         return None
 
 
+def compute_accuracy(csv_filename):
+    total_count = 0
+    correct_count = 0
 
-if __name__== '__main__':
+    with open(csv_filename, 'r') as csvfile:
+        csv_reader = csv.DictReader(csvfile)
+        for row in csv_reader:
+            total_count += 1
+            ground_truth = row['GroundTruth']
+            parsed_value = row['Parsed Value']
+            if ground_truth == parsed_value:
+                correct_count += 1
+
+    if total_count == 0:
+        return 0
+    else:
+        accuracy = correct_count / total_count
+        return accuracy
+
+if __name__== '__main__':  
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     data_dir = "./data"
     os.makedirs(data_dir, exist_ok=True)
@@ -149,15 +169,19 @@ if __name__== '__main__':
     #edge_example = edge_index[:, np.where(edge_index[0]==30)[0]]
     #draw_graph(edge_example)
 
-    #sample 10 nodes and create the prompt for gpt 3.5-turbo
+    #sample nodes and create the prompt for gpt 3.5-turbo
+    random.seed(10)
     openai.api_key = os.environ["OPENAI_API_UMNKEY"]
-    filename = "./results/cora_10nodes_2hop.csv"
-    graph_list = generate_graphlist(10,2, data)
+    filename = "./results/cora_100nodes_1hop_edgelist.csv"
+    no_of_hops = 1
+    use_edge_text = False
+    no_of_sampled_nodes = 100
+    graph_list = generate_graphlist(no_of_sampled_nodes,no_of_hops,data)
     with open(filename,'w') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
         for i, graph in enumerate(graph_list):
-            text, node_with_question_mark, ground_truth = generate_text_for_prompt(i, graph)
+            text, node_with_question_mark, ground_truth = generate_text_for_prompt(i, graph,use_edge_text)
             prompt = f"""
             Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format "Label of Node = " : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
             ```{text}```
@@ -177,6 +201,8 @@ if __name__== '__main__':
             print("RESPONSE --> ", response)
             print("Node with ?: ", node_with_question_mark, "Label: ",ground_truth)
             print("="*30)
+    accuracy = compute_accuracy(filename)
+    print(f"Accuracy: {accuracy:.2%}")
 
     
     
