@@ -67,12 +67,16 @@ def load_dataset(data_dir, dataset_name):
 def generate_graphlist(num_nodes_to_sample,no_of_hops,data):
     # List to store sampled graphs
     graph_list = []
-
+    #choose some random nodes to sample
+    sampled_indices = torch.randint(0, data.num_nodes, (num_nodes_to_sample,))
     # Convert the PyG graph to NetworkX graph
     nx_graph = to_networkx(data, to_undirected=True)
 
+    # Convert sampled indices to integers, list of center nodes
+    nx_ids = [int(node_id.item()) for node_id in sampled_indices]
+
     # Sample first 10 nodes and create a graph centered around each node -- modify this to be random!
-    for center_node in range(num_nodes_to_sample):
+    for center_node in nx_ids:
         sampled_subgraph = nx.ego_graph(nx_graph, center_node, radius=no_of_hops, undirected=True)
         graph_list.append(sampled_subgraph)
     return graph_list
@@ -147,8 +151,8 @@ if __name__== '__main__':
 
     #sample 10 nodes and create the prompt for gpt 3.5-turbo
     openai.api_key = os.environ["OPENAI_API_UMNKEY"]
-    filename = "./results/cora_10nodes_1hop.csv"
-    graph_list = generate_graphlist(10,1, data)
+    filename = "./results/cora_10nodes_2hop.csv"
+    graph_list = generate_graphlist(10,2, data)
     with open(filename,'w') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
