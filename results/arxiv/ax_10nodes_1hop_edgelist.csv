@@ -1,0 +1,71 @@
+GroundTruth,Parsed Value,Prompt,Response
+4,4,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 1 Attributes
+Edgelist: [(118080, 78016), (118080, 3841)]
+Node to Label Mapping : 
+Node 118080: Label 4| Node 3841: Label 4| Node 78016: Label ?| ```
+            ""","""Label of Node 78016 = 4"""
+24,28,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 2 Attributes
+Edgelist: [(59526, 151446), (151446, 35159)]
+Node to Label Mapping : 
+Node 59526: Label ?| Node 151446: Label 10| Node 35159: Label 28| ```
+            ""","""Label of Node = 28"""
+16,24,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 3 Attributes
+Edgelist: [(131267, 47580)]
+Node to Label Mapping : 
+Node 131267: Label 24| Node 47580: Label ?| ```
+            ""","""Label of Node = 24"""
+30,16,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 4 Attributes
+Edgelist: [(19721, 82321), (19721, 86300), (19721, 144560), (19721, 69402), (19721, 52169), (19721, 87857), (19721, 107671), (19721, 48487), (19721, 154297), (19721, 50091), (82321, 144485), (82321, 130623), (82321, 48487), (82321, 57959), (82321, 50091), (82321, 60728), (82321, 3870), (107671, 119480), (107671, 48487), (69402, 86300), (69402, 157180), (69402, 98988), (69402, 52169), (69402, 48487), (69402, 20731), (86300, 144485), (86300, 130623), (86300, 48487), (86300, 57959), (3870, 144485), (3870, 144560), (3870, 87857), (3870, 48487), (3870, 154297), (3870, 67166), (3870, 130623), (3870, 98988), (50091, 48487), (50091, 144485), (50091, 144560), (50091, 154297), (98988, 52169), (98988, 81232), (98988, 48487), (98988, 20731), (98988, 166979), (144560, 154297), (144560, 87857), (144560, 48487), (144560, 98876), (144560, 135913), (144560, 60728), (87857, 144485), (87857, 154297), (87857, 135913), (87857, 48487), (119480, 157180), (119480, 81232), (119480, 48487), (119480, 117444), (154297, 48487), (154297, 98876), (154297, 135913), (154297, 60728), (60728, 48487), (60728, 144485), (60728, 130623), (98876, 48487), (98876, 144485), (98876, 157180), (130623, 124621), (130623, 48487), (166979, 81232), (166979, 48487), (166979, 157180), (117444, 48487), (117444, 157180), (52169, 48487), (124621, 81232), (124621, 48487), (81232, 48487), (67166, 48487), (67166, 20731), (144485, 48487), (144485, 57959), (144485, 135913), (48487, 57959), (48487, 135913), (48487, 157180), (48487, 20731)]
+Node to Label Mapping : 
+Node 19721: Label 16| Node 82321: Label 16| Node 107671: Label 10| Node 69402: Label 16| Node 86300: Label 16| Node 3870: Label 16| Node 50091: Label 16| Node 98988: Label 16| Node 144560: Label 16| Node 87857: Label 16| Node 119480: Label 16| Node 154297: Label 16| Node 60728: Label 16| Node 98876: Label 30| Node 130623: Label 16| Node 166979: Label ?| Node 117444: Label 16| Node 52169: Label 30| Node 124621: Label 16| Node 81232: Label 16| Node 67166: Label 16| Node 144485: Label 16| Node 48487: Label 16| Node 57959: Label 16| Node 135913: Label 16| Node 20731: Label 16| Node 157180: Label 16| ```
+            ""","""Label of Node 166979 = 16"""
+5,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 5 Attributes
+Edgelist: [(132068, 28102), (132068, 75147), (132068, 141210), (132068, 12916), (28102, 144254), (28102, 75147), (28102, 141210), (28102, 165052), (28102, 12916), (120715, 107729), (120715, 12916), (75147, 141210), (75147, 12916), (107729, 12916), (12916, 144254), (12916, 87448), (12916, 140597), (12916, 168767), (12916, 59326), (12916, 141210), (12916, 165052), (140597, 141210), (59326, 144254), (59326, 141210), (59326, 165052), (165052, 144254)]
+Node to Label Mapping : 
+Node 132068: Label 34| Node 28102: Label 5| Node 120715: Label 5| Node 75147: Label 5| Node 107729: Label 34| Node 12916: Label 34| Node 140597: Label 5| Node 59326: Label 5| Node 87448: Label 34| Node 141210: Label ?| Node 165052: Label 34| Node 144254: Label 5| Node 168767: Label 34| ```
+            ""","""Label of Node 141210 = 5"""
+24,34,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 6 Attributes
+Edgelist: [(72866, 122971), (72866, 84843), (72866, 106074), (72866, 83710), (72866, 88113), (72866, 79045), (72866, 121245), (88113, 106074), (106074, 83710)]
+Node to Label Mapping : 
+Node 72866: Label ?| Node 79045: Label 24| Node 84843: Label 4| Node 88113: Label 24| Node 106074: Label 34| Node 122971: Label 34| Node 121245: Label 24| Node 83710: Label 4| ```
+            ""","""Label of Node = 34"""
+34,34,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 7 Attributes
+Edgelist: [(133680, 4722), (133680, 56730), (4722, 56730), (4722, 875)]
+Node to Label Mapping : 
+Node 133680: Label 34| Node 4722: Label ?| Node 875: Label 33| Node 56730: Label 34| ```
+            ""","""Label of Node 4722 = 34"""
+23,23,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 8 Attributes
+Edgelist: [(135040, 90183)]
+Node to Label Mapping : 
+Node 135040: Label 23| Node 90183: Label ?| ```
+            ""","""Label of Node = 23"""
+10,10,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 9 Attributes
+Edgelist: [(12610, 142071), (64347, 142071), (8876, 142071)]
+Node to Label Mapping : 
+Node 12610: Label 30| Node 64347: Label 10| Node 8876: Label 24| Node 142071: Label ?| ```
+            ""","""Label of Node = 10"""
+9,9,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 10 Attributes
+Edgelist: [(150502, 11710), (150502, 121397), (100208, 11710), (121397, 11710), (41274, 11710), (143739, 11710)]
+Node to Label Mapping : 
+Node 150502: Label 9| Node 100208: Label 10| Node 121397: Label ?| Node 41274: Label 28| Node 143739: Label 9| Node 11710: Label 9| ```
+            ""","""Label of Node 121397 = 9"""

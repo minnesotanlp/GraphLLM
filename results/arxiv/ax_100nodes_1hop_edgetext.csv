@@ -1,0 +1,162 @@
+GroundTruth,Parsed Value,Prompt,Response
+24,24,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 1 Attributes
+Edgelist: Node 117345 is connected to Node 156175. Node 117345 is connected to Node 138135. Node 117345 is connected to Node 30293. Node 117345 is connected to Node 19824. Node 117345 is connected to Node 58364. Node 117345 is connected to Node 76875. Node 19824 is connected to Node 30293. 
+Node to Label Mapping : 
+Node 117345: Label 24| Node 76875: Label 24| Node 156175: Label 5| Node 19824: Label 24| Node 30293: Label ?| Node 138135: Label 5| Node 58364: Label 24| ```
+            ""","""Label of Node 30293 = 24"""
+35,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 2 Attributes
+Edgelist: Node 104130 is connected to Node 108554. 
+Node to Label Mapping : 
+Node 104130: Label ?| Node 108554: Label 5| ```
+            ""","""Label of Node = 5"""
+8,8,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 3 Attributes
+Edgelist: Node 64641 is connected to Node 125841. 
+Node to Label Mapping : 
+Node 64641: Label 8| Node 125841: Label ?| ```
+            ""","""Label of Node = 8"""
+28,28,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 4 Attributes
+Edgelist: Node 107363 is connected to Node 18740. 
+Node to Label Mapping : 
+Node 107363: Label 28| Node 18740: Label ?| ```
+            ""","""Label of Node = 28"""
+34,34,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 5 Attributes
+Edgelist: Node 38118 is connected to Node 106103. Node 38118 is connected to Node 114589. Node 38118 is connected to Node 110645. Node 38118 is connected to Node 44652. Node 38118 is connected to Node 90909. Node 38118 is connected to Node 117388. Node 38118 is connected to Node 122545. Node 38118 is connected to Node 142598. Node 38118 is connected to Node 124022. Node 142598 is connected to Node 122545. Node 90909 is connected to Node 106103. Node 90909 is connected to Node 124022. Node 117388 is connected to Node 106103. Node 117388 is connected to Node 110645. Node 117388 is connected to Node 124022. Node 122545 is connected to Node 124022. Node 110645 is connected to Node 114589. Node 110645 is connected to Node 124022. Node 124022 is connected to Node 114589. 
+Node to Label Mapping : 
+Node 38118: Label 34| Node 142598: Label 34| Node 90909: Label 34| Node 44652: Label 34| Node 117388: Label 34| Node 122545: Label 34| Node 110645: Label 34| Node 124022: Label 34| Node 106103: Label 34| Node 114589: Label ?| ```
+            ""","""Label of Node 114589 = 34"""
+6,30,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 6 Attributes
+Edgelist: Node 84131 is connected to Node 6789. Node 6789 is connected to Node 38462. Node 6789 is connected to Node 85356. Node 6789 is connected to Node 16969. 
+Node to Label Mapping : 
+Node 84131: Label ?| Node 6789: Label 26| Node 16969: Label 24| Node 85356: Label 3| Node 38462: Label 30| ```
+            ""","""Label of Node 84131 = 30"""
+16,27,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 7 Attributes
+Edgelist: Node 7169 is connected to Node 25208. Node 7169 is connected to Node 77098. Node 7169 is connected to Node 62580. Node 7169 is connected to Node 100798. Node 7169 is connected to Node 26795. Node 7169 is connected to Node 50817. Node 7169 is connected to Node 34983. Node 7169 is connected to Node 48535. Node 7169 is connected to Node 63189. Node 7169 is connected to Node 67166. Node 7169 is connected to Node 22035. Node 7169 is connected to Node 82929. Node 7169 is connected to Node 94874. Node 7169 is connected to Node 18191. Node 50817 is connected to Node 94874. Node 34983 is connected to Node 67166. Node 34983 is connected to Node 82929. Node 67166 is connected to Node 48535. Node 77098 is connected to Node 18191. Node 26795 is connected to Node 18191. Node 82929 is connected to Node 94874. Node 63189 is connected to Node 48535. 
+Node to Label Mapping : 
+Node 7169: Label 16| Node 50817: Label 30| Node 34983: Label 16| Node 67166: Label ?| Node 77098: Label 16| Node 26795: Label 27| Node 18191: Label 16| Node 82929: Label 16| Node 22035: Label 16| Node 62580: Label 16| Node 63189: Label 27| Node 48535: Label 27| Node 25208: Label 16| Node 94874: Label 30| Node 100798: Label 16| ```
+            ""","""Label of Node 67166 = 27"""
+24,34,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 8 Attributes
+Edgelist: Node 6020 is connected to Node 75304. Node 66054 is connected to Node 9489. Node 66054 is connected to Node 75304. Node 66054 is connected to Node 46184. Node 73867 is connected to Node 75304. Node 9489 is connected to Node 58601. Node 9489 is connected to Node 63934. Node 9489 is connected to Node 29373. Node 9489 is connected to Node 75304. Node 56092 is connected to Node 75304. Node 33309 is connected to Node 75304. Node 33182 is connected to Node 75304. Node 75304 is connected to Node 58601. Node 75304 is connected to Node 63934. Node 75304 is connected to Node 30658. Node 75304 is connected to Node 29373. Node 75304 is connected to Node 21489. Node 75304 is connected to Node 53464. Node 75304 is connected to Node 66907. Node 75304 is connected to Node 52442. Node 75304 is connected to Node 59250. Node 75304 is connected to Node 29928. Node 75304 is connected to Node 55361. Node 75304 is connected to Node 22059. Node 75304 is connected to Node 46184. Node 29373 is connected to Node 58601. Node 29373 is connected to Node 63934. Node 55361 is connected to Node 58601. Node 46184 is connected to Node 58601. 
+Node to Label Mapping : 
+Node 6020: Label 24| Node 66054: Label 34| Node 73867: Label 10| Node 9489: Label 34| Node 56092: Label 34| Node 33309: Label 34| Node 33182: Label 24| Node 75304: Label 34| Node 22059: Label 34| Node 29373: Label 34| Node 63934: Label 24| Node 55361: Label 24| Node 30658: Label 24| Node 53464: Label 34| Node 52442: Label ?| Node 66907: Label 20| Node 29928: Label 34| Node 46184: Label 34| Node 58601: Label 24| Node 21489: Label 36| Node 59250: Label 10| ```
+            ""","""Label of Node 52442 = 34"""
+28,28,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 9 Attributes
+Edgelist: Node 108667 is connected to Node 115391. Node 108667 is connected to Node 105333. Node 105333 is connected to Node 115391. 
+Node to Label Mapping : 
+Node 108667: Label 28| Node 105333: Label ?| Node 115391: Label 28| ```
+            ""","""Label of Node 105333 = 28"""
+37,37,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 10 Attributes
+Edgelist: Node 43761 is connected to Node 162470. 
+Node to Label Mapping : 
+Node 43761: Label 37| Node 162470: Label ?| ```
+            ""","""Label of Node = 37"""
+10,75640 : ?,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 11 Attributes
+Edgelist: Node 75640 is connected to Node 37109. 
+Node to Label Mapping : 
+Node 75640: Label ?| Node 37109: Label 10| ```
+            ""","""Label of Node = 75640 : ?"""
+28,28,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 12 Attributes
+Edgelist: Node 106878 is connected to Node 52157. Node 106878 is connected to Node 111956. Node 106878 is connected to Node 110736. Node 106878 is connected to Node 147910. Node 93477 is connected to Node 52157. Node 93477 is connected to Node 161678. Node 93477 is connected to Node 147910. Node 143206 is connected to Node 52157. Node 143206 is connected to Node 110736. Node 147910 is connected to Node 52157. Node 161678 is connected to Node 52157. Node 161678 is connected to Node 110736. Node 110736 is connected to Node 52157. Node 110736 is connected to Node 111956. Node 111956 is connected to Node 52157. Node 4315 is connected to Node 52157. Node 52157 is connected to Node 84990. 
+Node to Label Mapping : 
+Node 106878: Label ?| Node 93477: Label 28| Node 143206: Label 8| Node 147910: Label 28| Node 161678: Label 28| Node 110736: Label 28| Node 111956: Label 28| Node 4315: Label 28| Node 52157: Label 28| Node 84990: Label 28| ```
+            ""","""Label of Node 106878 = 28"""
+28,28,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 13 Attributes
+Edgelist: Node 166200 is connected to Node 96330. Node 96330 is connected to Node 31831. 
+Node to Label Mapping : 
+Node 166200: Label 28| Node 96330: Label 28| Node 31831: Label ?| ```
+            ""","""Label of Node 31831 = 28"""
+24,24,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 14 Attributes
+Edgelist: Node 102152 is connected to Node 97343. Node 126109 is connected to Node 97343. 
+Node to Label Mapping : 
+Node 102152: Label 24| Node 126109: Label ?| Node 97343: Label 24| ```
+            ""","""Label of Node = 24"""
+26,26,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 15 Attributes
+Edgelist: Node 101888 is connected to Node 167559. 
+Node to Label Mapping : 
+Node 101888: Label 26| Node 167559: Label ?| ```
+            ""","""Label of Node = 26"""
+26,26,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 16 Attributes
+Edgelist: Node 146469 is connected to Node 130045. Node 146469 is connected to Node 126075. Node 146469 is connected to Node 142477. Node 142477 is connected to Node 130045. Node 142477 is connected to Node 126075. Node 142477 is connected to Node 8152. Node 8152 is connected to Node 130045. Node 8152 is connected to Node 126075. Node 126075 is connected to Node 130045. 
+Node to Label Mapping : 
+Node 146469: Label ?| Node 142477: Label 26| Node 8152: Label 10| Node 126075: Label 26| Node 130045: Label 26| ```
+            ""","""Label of Node 146469 = 26"""
+24,25,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 17 Attributes
+Edgelist: Node 96967 is connected to Node 48755. Node 61997 is connected to Node 48755. Node 112878 is connected to Node 48755. Node 120722 is connected to Node 48755. 
+Node to Label Mapping : 
+Node 96967: Label 30| Node 61997: Label ?| Node 112878: Label 30| Node 120722: Label 25| Node 48755: Label 25| ```
+            ""","""Label of Node 61997 = 25"""
+27,16,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 18 Attributes
+Edgelist: Node 159656 is connected to Node 145010. 
+Node to Label Mapping : 
+Node 159656: Label 16| Node 145010: Label ?| ```
+            ""","""Label of Node = 16"""
+24,40432 : ?,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 19 Attributes
+Edgelist: Node 40432 is connected to Node 7031. 
+Node to Label Mapping : 
+Node 40432: Label ?| Node 7031: Label 6| ```
+            ""","""Label of Node = 40432 : ?"""
+5,5,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 20 Attributes
+Edgelist: Node 79912 is connected to Node 98739. Node 7475 is connected to Node 98739. 
+Node to Label Mapping : 
+Node 79912: Label 5| Node 7475: Label ?| Node 98739: Label 5| ```
+            ""","""Label of Node 7475 = 5"""
+10,?,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 21 Attributes
+Edgelist: 
+Node to Label Mapping : 
+Node 33192: Label ?| ```
+            ""","""Label of Node 33192 = ?"""
+22,?,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 22 Attributes
+Edgelist: 
+Node to Label Mapping : 
+Node 75982: Label ?| ```
+            ""","""Label of Node 75982 = ?"""
+34,26,"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format ""Label of Node = "" : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+            ```Ego Graph 23 Attributes
+Edgelist: Node 75081 is connected to Node 154300. Node 22960 is connected to Node 154300. Node 22960 is connected to Node 126551. Node 86806 is connected to Node 154300. Node 126551 is connected to Node 154300. Node 154300 is connected to Node 74143. 
+Node to Label Mapping : 
+Node 75081: Label 26| Node 22960: Label 34| Node 86806: Label 26| Node 126551: Label ?| Node 154300: Label 26| Node 74143: Label 26| ```
+            ""","""Label of Node 126551 = 26"""
