@@ -186,7 +186,20 @@ if __name__== '__main__':
             Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format "Label of Node = " : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
             ```{text}```
             """
-            response = get_completion(prompt)
+            try:
+                response = get_completion(prompt)
+            except openai.error.APIError as e:
+                #Handle API error here, e.g. retry or log
+                print(f"OpenAI API returned an API Error: {e}")
+                pass
+            except openai.error.APIConnectionError as e:
+                #Handle connection error here
+                print(f"Failed to connect to OpenAI API: {e}")
+                pass
+            except openai.error.RateLimitError as e:
+                #Handle rate limit error (we recommend using exponential backoff)
+                print(f"OpenAI API request exceeded rate limit: {e}")
+                pass
             print(text)
 
             delimiter_options = ['=', ':']  # You can add more delimiters if needed
