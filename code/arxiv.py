@@ -1,5 +1,6 @@
 
 import os
+import time
 import csv
 import collections
 import numpy as np
@@ -65,7 +66,6 @@ def print_dataset_stats(dataset):
     print(f'Has isolated nodes: {data.has_isolated_nodes()}')  # False
     print(f'Has self-loops: {data.has_self_loops()}')  # False
     print(f'Is undirected: {data.is_undirected()}')  # True
-
 
 
 def generate_graphlist(num_nodes_to_sample,no_of_hops,data):
@@ -142,7 +142,10 @@ def parse_response(response, delimiter):
     try:
         start_index = response.index(delimiter) + len(delimiter)
         value = response[start_index:].strip()
-        return value
+        if '?' in value :
+            return '?'
+        else:
+            return value
     except ValueError:
         return None
 
@@ -150,7 +153,7 @@ def parse_response(response, delimiter):
 def compute_accuracy(csv_filename):
     total_count = 0
     correct_count = 0
-
+    fail_count = 0
     with open(csv_filename, 'r') as csvfile:
         csv_reader = csv.DictReader(csvfile)
         for row in csv_reader:
@@ -159,12 +162,18 @@ def compute_accuracy(csv_filename):
             parsed_value = row['Parsed Value']
             if ground_truth == parsed_value:
                 correct_count += 1
+            if parsed_value == '?':
+                fail_count+=1
+
 
     if total_count == 0:
         return 0
     else:
         accuracy = correct_count / total_count
-        return accuracy
+        failures = fail_count / total_count
+        return accuracy, failures
+
+
 
 if __name__== '__main__':  
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -181,54 +190,79 @@ if __name__== '__main__':
     #sample nodes and create the prompt for gpt 3.5-turbo
     random.seed(10)
     openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+
     # ---- PARAMS --- #
-    no_of_hops = 1
-    use_edge_text = True
-    edge_format = "edgelist"
-    if use_edge_text==True:
-        edge_format = "edgetext"
-    no_of_sampled_nodes = 100
+    NO_OF_HOPS = [1,2]
+    USE_EDGE_TEXT = [False]
+    NO_OF_SAMPLED_NODES = [10]
     # ------------------
-    filename = "./results/arxiv/ax_"+str(no_of_sampled_nodes)+"nodes_"+str(no_of_hops)+"hop_"+edge_format+".csv"
-    # get the y labels and the graph list (in this dataset we need to access the y labels in a special way)
-    y_labels_dict, nx_ids, graph_list = generate_graphlist(no_of_sampled_nodes,no_of_hops,data)
     
-    with open(filename,'w') as csvfile:
-        csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
-        for i, graph in enumerate(graph_list):
-            text, node_with_question_mark, ground_truth = generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, use_edge_text)
-            prompt = f"""
-            Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format "Label of Node = " : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
-            ```{text}```
-            """
-            try:
-                response = get_completion(prompt)
-            except openai.error.APIError as e:
-                #Handle API error here, e.g. retry or log
-                print(f"OpenAI API returned an API Error: {e}")
-                pass
-            except openai.error.APIConnectionError as e:
-                #Handle connection error here
-                print(f"Failed to connect to OpenAI API: {e}")
-                pass
-            except openai.error.RateLimitError as e:
-                #Handle rate limit error (we recommend using exponential backoff)
-                print(f"OpenAI API request exceeded rate limit: {e}")
-                pass
-            print(text)
+    rate_limit_pause = 1.2 # london uses 1.2; says we can use 1.0
+    edge_format = "edgelist"
+    if USE_EDGE_TEXT ==True:
+        edge_format = "edgetext"
+    
+    for hops in NO_OF_HOPS:
+        for use_edge in USE_EDGE_TEXT:
+            for sampled_nodes in NO_OF_SAMPLED_NODES:
+                print("****Starting generation for :", hops, " hops, ",use_edge, " using edgetext, ", sampled_nodes, " sample nodes****")
+                filename = "./results/arxiv/ax_"+str(NO_OF_SAMPLED_NODES)+"nodes_"+str(NO_OF_HOPS)+"hop_"+edge_format+".csv"
+                # get the y labels and the graph list (in this dataset we need to access the y labels in a special way)
+                y_labels_dict, nx_ids, graph_list = generate_graphlist(sampled_nodes,hops,data)
+                with open(filename,'w') as csvfile:
+                    csv_writer = csv.writer(csvfile)
+                    csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
+                    error_count = 0
+                    token_err_count = 0
+                    for i, graph in enumerate(graph_list):
+                        text, node_with_question_mark, ground_truth = generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, use_edge)
+                        prompt = f"""
+                        Task : Node Label Prediction (Predict the label of the node marked with a ?, in the format "Label of Node = " : <predicted label>) given the edge connectivity and label information in the text enclosed in triple backticks.
+                        ```{text}```
+                        """
+                        try:
+                            response = get_completion(prompt)
+                        except Exception as e:
+                            error_count+=1
+                            if error_count>5:
+                                if isinstance(e, openai.error.RateLimitError):
+                                    raise Exception("Rate limit exceeded too many times.") from e
+                                elif isinstance(e, openai.error.ServiceUnavailableError):
+                                    raise Exception("Service unavailable too many times.") from e
+                                else:
+                                    raise e
+                        
+                            if isinstance(e, openai.error.RateLimitError):
+                                print(f"Rate limit exceeded. Pausing for {rate_limit_pause} seconds.")
+                            elif isinstance(e, openai.error.ServiceUnavailableError):
+                                print(f"Service unavailable; you likely paused and resumed. Pausing on our own for {rate_limit_pause} seconds to help reset things and then retrying.")
+                            elif isinstance(e, openai.error.InvalidRequestError):
+                                token_err_count+=1
+                                print("Prompt tokens > context limit of 4097")
+                                print(e)
+                                #continue
+                            else:
+                                print(f"Type of error: {type(e)}")
+                                print(f"Error: {e}")
+                                print(f"Pausing for {rate_limit_pause} seconds.")
+                            time.sleep(rate_limit_pause)
+                            continue
+                        
+                        #print(text)
 
-            delimiter_options = ['=', ':']  # You can add more delimiters if needed
-            parsed_value = None
+                        delimiter_options = ['=', ':']  # You can add more delimiters if needed
+                        parsed_value = None
 
-            for delimiter in delimiter_options:
-                parsed_value = parse_response(response, delimiter)
-                if parsed_value is not None:
-                    csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"'])
-                    break
+                        for delimiter in delimiter_options:
+                            parsed_value = parse_response(response, delimiter)
+                            if parsed_value is not None:
+                                csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"'])
+                                break
 
-            print("RESPONSE --> ", response)
-            print("Node with ?: ", node_with_question_mark, "Label: ",ground_truth)
-            print("="*30)
-    accuracy = compute_accuracy(filename)
-    print(f"Accuracy: {accuracy:.2%}")
+                        print("RESPONSE --> ", response)
+                        print("Node with ?: ", node_with_question_mark, "Label: ",ground_truth)
+                        print("="*30)
+                accuracy, failures = compute_accuracy(filename)
+                print(f"% of times LLM prompt was too large: {token_err_count/sampled_nodes}")
+                print(f"Accuracy: {accuracy:.2%}")
+                print(f"No of times LLM failed to predict a label: {failures:.2%}")
