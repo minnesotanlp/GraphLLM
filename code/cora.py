@@ -172,10 +172,17 @@ if __name__== '__main__':
     #sample nodes and create the prompt for gpt 3.5-turbo
     random.seed(10)
     openai.api_key = os.environ["OPENAI_API_UMNKEY"]
-    filename = "./results/cora_100nodes_1hop_edgelist.csv"
-    no_of_hops = 1
+    
+    
+    #---- PARAMS -----
+    no_of_hops = 2
     use_edge_text = False
-    no_of_sampled_nodes = 100
+    edge_format = "edgelist"
+    if use_edge_text==True:
+        edge_format = "edgetext"
+    no_of_sampled_nodes = 10
+    #--------------------
+    filename = "./results/cora/cora_"+str(no_of_sampled_nodes)+"nodes_"+str(no_of_hops)+"hop_"+edge_format+".csv"
     graph_list = generate_graphlist(no_of_sampled_nodes,no_of_hops,data)
     with open(filename,'w') as csvfile:
         csv_writer = csv.writer(csvfile)
