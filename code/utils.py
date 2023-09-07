@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
-def compute_mean(alist):
-    return sum(alist) / len(alist)
+
 
 def draw_graph(edge_example):
     node_example = np.unique(edge_example.flatten())
