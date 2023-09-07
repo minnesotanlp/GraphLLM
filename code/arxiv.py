@@ -206,7 +206,7 @@ if __name__== '__main__':
                                         print("DEBUG : Continuing ---")
                                         error = str(e)
                                         csv_writer.writerow(['', '',f'"{prompt}"', '', f'{error}'])
-                                        csv_writer_i.writerow(f'"{prompt}"', f'{error}')
+                                        csv_writer_i.writerow([f'"{prompt}"', f'{error}'])
                                     else:
                                         print(f"Type of error: {type(e)}")
                                         print(f"Error: {e}")

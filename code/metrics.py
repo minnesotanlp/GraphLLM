@@ -1,7 +1,7 @@
 
 import csv
-# computes accuracy based on the no of records in the file
 def compute_accuracy(csv_filename):
+    # computes accuracy based on the no of records in the file
     total_count = 0
     correct_count = 0
     fail_count = 0
@@ -15,7 +15,7 @@ def compute_accuracy(csv_filename):
                 correct_count += 1
             elif ground_truth in parsed_value: # this is probably not correct way
                 correct_count +=1
-            if parsed_value == '?':
+            if parsed_value == '-1' or parsed_value == '?':
                 fail_count+=1
 
     if total_count == 0:
