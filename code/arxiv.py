@@ -33,6 +33,43 @@ def get_completion(prompt, model):
     return response.choices[0].message["content"]
 
 
+# modified such that it only has <50 nodes and <50 edges
+def generate_graphlist_constrained(num_nodes_to_sample, no_of_hops, data):
+    # stores labels of each sub graph --> center node : {node: label}, ..
+    y_labels_dict = {}
+    # List to store sampled graphs
+    graph_list = []
+
+    # Convert the PyG graph to NetworkX graph
+    nx_graph = to_networkx(data, to_undirected=True)
+    sampled_nodes = set()
+
+    while len(graph_list) < num_nodes_to_sample:
+        # Choose a random node index
+        center_node_index = random.randint(0, data.num_nodes - 1)
+        center_node = int(center_node_index)
+
+        if center_node in sampled_nodes:
+            continue
+
+        sampled_subgraph = nx.ego_graph(nx_graph, center_node, radius=no_of_hops, undirected=True)
+
+        # Check the size of the subgraph before adding it
+        if (
+            sampled_subgraph.number_of_edges() < 100
+        ):
+            y_labels_dict[center_node] = {}  # Initialize dictionary for this center node
+            for node in sampled_subgraph.nodes():
+                y_labels_dict[center_node][node] = data.y[node].item()  # Store y label
+            graph_list.append(sampled_subgraph)
+            sampled_nodes.add(center_node)
+
+    # Convert the list of center nodes to integers
+    nx_ids = list(y_labels_dict.keys())
+
+    return y_labels_dict, nx_ids, graph_list
+
+
 def generate_graphlist(num_nodes_to_sample,no_of_hops,data):
     # stores labels of each sub graph --> center node : {node: label}, ..
     y_labels_dict= {}
@@ -129,27 +166,27 @@ if __name__== '__main__':
     openai.api_key = os.environ["OPENAI_API_UMNKEY"]
 
     # ---- PARAMS --- #
-    NO_OF_HOPS = [1,2]
+    NO_OF_HOPS = [2]
     USE_EDGE_TEXT = [True, False]
-    NO_OF_SAMPLED_NODES = [20,50]
+    NO_OF_SAMPLED_NODES = [50]
     RUN_COUNT = 3
     #model = "gpt-3.5-turbo"
     model = "gpt-4"
+    rate_limit_pause = 1.2 # calculated as per rate limit policy
+
     # ------------------
-    # this logs all the run metrics
-    metrics_filename = "./results/arxiv/metrics.csv"
+    # this logs all the run metrics -- this needs to be changed everytime you run it
+    metrics_filename = "./results/arxiv/metrics_test.csv"
     with open(metrics_filename, 'w') as metrics_file:
         metrics_writer = csv.writer(metrics_file)
         metrics_writer.writerow(["no of hops", "edgetext", "sampled nodes", "mean accuracy", "SD-accuracy","mean failure fraction","SD failure fraction"," mean token err frac", "SD token frac"])
-
-    rate_limit_pause = 1.2 # calculated as per rate limit policy
-
-    # Initialize a CSV file to store prompt and error messages
-    csv_filename = "./results/arxiv/invalid_request_errors.csv"
+    
+    # This stores all error messages - So need to rename file for every run -- remove this bit later
+    csv_filename = "./results/arxiv/invalid_request_errors_test.csv"
     # Open the CSV file in append mode
-    with open(csv_filename, 'a', newline='') as csvfilei:
+    with open(csv_filename, 'w', newline='') as csvfilei:
         csv_writer_i = csv.writer(csvfilei)
-        csv_writer_i.writerow(["prompt", "error"])
+        csv_writer_i.writerow(["setting", "nodes","edges", "error", "response if present"])
 
         for hops in NO_OF_HOPS:
             for use_edge in USE_EDGE_TEXT:
@@ -172,7 +209,7 @@ if __name__== '__main__':
 
                         with open(filename,'w') as csvfile:
                             csv_writer = csv.writer(csvfile)
-                            csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response', 'Error'])
+                            csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
                             error_count = 0
                             token_err_count = 0
                             for i, graph in enumerate(graph_list):
@@ -203,10 +240,8 @@ if __name__== '__main__':
                                         token_err_count+=1
                                         print("Prompt tokens > context limit of 4097")
                                         print(e)
-                                        print("DEBUG : Continuing ---")
-                                        error = str(e)
-                                        csv_writer.writerow(['', '',f'"{prompt}"', '', f'{error}'])
-                                        csv_writer_i.writerow([f'"{prompt}"', f'{error}'])
+                                        error = str(e)                                   
+                                        csv_writer_i.writerow([f'"{(hops,edge_format,sampled_nodes)}"', f'{graph.number_of_nodes()}', f'{graph.number_of_edges()}', f'{error}'])
                                     else:
                                         print(f"Type of error: {type(e)}")
                                         print(f"Error: {e}")
@@ -220,11 +255,12 @@ if __name__== '__main__':
                                 for delimiter in delimiter_options: 
                                     parsed_value = parse_response(response, delimiter) # check for better rules here!
                                     if parsed_value is not None: # general checking for the delimiter responses
-                                        csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"',''])
+                                        csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"'])
                                         break
                                     else :
                                         print("Delimiter not found in response from the LLM")
-                                        csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"','delimiter not found'])
+                                        csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"','delimiter not found']) # remove delimiter not found part later
+                                        csv_writer_i.writerow([f'"{(hops,edge_format,sampled_nodes)}"', f'{graph.number_of_nodes()}', f'{graph.number_of_edges()}','delimiter not found', f'"{response}"'])
                                         break
                                         
                                 #print("RESPONSE --> ", response)
