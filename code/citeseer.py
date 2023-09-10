@@ -64,7 +64,7 @@ if __name__== '__main__':
 
     #sample nodes and create the prompt for gpt 3.5-turbo
     random.seed(10)
-    openai.api_key = "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"
+    openai.api_key = os.environ["OPENAI_API_UMNKEY"]
 
     # ---- PARAMS --- #
     NO_OF_HOPS = [2]
@@ -78,13 +78,13 @@ if __name__== '__main__':
 
     # ------------------
     # this logs all the run metrics -- this needs to be changed everytime you run it
-    metrics_filename = "../results/citeseer/edge/edge_connection/metrics_test2.csv"
+    metrics_filename = "./results/citeseer/edge/edge_connection/metrics_test2.csv"
     with open(metrics_filename, 'w') as metrics_file:
         metrics_writer = csv.writer(metrics_file)
         metrics_writer.writerow(["no of hops", "edgetext", "sampled nodes", "mean accuracy", "SD-accuracy","mean failure fraction","SD failure fraction"," mean token err frac", "SD token frac"])
     
     # This stores all error messages - So need to rename file for every run -- remove this bit later
-    csv_filename = "../results/citeseer/edge/edge_connection/invalid_request_errors_test.csv"
+    csv_filename = "./results/citeseer/edge/edge_connection/invalid_request_errors_test.csv"
     # Open the CSV file in append mode?
     with open(csv_filename, 'w', newline='') as csvfilei:
         csv_writer_i = csv.writer(csvfilei)
@@ -107,7 +107,7 @@ if __name__== '__main__':
                         start_time = time.time()
                         print("Run Count : ", run_count+1)
                         print("****Starting generation for :", hops, " hops, ",edge_format, " , ", sampled_nodes, " sample nodes****")
-                        filename = "../results/citeseer/edge/edge_connection/ci_"+str(sampled_nodes)+"nodes_"+str(hops)+"hop_"+edge_format+"_run"+str(run_count)+".csv"
+                        filename = "./results/citeseer/edge/edge_connection/ci_"+str(sampled_nodes)+"nodes_"+str(hops)+"hop_"+edge_format+"_run"+str(run_count)+".csv"
 
                         # get the y labels and the graph list (in this dataset we need to access the y labels in a special way)
                         y_labels_dict, nx_ids, graph_list = generate_graphlist_constrained(sampled_nodes,hops,data)
