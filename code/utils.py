@@ -2,6 +2,7 @@ import torch
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
+import json
 
 
 
@@ -41,3 +42,12 @@ def print_dataset_stats(dataset): # modify
     print(f'Has isolated nodes: {data.has_isolated_nodes()}')  # False
     print(f'Has self-loops: {data.has_self_loops()}')  # False
     print(f'Is undirected: {data.is_undirected()}')  # True
+
+def get_labels_for_dataset(dataset_name):
+    label_filename = "./label_data/" + dataset_name + "_labels.json"
+    with open(label_filename, 'r') as label_file:
+        data = json.load(label_file)
+    labels = dict()
+    for item in data:
+        labels[item['class']] = item['label']
+    print(labels)

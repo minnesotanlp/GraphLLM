@@ -1,0 +1,14 @@
+[
+  {
+    "class": 0,
+    "label": "Diabetes Mellitus"
+  },
+  {
+    "class": 1,
+    "label": "Diabetes Mellitus Type 2"
+  },
+  {
+    "class": 2,
+    "label": "Diabetes Mellitus Type 1"
+  }
+]
