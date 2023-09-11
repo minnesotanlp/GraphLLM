@@ -2,9 +2,27 @@ import torch
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
+
+import torch_geometric
+from ogb.nodeproppred import PygNodePropPredDataset
+from torch_geometric.datasets import Planetoid
+
 import json
 
-
+def load_dataset(data_dir, dataset_name):
+    if dataset_name == 'cora':
+        dataset = Planetoid(root=data_dir, name='Cora')
+    elif dataset_name == 'arxiv':
+        dataset = PygNodePropPredDataset(root=data_dir, name='ogbn-arxiv')        
+    elif dataset_name == 'products':
+        dataset = PygNodePropPredDataset(root=data_dir, name='ogbn-products')
+    elif dataset_name == 'pubmed':
+        dataset = Planetoid(root=data_dir, name='Pubmed')
+    elif dataset_name == 'citeseer':
+        dataset = Planetoid(root=data_dir, name='Citeseer')
+    else :
+        print("ERROR : Dataset name not present in our list!")
+    return dataset
 
 def draw_graph(edge_example):
     node_example = np.unique(edge_example.flatten())
@@ -27,8 +45,7 @@ def plot_label_distribution(data):
     plt.tight_layout()  # Adjust layout for better readability
     plt.show()
 
-def print_dataset_stats(dataset): # modify
-    data = dataset[0]
+def print_dataset_stats(data): # modify
     print(f'Number of nodes: {data.num_nodes}')
     # Number of nodes: 2708
     print(f'Number of edges: {data.num_edges}')
@@ -50,4 +67,4 @@ def get_labels_for_dataset(dataset_name):
     labels = dict()
     for item in data:
         labels[item['class']] = item['label']
-    print(labels)
+    return labels
