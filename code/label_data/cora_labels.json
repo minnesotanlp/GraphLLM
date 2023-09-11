@@ -1,0 +1,30 @@
+[
+    {
+        "class": 0,
+        "label": "Theory"
+    },
+    {
+        "class": 1,
+        "label": "Reinforcement_Learning"
+    },
+    {
+        "class": 2,
+        "label": "Genetic_Algorithms"
+    },
+    {
+        "class": 3,
+        "label": "Neural_Networks"
+    },
+    {
+        "class": 4,
+        "label": "Probabilistic_Methods"
+    },
+    {
+        "class": 5,
+        "label": "Case_Based"
+    },
+    {
+        "class": 6,
+        "label": "Rule_Learning"
+    }
+]
