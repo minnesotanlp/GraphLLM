@@ -18,7 +18,7 @@ from networkx.algorithms import community
 
 import openai
 import random
-from utils import draw_graph,plot_label_distribution
+from utils import draw_graph,plot_label_distribution,print_dataset_stats
 from metrics import compute_accuracy,record_metrics
 from response_parser import parse_response
 from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list

@@ -18,21 +18,11 @@ from networkx.algorithms import community
 
 import openai
 import random
-from utils import draw_graph,plot_label_distribution
+from utils import draw_graph,plot_label_distribution,print_dataset_stats
 from metrics import compute_accuracy,record_metrics
 from response_parser import parse_response
 from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list
 from prompt_generation import get_completion,generate_text_for_prompt
-
-
-# Ai, Hci, Ml, Agents, Db, IR
-# {264, 508, 590, 596, 668, 701}
-#IR = 734
-#Agents = 603
-#AI = 316
-#ML = 601
-#DB = 711
-#HCI = 508
 
 def load_dataset(data_dir, dataset_name):
     dataset = Planetoid(root=data_dir, name=dataset_name)
@@ -46,12 +36,6 @@ if __name__== '__main__':
     dataset = load_dataset(data_dir,'Citeseer')
     # print_dataset_stats(dataset)
     data = dataset[0]
-    # print({data.y.tolist().count(i) for i in data.y.tolist()})
-    # import sys
-    # np.set_printoptions(threshold=sys.maxsize)
-    # op = (np.load("./data/Citeseer/raw/ind.citeseer.graph", allow_pickle=True))
-    # # d = dict(zip(("data1{}".format(k) for k in op), (op[k] for k in op)))
-    # print(op)
 
     #lets print the label distribution
     # plot_label_distribution(data)
