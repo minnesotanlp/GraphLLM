@@ -1,0 +1,3 @@
+no of hops,edgetext,sampled nodes,mean accuracy,SD-accuracy,mean failure fraction,SD failure fraction, mean token err frac,SD token frac
+1,False,100,0.485,0.03535533905932737,0.5060468631897204,0.03474069597666338,0.0,0.0
+2,False,100,0.43,0.07071067811865474,0.6913771712158809,0.025880459112907126,0.0,0.0

@@ -1,0 +1,61 @@
+GroundTruth,Parsed Value,Prompt,Response
+24,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 46850 is connected to Node 36356. Node 36356 is connected to Node 77197. Node 36356 is connected to Node 82536. Node 36356 is connected to Node 61496. Node 36356 is connected to Node 118578. Node 36356 is connected to Node 94874. Node 82536 is connected to Node 94874. Node 118578 is connected to Node 61496. 
+Node to Label Mapping : 
+Node 46850: Label 13| Node 36356: Label 24| Node 82536: Label 24| Node 77197: Label 24| Node 118578: Label 16| Node 61496: Label ?| Node 94874: Label 30| ```
+                                ""","""Label of Node = -1"""
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 85328 is connected to Node 158122. Node 158122 is connected to Node 167226. 
+Node to Label Mapping : 
+Node 85328: Label 16| Node 158122: Label ?| Node 167226: Label 16| ```
+                                ""","""Label of Node = 16"""
+16,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 104871 is connected to Node 93082. Node 107240 is connected to Node 93082. Node 615 is connected to Node 93082. Node 111475 is connected to Node 93082. Node 93082 is connected to Node 138107. 
+Node to Label Mapping : 
+Node 104871: Label 13| Node 107240: Label ?| Node 615: Label 30| Node 111475: Label 16| Node 93082: Label 1| Node 138107: Label 16| ```
+                                ""","""Label of Node = -1"""
+11,36,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 100035 is connected to Node 41199. Node 100035 is connected to Node 11976. Node 100035 is connected to Node 122537. Node 100035 is connected to Node 134699. Node 100035 is connected to Node 79006. Node 100035 is connected to Node 9923. Node 100035 is connected to Node 92234. Node 100035 is connected to Node 23445. Node 9923 is connected to Node 41199. Node 92234 is connected to Node 79006. 
+Node to Label Mapping : 
+Node 100035: Label 36| Node 9923: Label 36| Node 11976: Label 2| Node 122537: Label 36| Node 92234: Label 10| Node 134699: Label 5| Node 41199: Label 36| Node 23445: Label ?| Node 79006: Label 2| ```
+                                ""","""Label of Node = 36"""
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 119427 is connected to Node 110431. Node 117447 is connected to Node 110431. Node 109579 is connected to Node 110431. Node 109579 is connected to Node 118578. Node 147469 is connected to Node 110431. Node 147469 is connected to Node 69752. Node 78866 is connected to Node 110431. Node 78866 is connected to Node 118578. Node 118578 is connected to Node 110431. Node 118578 is connected to Node 69752. Node 69752 is connected to Node 124794. Node 69752 is connected to Node 110431. Node 124794 is connected to Node 110431. Node 119578 is connected to Node 110431. 
+Node to Label Mapping : 
+Node 119427: Label 16| Node 117447: Label 16| Node 109579: Label 16| Node 147469: Label ?| Node 78866: Label 24| Node 118578: Label 16| Node 69752: Label 24| Node 124794: Label 10| Node 119578: Label 17| Node 110431: Label 16| ```
+                                ""","""Label of Node = 16"""
+4,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): 
+Node to Label Mapping : 
+Node 74348: Label ?| ```
+                                ""","""Label of Node = -1"""
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 69794 is connected to Node 68765. Node 103461 is connected to Node 99655. Node 103461 is connected to Node 68765. Node 99655 is connected to Node 68765. Node 73583 is connected to Node 68765. Node 118170 is connected to Node 68765. 
+Node to Label Mapping : 
+Node 69794: Label 24| Node 103461: Label 16| Node 99655: Label 16| Node 73583: Label 16| Node 118170: Label ?| Node 68765: Label 16| ```
+                                ""","""Label of Node = 16"""
+24,26,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 140643 is connected to Node 119755. Node 131147 is connected to Node 119755. Node 119755 is connected to Node 125710. Node 119755 is connected to Node 159794. 
+Node to Label Mapping : 
+Node 140643: Label 10| Node 131147: Label 26| Node 119755: Label 26| Node 125710: Label ?| Node 159794: Label 26| ```
+                                ""","""Label of Node = 26"""
+28,28,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 70496 is connected to Node 45788. Node 137715 is connected to Node 45788. 
+Node to Label Mapping : 
+Node 70496: Label ?| Node 137715: Label 28| Node 45788: Label 28| ```
+                                ""","""Label of Node = 28"""
+8,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge connections (source node - target node): Node 79457 is connected to Node 104696. Node 79457 is connected to Node 137771. Node 79457 is connected to Node 150038. Node 79457 is connected to Node 161917. Node 79457 is connected to Node 160647. Node 79457 is connected to Node 81285. Node 79457 is connected to Node 140782. Node 79457 is connected to Node 93218. Node 79457 is connected to Node 106854. Node 93218 is connected to Node 137771. Node 81285 is connected to Node 104696. 
+Node to Label Mapping : 
+Node 79457: Label 8| Node 93218: Label 28| Node 81285: Label 8| Node 106854: Label 28| Node 160647: Label 8| Node 137771: Label 28| Node 140782: Label 28| Node 150038: Label 8| Node 104696: Label 28| Node 161917: Label ?| ```
+                                ""","""Label of Node = -1"""

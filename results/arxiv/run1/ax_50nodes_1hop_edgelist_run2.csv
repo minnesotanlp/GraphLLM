@@ -1,0 +1,301 @@
+GroundTruth,Parsed Value,Prompt,Response,Error
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(117249, 90465), (117249, 48287), (117249, 21682), (117249, 12251), (117249, 21737), (117249, 45708), (117249, 81355), (117249, 40424), (117249, 86672), (117249, 78825), (117249, 43132), (117249, 56444), (117249, 1994), (117249, 28468), (117249, 48493), (117249, 74968), (117249, 78860), (117249, 85396), (117249, 3337), (117249, 56485), (117249, 67058), (117249, 4647), (117249, 73740), (117249, 48559), (117249, 63108), (117249, 75097), (117249, 3450), (117249, 60586), (117249, 44645), (117249, 32628), (117249, 68612), (117249, 60680), (117249, 15551), (117249, 81774), (117249, 48881), (117249, 26200), (117249, 80512), (117249, 12847), (117249, 22245), (117249, 39581), (117249, 7487), (117249, 23659), (117249, 3708), (117249, 44939), (117249, 77991), (117249, 64861), (117249, 47697), (117249, 49154), (49154, 90465), (49154, 73740), (49154, 104194), (67587, 90465), (68612, 90465), (12294, 90465), (13833, 90465), (74763, 90465), (73740, 108784), (73740, 90465), (73740, 86672), (78860, 90465), (78860, 81355), (88597, 90465), (72218, 90465), (25117, 90465), (25117, 48287), (25117, 44645), (88098, 90465), (4647, 90465), (4647, 48287), (4647, 12251), (4647, 44645), (41001, 90465), (41001, 44645), (32301, 90465), (12847, 90465), (70191, 90465), (72242, 45708), (72242, 90465), (72242, 56485), (72242, 48881), (72242, 3708), (36406, 32347), (36406, 90465), (36406, 73446), (36406, 45708), (36406, 44645), (36406, 38063), (36406, 56763), (36406, 48881), (36406, 1994), (36406, 28518), (36406, 19291), (36406, 32504), (36406, 15642), (36406, 3708), (36406, 2619), (2619, 90465), (2619, 73446), (2619, 28518), (2619, 44645), (2619, 48881), (4672, 90465), (47697, 90465), (88662, 90465), (26200, 90465), (32347, 90465), (32347, 73446), (32347, 28518), (32347, 15642), (56928, 90465), (44645, 28518), (44645, 19291), (44645, 16615), (44645, 21905), (44645, 90465), (44645, 48287), (44645, 22245), (44645, 7487), (44645, 23659), (44645, 3708), (44645, 31677), (58985, 90465), (23659, 90465), (23659, 73446), (23659, 56444), (23659, 48881), (54380, 107463), (54380, 90465), (43132, 90465), (56444, 90465), (3708, 90465), (3708, 38063), (3708, 48881), (45695, 90465), (2175, 90465), (2175, 104194), (80512, 90465), (63108, 90465), (63108, 104194), (45708, 107463), (45708, 90465), (45708, 73446), (45708, 48287), (45708, 28468), (45708, 19291), (86672, 90465), (45721, 90465), (45721, 104194), (39581, 90465), (48287, 90465), (48287, 1994), (48287, 19291), (48287, 43334), (48287, 22245), (48287, 31677), (672, 90465), (56485, 90465), (56485, 78825), (77991, 90465), (77991, 1240), (60586, 90465), (38063, 3337), (38063, 90465), (38063, 73446), (3248, 90465), (21682, 108784), (21682, 90465), (79035, 90465), (15551, 90465), (59594, 90465), (59594, 104194), (72909, 90465), (72909, 104194), (85207, 90465), (1240, 90465), (1240, 32504), (1240, 48881), (74968, 90465), (87256, 90465), (22245, 90465), (22245, 32628), (35045, 108784), (35045, 90465), (16615, 90465), (73446, 90465), (73446, 28518), (73446, 32504), (73446, 56763), (73446, 48881), (21737, 107463), (21737, 90465), (108784, 90465), (108784, 81355), (108784, 1994), (108784, 28468), (108784, 43334), (108784, 32628), (108784, 64861), (48881, 1994), (48881, 3337), (48881, 28518), (48881, 3450), (48881, 43334), (48881, 90465), (48881, 104194), (48881, 7487), (48881, 15642), (32504, 90465), (104194, 90465), (104194, 40424), (104194, 19313), (104194, 60680), (44293, 90465), (46342, 90465), (60680, 90465), (3337, 90465), (64792, 90465), (15642, 90465), (15642, 67058), (15642, 32628), (82714, 90465), (85796, 90465), (28468, 90465), (7487, 90465), (7487, 67058), (44355, 90465), (9030, 90465), (9030, 48493), (9030, 19291), (43334, 90465), (75097, 19291), (75097, 90465), (19291, 90465), (64861, 90465), (90465, 107463), (90465, 472), (90465, 62824), (90465, 12222), (90465, 12237), (90465, 53651), (90465, 12251), (90465, 81355), (90465, 40424), (90465, 78825), (90465, 1994), (90465, 51135), (90465, 48493), (90465, 55179), (90465, 85396), (90465, 64376), (90465, 67058), (90465, 28518), (90465, 48559), (90465, 21905), (90465, 19313), (90465, 28603), (90465, 3450), (90465, 32628), (90465, 8611), (90465, 56763), (90465, 81774), (90465, 44939), (90465, 51650), (90465, 58287), (90465, 22391), (90465, 31677), (90465, 58361), (28518, 48493), (32628, 21905), (32628, 31677), (44939, 56763), (12222, 1994)]
+Node to Label Mapping : 
+Node 117249: Label 16| Node 49154: Label 16| Node 67587: Label 16| Node 68612: Label 24| Node 12294: Label 24| Node 13833: Label 16| Node 74763: Label 16| Node 73740: Label 16| Node 78860: Label 16| Node 88597: Label 16| Node 72218: Label 16| Node 25117: Label 16| Node 88098: Label ?| Node 4647: Label 16| Node 41001: Label 16| Node 32301: Label 16| Node 12847: Label 16| Node 70191: Label 24| Node 72242: Label 16| Node 36406: Label 16| Node 2619: Label 16| Node 4672: Label 16| Node 47697: Label 16| Node 88662: Label 16| Node 26200: Label 16| Node 32347: Label 16| Node 56928: Label 16| Node 44645: Label 16| Node 58985: Label 16| Node 23659: Label 16| Node 54380: Label 16| Node 43132: Label 16| Node 56444: Label 16| Node 3708: Label 16| Node 45695: Label 13| Node 2175: Label 16| Node 80512: Label 16| Node 63108: Label 16| Node 45708: Label 16| Node 86672: Label 16| Node 45721: Label 16| Node 39581: Label 16| Node 48287: Label 16| Node 672: Label 16| Node 56485: Label 1| Node 77991: Label 16| Node 60586: Label 16| Node 38063: Label 16| Node 3248: Label 16| Node 21682: Label 16| Node 79035: Label 16| Node 15551: Label 16| Node 59594: Label 5| Node 72909: Label 16| Node 85207: Label 16| Node 1240: Label 16| Node 74968: Label 16| Node 87256: Label 16| Node 22245: Label 16| Node 35045: Label 16| Node 16615: Label 16| Node 73446: Label 16| Node 21737: Label 16| Node 108784: Label 16| Node 48881: Label 16| Node 32504: Label 16| Node 104194: Label 16| Node 44293: Label 16| Node 46342: Label 16| Node 60680: Label 16| Node 3337: Label 16| Node 64792: Label 16| Node 15642: Label 16| Node 82714: Label 16| Node 85796: Label 16| Node 28468: Label 16| Node 7487: Label 16| Node 44355: Label 16| Node 9030: Label 16| Node 43334: Label 16| Node 75097: Label 16| Node 19291: Label 16| Node 64861: Label 16| Node 90465: Label 16| Node 28518: Label 16| Node 62824: Label 16| Node 48493: Label 16| Node 81774: Label 16| Node 19313: Label 16| Node 32628: Label 16| Node 22391: Label 16| Node 64376: Label 16| Node 3450: Label 16| Node 44939: Label 16| Node 55179: Label 16| Node 21905: Label 16| Node 53651: Label 16| Node 85396: Label 16| Node 8611: Label 16| Node 48559: Label 16| Node 58287: Label 16| Node 56763: Label 16| Node 28603: Label 16| Node 31677: Label 16| Node 12222: Label 16| Node 51135: Label 16| Node 51650: Label 16| Node 107463: Label 16| Node 1994: Label 16| Node 81355: Label 16| Node 12237: Label 16| Node 472: Label 16| Node 12251: Label 16| Node 40424: Label 16| Node 78825: Label 16| Node 67058: Label 16| Node 58361: Label 16| ```
+                                ""","""Label of Node = 16""",
+5,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: []
+Node to Label Mapping : 
+Node 42127: Label ?| ```
+                                ""","""Label of Node = -1""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(68037, 119987), (68037, 21714), (68037, 11435), (68037, 1172), (58630, 21714), (58630, 11435), (58630, 1172), (1353, 1172), (11435, 21714), (11435, 1172), (21714, 119987), (21714, 1172), (153011, 1172), (1172, 120826), (1172, 119987)]
+Node to Label Mapping : 
+Node 68037: Label 16| Node 58630: Label ?| Node 1353: Label 24| Node 11435: Label 16| Node 21714: Label 16| Node 153011: Label 16| Node 1172: Label 16| Node 119987: Label 16| Node 120826: Label 16| ```
+                                ""","""Label of Node = 16""",
+34,34,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(45284, 140281), (4870, 140281), (4870, 167630), (33161, 140281), (167630, 140281)]
+Node to Label Mapping : 
+Node 45284: Label 34| Node 4870: Label 34| Node 33161: Label 34| Node 167630: Label 34| Node 140281: Label ?| ```
+                                ""","""Label of Node = 34""",
+38,38,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(12665, 10778), (12665, 86109), (12665, 122421)]
+Node to Label Mapping : 
+Node 12665: Label 38| Node 10778: Label 38| Node 122421: Label 37| Node 86109: Label ?| ```
+                                ""","""Label of Node = 38""",
+24,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(68037, 111390), (68037, 24983), (114630, 24983), (26900, 24983), (38581, 24983), (24983, 111390), (24983, 143963)]
+Node to Label Mapping : 
+Node 68037: Label 16| Node 114630: Label 34| Node 26900: Label 24| Node 38581: Label 18| Node 24983: Label ?| Node 143963: Label 16| Node 111390: Label 16| ```
+                                ""","""Label of Node = 16""",
+22,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(96091, 163039)]
+Node to Label Mapping : 
+Node 96091: Label ?| Node 163039: Label 22| ```
+                                ""","""Label of Node = -1""",
+24,24,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(2083, 115673), (66020, 115673), (11269, 115673), (85283, 115673), (76232, 115673), (76232, 59379), (64937, 115673), (101710, 115673), (59379, 21942), (59379, 115673), (92020, 115673), (31701, 115673), (21942, 115673), (115673, 61819)]
+Node to Label Mapping : 
+Node 2083: Label 33| Node 66020: Label 24| Node 11269: Label 24| Node 85283: Label 24| Node 76232: Label ?| Node 64937: Label 10| Node 101710: Label 24| Node 59379: Label 24| Node 92020: Label 24| Node 31701: Label 6| Node 21942: Label 24| Node 115673: Label 24| Node 61819: Label 24| ```
+                                ""","""Label of Node = 24""",
+30,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: []
+Node to Label Mapping : 
+Node 154265: Label ?| ```
+                                ""","""Label of Node = -1""",
+27,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(84083, 39228)]
+Node to Label Mapping : 
+Node 84083: Label ?| Node 39228: Label 27| ```
+                                ""","""Label of Node = -1""",
+13,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(34570, 58062), (34570, 14726), (58062, 14726)]
+Node to Label Mapping : 
+Node 34570: Label ?| Node 58062: Label 24| Node 14726: Label 13| ```
+                                ""","""Label of Node = -1""",
+36,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: []
+Node to Label Mapping : 
+Node 13153: Label ?| ```
+                                ""","""Label of Node = -1""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(95382, 81566), (95548, 81566)]
+Node to Label Mapping : 
+Node 95382: Label ?| Node 95548: Label 16| Node 81566: Label 16| ```
+                                ""","""Label of Node = 16""",
+3,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(19154, 111431), (112019, 111431)]
+Node to Label Mapping : 
+Node 19154: Label 3| Node 112019: Label ?| Node 111431: Label 8| ```
+                                ""","""Label of Node = -1""",
+21,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(104120, 134501)]
+Node to Label Mapping : 
+Node 104120: Label ?| Node 134501: Label 21| ```
+                                ""","""Label of Node = -1""",
+13,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(154469, 49498), (161050, 49498), (151757, 148543), (151757, 49498), (591, 49498), (49498, 148543)]
+Node to Label Mapping : 
+Node 154469: Label ?| Node 161050: Label 33| Node 151757: Label 24| Node 591: Label 10| Node 49498: Label 10| Node 148543: Label 24| ```
+                                ""","""Label of Node = -1""",
+28,28,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(6250, 40411)]
+Node to Label Mapping : 
+Node 6250: Label 28| Node 40411: Label ?| ```
+                                ""","""Label of Node = 28""",
+28,28,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(86050, 19949), (55398, 19949), (55398, 10475), (10475, 19949), (19949, 59769), (19949, 57853)]
+Node to Label Mapping : 
+Node 86050: Label 28| Node 55398: Label 28| Node 10475: Label ?| Node 19949: Label 28| Node 59769: Label 28| Node 57853: Label 28| ```
+                                ""","""Label of Node = 28""",
+10,10,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(94816, 96257), (96257, 53233), (96257, 12556), (96257, 84197), (96257, 11191), (96257, 75177), (96257, 77771), (96257, 87022), (96257, 63419), (96257, 80506)]
+Node to Label Mapping : 
+Node 94816: Label 10| Node 96257: Label 10| Node 84197: Label ?| Node 75177: Label 10| Node 77771: Label 10| Node 12556: Label 10| Node 87022: Label 10| Node 53233: Label 10| Node 11191: Label 10| Node 80506: Label 10| Node 63419: Label 10| ```
+                                ""","""Label of Node = 10""",
+5,34,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(51497, 47329), (51497, 6171), (51497, 38340), (6171, 47329)]
+Node to Label Mapping : 
+Node 51497: Label ?| Node 6171: Label 34| Node 38340: Label 34| Node 47329: Label 34| ```
+                                ""","""Label of Node = 34""",
+5,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(158761, 129058), (129058, 149111)]
+Node to Label Mapping : 
+Node 158761: Label 19| Node 129058: Label ?| Node 149111: Label 24| ```
+                                ""","""Label of Node = -1""",
+27,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(112865, 96465)]
+Node to Label Mapping : 
+Node 112865: Label 6| Node 96465: Label ?| ```
+                                ""","""Label of Node = -1""",
+28,28,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(104385, 163647), (104385, 128127), (62114, 163647), (128127, 163647)]
+Node to Label Mapping : 
+Node 104385: Label 28| Node 62114: Label 28| Node 128127: Label 28| Node 163647: Label ?| ```
+                                ""","""Label of Node = 28""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(89476, 93020), (34175, 16533), (34175, 93020), (16533, 93020), (102811, 93020), (93020, 76895)]
+Node to Label Mapping : 
+Node 89476: Label 16| Node 34175: Label ?| Node 16533: Label 16| Node 102811: Label 16| Node 93020: Label 16| Node 76895: Label 16| ```
+                                ""","""Label of Node = 16""",
+28,28,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(1666, 57853), (32762, 57853), (43299, 57853), (45990, 57853), (42185, 139034), (42185, 57853), (75273, 9163), (75273, 57853), (9163, 57853), (19949, 57853), (53358, 57853), (53358, 21522), (53358, 5588), (5329, 57853), (21522, 57853), (21522, 5588), (49363, 139034), (49363, 57853), (5588, 57853), (13018, 139034), (13018, 57853), (139034, 57853)]
+Node to Label Mapping : 
+Node 1666: Label ?| Node 32762: Label 28| Node 43299: Label 28| Node 45990: Label 28| Node 42185: Label 28| Node 75273: Label 28| Node 9163: Label 28| Node 19949: Label 28| Node 53358: Label 28| Node 5329: Label 28| Node 21522: Label 28| Node 49363: Label 28| Node 5588: Label 28| Node 13018: Label 28| Node 139034: Label 28| Node 57853: Label 28| ```
+                                ""","""Label of Node 1666 = 28""",
+10,10,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(160310, 38990), (85721, 38990), (38990, 66558)]
+Node to Label Mapping : 
+Node 160310: Label 36| Node 85721: Label ?| Node 38990: Label 10| Node 66558: Label 10| ```
+                                ""","""Label of Node = 10""",
+28,28,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(135145, 31958), (135145, 87740), (135145, 71245), (135145, 14089)]
+Node to Label Mapping : 
+Node 135145: Label 28| Node 14089: Label ?| Node 71245: Label 28| Node 31958: Label 28| Node 87740: Label 28| ```
+                                ""","""Label of Node = 28""",
+37,37,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(63320, 11714), (11714, 50564), (11714, 48687)]
+Node to Label Mapping : 
+Node 63320: Label 10| Node 11714: Label 37| Node 50564: Label ?| Node 48687: Label 10| ```
+                                ""","""Label of Node = 37""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(80881, 66916), (66916, 166425), (66916, 72679), (166425, 72679)]
+Node to Label Mapping : 
+Node 80881: Label 26| Node 66916: Label ?| Node 166425: Label 16| Node 72679: Label 16| ```
+                                ""","""Label of Node = 16""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(69794, 68037), (69794, 40398), (69794, 53950), (69794, 67166), (85092, 40398), (68037, 40398), (68037, 8440), (48670, 40398), (48670, 8440), (48670, 37013), (67166, 40398), (67166, 8440), (67166, 53950), (67166, 79124), (67166, 37013), (155212, 40398), (40398, 100885), (40398, 155291), (40398, 53950), (40398, 79124), (40398, 46132), (40398, 167758), (40398, 8440), (40398, 37013), (100885, 8440), (8440, 53950)]
+Node to Label Mapping : 
+Node 69794: Label 24| Node 85092: Label 16| Node 68037: Label 16| Node 48670: Label ?| Node 67166: Label 16| Node 155212: Label 16| Node 40398: Label 24| Node 167758: Label 16| Node 79124: Label 16| Node 100885: Label 16| Node 37013: Label 24| Node 46132: Label 16| Node 8440: Label 24| Node 155291: Label 24| Node 53950: Label 16| ```
+                                ""","""Label of Node = 16""",
+0,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(57146, 146612)]
+Node to Label Mapping : 
+Node 57146: Label ?| Node 146612: Label 34| ```
+                                ""","""Label of Node = -1""",
+5,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: []
+Node to Label Mapping : 
+Node 151994: Label ?| ```
+                                ""","""Label of Node = -1""",
+31,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(58461, 34509)]
+Node to Label Mapping : 
+Node 58461: Label 11| Node 34509: Label ?| ```
+                                ""","""Label of Node = -1""",
+10,24,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(58560, 113289), (22145, 146476), (22145, 113289), (22145, 71307), (166368, 113289), (166368, 104051), (166368, 113447), (86949, 113289), (113447, 113289), (113447, 86955), (113447, 104051), (113289, 146476), (113289, 86955), (113289, 104051), (113289, 71307), (113289, 38135), (113289, 1086), (146476, 1086)]
+Node to Label Mapping : 
+Node 58560: Label 24| Node 22145: Label 24| Node 166368: Label 10| Node 86949: Label 24| Node 113447: Label 24| Node 113289: Label 24| Node 71307: Label 24| Node 86955: Label 24| Node 146476: Label ?| Node 104051: Label 24| Node 38135: Label 24| Node 1086: Label 10| ```
+                                ""","""Label of Node = 24""",
+24,24,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(28036, 164990), (28036, 145275), (2054, 109116), (2054, 76356), (2054, 63148), (2054, 145275), (63623, 145275), (65800, 145275), (121864, 164990), (121864, 145275), (30860, 164990), (30860, 145275), (103821, 145275), (53649, 145275), (124306, 145275), (70163, 145275), (11926, 145275), (107030, 145275), (141207, 145275), (91807, 145275), (17184, 145275), (88481, 164990), (88481, 145275), (103716, 145275), (82469, 164990), (82469, 145275), (49448, 145275), (23723, 145275), (63148, 145275), (12973, 145275), (59057, 164990), (59057, 145275), (49075, 145275), (16441, 145275), (32444, 102633), (32444, 145275), (109116, 164990), (109116, 145275), (134467, 164990), (134467, 145275), (76356, 129106), (76356, 164990), (76356, 145275), (116038, 164990), (116038, 145275), (70730, 129106), (70730, 145275), (8651, 164990), (8651, 145275), (136523, 145275), (47437, 145275), (100429, 145275), (144587, 145275), (99792, 102376), (99792, 145275), (129106, 164990), (129106, 145275), (14932, 164990), (14932, 145275), (10197, 145275), (38740, 102633), (38740, 145275), (107095, 164990), (107095, 145275), (78817, 145275), (96869, 164990), (96869, 145275), (30696, 145275), (102376, 145275), (102633, 164990), (102633, 145275), (92523, 145275), (57068, 145275), (50157, 145275), (24686, 145275), (111475, 145275), (100856, 145275), (44665, 145275), (145275, 75647), (145275, 164990), (164990, 75647)]
+Node to Label Mapping : 
+Node 28036: Label 24| Node 2054: Label 24| Node 63623: Label 24| Node 65800: Label 24| Node 121864: Label 24| Node 30860: Label 24| Node 103821: Label 24| Node 53649: Label 24| Node 124306: Label 30| Node 70163: Label 24| Node 11926: Label 31| Node 107030: Label 24| Node 141207: Label 30| Node 91807: Label 24| Node 17184: Label 16| Node 88481: Label 31| Node 103716: Label 16| Node 82469: Label 24| Node 49448: Label 24| Node 23723: Label 24| Node 63148: Label 24| Node 12973: Label 24| Node 59057: Label 5| Node 49075: Label 24| Node 16441: Label 16| Node 32444: Label 16| Node 109116: Label 24| Node 134467: Label 30| Node 76356: Label 24| Node 116038: Label 24| Node 70730: Label 24| Node 8651: Label 24| Node 136523: Label 24| Node 47437: Label 24| Node 100429: Label 24| Node 144587: Label 34| Node 99792: Label 16| Node 129106: Label 24| Node 14932: Label 30| Node 10197: Label 24| Node 38740: Label 16| Node 107095: Label 24| Node 78817: Label 24| Node 96869: Label 24| Node 30696: Label 24| Node 102376: Label 16| Node 102633: Label 16| Node 92523: Label 24| Node 57068: Label ?| Node 50157: Label 16| Node 24686: Label 24| Node 111475: Label 16| Node 100856: Label 24| Node 44665: Label 24| Node 145275: Label 24| Node 164990: Label 24| Node 75647: Label 24| ```
+                                ""","""Label of Node = 24""",
+28,28,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(133801, 106073), (133801, 57680), (133801, 106635), (106635, 57680), (119501, 57680), (131919, 57680), (57680, 113949), (57680, 106073)]
+Node to Label Mapping : 
+Node 133801: Label ?| Node 106635: Label 28| Node 119501: Label 28| Node 131919: Label 28| Node 57680: Label 28| Node 106073: Label 28| Node 113949: Label 28| ```
+                                ""","""Label of Node = 28""",
+34,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(46560, 56716)]
+Node to Label Mapping : 
+Node 46560: Label ?| Node 56716: Label 34| ```
+                                ""","""Label of Node = -1""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(58630, 69794), (58630, 98786), (58630, 166425), (58630, 43080), (58630, 23743), (38158, 34064), (38158, 166425), (38158, 23743), (34064, 98786), (34064, 166425), (34064, 23743), (166425, 98047), (166425, 116667), (166425, 61243), (166425, 123230), (166425, 124733), (166425, 43080), (166425, 129267), (166425, 23743), (69794, 43080), (69794, 23743), (54179, 23743), (121258, 98047), (121258, 116667), (121258, 61243), (121258, 23743), (73391, 23743), (78260, 23743), (143284, 23743), (141879, 23743), (116667, 129267), (116667, 23743), (61243, 98786), (61243, 129267), (61243, 23743), (124733, 23743), (23743, 98047), (23743, 67928), (23743, 123230), (23743, 43080), (23743, 98786), (23743, 129267), (43080, 67928), (43080, 98786), (98786, 98047), (129267, 98047)]
+Node to Label Mapping : 
+Node 58630: Label ?| Node 38158: Label 16| Node 34064: Label 16| Node 166425: Label 16| Node 69794: Label 24| Node 54179: Label 16| Node 121258: Label 16| Node 73391: Label 16| Node 78260: Label 16| Node 143284: Label 16| Node 141879: Label 16| Node 116667: Label 16| Node 61243: Label 16| Node 124733: Label 16| Node 23743: Label 16| Node 43080: Label 16| Node 67928: Label 16| Node 123230: Label 16| Node 98786: Label 16| Node 129267: Label 16| Node 98047: Label 16| ```
+                                ""","""Label of Node = 16""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(141185, 90554), (141185, 151734), (93649, 90554), (93649, 125272), (151734, 90554), (125272, 90554), (166425, 90554)]
+Node to Label Mapping : 
+Node 141185: Label ?| Node 93649: Label 16| Node 151734: Label 16| Node 125272: Label 16| Node 166425: Label 16| Node 90554: Label 16| ```
+                                ""","""Label of Node = 16""",
+30,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(36992, 166593)]
+Node to Label Mapping : 
+Node 36992: Label ?| Node 166593: Label 30| ```
+                                ""","""Label of Node = -1""",
+3,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: []
+Node to Label Mapping : 
+Node 163805: Label ?| ```
+                                ""","""Label of Node = -1""",
+24,24,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(112353, 168443), (12004, 168443), (153125, 168443), (131398, 168443), (131398, 51125), (131398, 105271), (131398, 47606), (96251, 168443), (35112, 168443), (150279, 168443), (105271, 168443), (105271, 150041), (150041, 168443), (130800, 168443), (51125, 168443), (51125, 54842), (51125, 47606), (47606, 168443), (40342, 168443), (51097, 168443), (54842, 168443)]
+Node to Label Mapping : 
+Node 112353: Label 34| Node 12004: Label 34| Node 153125: Label 34| Node 131398: Label 24| Node 96251: Label 34| Node 35112: Label ?| Node 150279: Label 24| Node 105271: Label 24| Node 150041: Label 24| Node 130800: Label 24| Node 51125: Label 34| Node 47606: Label 34| Node 40342: Label 34| Node 51097: Label 24| Node 54842: Label 34| Node 168443: Label 24| ```
+                                ""","""Label of Node = 24""",
+26,26,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(20608, 21370), (20608, 114168), (20608, 134174)]
+Node to Label Mapping : 
+Node 20608: Label ?| Node 21370: Label 26| Node 114168: Label 26| Node 134174: Label 26| ```
+                                ""","""Label of Node = 26""",
+16,16,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(128577, 166425), (128577, 103461), (128577, 110436), (128577, 61682), (110436, 130300), (110436, 166425), (110436, 61682), (103461, 166425), (103461, 61682), (48936, 61682), (75913, 166425), (75913, 61682), (165736, 166425), (165736, 61682), (45739, 120825), (45739, 61682), (45739, 119987), (166425, 120825), (166425, 61682), (61682, 120825), (61682, 130300), (61682, 119987), (61682, 26363)]
+Node to Label Mapping : 
+Node 128577: Label 16| Node 110436: Label 16| Node 103461: Label 16| Node 48936: Label 16| Node 75913: Label 16| Node 165736: Label 16| Node 45739: Label 16| Node 166425: Label 16| Node 61682: Label 16| Node 119987: Label 16| Node 120825: Label 16| Node 26363: Label ?| Node 130300: Label 16| ```
+                                ""","""Label of Node = 16""",
+20,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(115554, 66125), (66125, 113871)]
+Node to Label Mapping : 
+Node 115554: Label 20| Node 66125: Label ?| Node 113871: Label 39| ```
+                                ""","""Label of Node = -1""",
+34,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(320, 2801), (320, 53995), (20456, 53995), (9928, 53995), (53995, 2801), (53995, 28094), (53995, 44430), (53995, 33948)]
+Node to Label Mapping : 
+Node 320: Label 34| Node 20456: Label ?| Node 9928: Label 20| Node 53995: Label 34| Node 44430: Label 10| Node 2801: Label 39| Node 33948: Label 34| Node 28094: Label 34| ```
+                                ""","""Label of Node = -1""",
+32,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(114832, 85289), (114832, 101611), (85289, 101611)]
+Node to Label Mapping : 
+Node 114832: Label ?| Node 85289: Label 22| Node 101611: Label 32| ```
+                                ""","""Label of Node = -1""",
+24,-1,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(165921, 153478), (155234, 153478), (160769, 153478)]
+Node to Label Mapping : 
+Node 165921: Label 10| Node 155234: Label 24| Node 160769: Label 24| Node 153478: Label ?| ```
+                                ""","""Label of Node = -1""",
+19,19,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(152609, 17718), (152609, 147625), (152609, 3280), (42882, 17718), (42882, 3280), (147625, 3280), (3280, 17718)]
+Node to Label Mapping : 
+Node 152609: Label 19| Node 42882: Label ?| Node 147625: Label 19| Node 3280: Label 19| Node 17718: Label 19| ```
+                                ""","""Label of Node = 19""",
+13,30,"""
+                                Task : Node Label Prediction (Predict the label of the node marked with a ?, given the edge connectivity information and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+                                ```Edge list: [(74841, 59002), (59002, 141660)]
+Node to Label Mapping : 
+Node 74841: Label 30| Node 59002: Label 30| Node 141660: Label ?| ```
+                                ""","""Label of Node = 30""",

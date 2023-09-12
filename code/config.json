@@ -1,0 +1,14 @@
+{
+    "dataset_name": "pubmed",
+    "NO_OF_HOPS": [1],
+    "USE_EDGE_TEXT": [false],
+    "NO_OF_SAMPLED_NODES": [2],
+    "RUN_COUNT": 2,
+    "USE_ADJACENCY": false,
+    "model": "gpt-4",
+    "rate_limit_pause": 1.2,
+    "data_dir": "./data",
+    "result_location": "./results/pubmed/",
+    "metrics_filename": "./results/pubmed/metrics.csv",
+    "csv_filename": "./results/pubmed/invalid_request_errors.csv"
+}

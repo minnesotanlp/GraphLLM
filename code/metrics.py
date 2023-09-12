@@ -18,10 +18,13 @@ def compute_accuracy(csv_filename):
 
 
     if total_count == 0:
-        return 0
+        return 0,0
     else:
         accuracy = correct_count / total_count
-        failure_perc = fail_count / (total_count-correct_count)
+        if total_count == correct_count:
+            failure_perc = 0
+        else:
+            failure_perc = fail_count / (total_count-correct_count)
         return accuracy, failure_perc
 
 # Function to record metrics in "metrics.csv"
