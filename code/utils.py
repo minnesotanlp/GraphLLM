@@ -33,7 +33,7 @@ def draw_graph(edge_example):
     nx.draw_networkx(G, with_labels=False)
     plt.show()
 
-def characterize_graph(G):
+def characterize_graph(G, plot_name):
     #Calculate the number of nodes and edges in the graph
     num_nodes = G.number_of_nodes()
     num_edges = G.number_of_edges()
@@ -48,10 +48,10 @@ def characterize_graph(G):
     # Connected Components
     num_connected_components = nx.number_connected_components(G)
     # Centrality Measures
-    degree_centrality = nx.degree_centrality(G)
-    betweenness_centrality = nx.betweenness_centrality(G)
-    closeness_centrality = nx.closeness_centrality(G)
-    eigenvector_centrality = nx.eigenvector_centrality(G)
+    #degree_centrality = nx.degree_centrality(G)
+    #betweenness_centrality = nx.betweenness_centrality(G)
+    #closeness_centrality = nx.closeness_centrality(G)
+    #eigenvector_centrality = nx.eigenvector_centrality(G)
 
     # Clustering Coefficient
     clustering_coefficient = nx.average_clustering(G)
@@ -67,15 +67,15 @@ def characterize_graph(G):
 
     # Print Connectivity Metrics
     print("Density:", density)
-    print("Degree Distribution:", degree_counts)
+    #print("Degree Distribution:", degree_counts)
     print("Average Degree:", average_degree)
     print("Number of Connected Components:", num_connected_components)
 
     # Print Centrality Measures
-    print("Degree Centrality:", degree_centrality)
-    print("Betweenness Centrality:", betweenness_centrality)
-    print("Closeness Centrality:", closeness_centrality)
-    print("Eigenvector Centrality:", eigenvector_centrality)
+    #print("Degree Centrality:", degree_centrality)
+    #print("Betweenness Centrality:", betweenness_centrality)
+    #print("Closeness Centrality:", closeness_centrality)
+    #print("Eigenvector Centrality:", eigenvector_centrality)
 
     # Print Clustering Coefficient and Graph Diameter
     print("Clustering Coefficient:", clustering_coefficient)
@@ -87,7 +87,7 @@ def characterize_graph(G):
     plt.xlabel("Degree")
     plt.ylabel("Frequency")
     plt.show()
-
+    
 
 def plot_label_distribution(data):
     # Count the occurrences of each y label
