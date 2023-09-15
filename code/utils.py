@@ -34,6 +34,7 @@ def draw_graph(edge_example):
     plt.show()
 
 def characterize_graph(G, plot_name):
+    print("On converting the PyG graph to NetworkX graph (this will effect no of edges)--> ")
     #Calculate the number of nodes and edges in the graph
     num_nodes = G.number_of_nodes()
     num_edges = G.number_of_edges()
@@ -102,9 +103,9 @@ def plot_label_distribution(data):
     plt.show()
 
 def print_dataset_stats(data): # modify
-    print(f'Number of nodes: {data.num_nodes}')
+    print(f'Number of nodes : {data.num_nodes}')
     # Number of nodes: 2708
-    print(f'Number of edges: {data.num_edges}')
+    print(f'Number of edges including self loops and duplicate edges: {data.num_edges}')
     # Number of edges: 10556
     print(f'Number of features: {data.num_node_features}')
     # Number of edge features: 0

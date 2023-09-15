@@ -35,6 +35,8 @@ def generate_node_label_dict(graph, node_with_question_mark, center_node, y_labe
         node_label_dict[node]=label
     return ground_truth, node_label_dict
 
+
+
 # modified such that it only has <50 nodes and <50 edges
 def generate_graphlist_constrained(num_nodes_to_sample, no_of_hops, data):
     # stores labels of each sub graph --> center node : {node: label}, ..
@@ -46,6 +48,7 @@ def generate_graphlist_constrained(num_nodes_to_sample, no_of_hops, data):
     nx_graph = to_networkx(data, to_undirected=True)
     sampled_nodes = set()
 
+    # num_nodes_to_sample : tells how many nodes in the graph list while sampled_subgraph.number_of_nodes is how many nodes per ego graph
     while len(graph_list) < num_nodes_to_sample:
         # Choose a random node index
         center_node_index = random.randint(0, data.num_nodes - 1)
@@ -56,8 +59,9 @@ def generate_graphlist_constrained(num_nodes_to_sample, no_of_hops, data):
 
         sampled_subgraph = nx.ego_graph(nx_graph, center_node, radius=no_of_hops, undirected=True)
 
-        # Check the size of the subgraph before adding it
+        # Check the size of the subgraph before adding it, the and condition is likely to fail with very small graphs
         if (
+
             sampled_subgraph.number_of_edges() < 100
         ):
             y_labels_dict[center_node] = {}  # Initialize dictionary for this center node
