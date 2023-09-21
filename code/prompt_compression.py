@@ -12,6 +12,48 @@ import time
 import csv
 import os
 import re
+import tiktoken
+
+# uses a fast a fast BPE tokenizer specifically designed for OpenAI models
+def return_no_tokens(model, text): 
+    encoding = tiktoken.encoding_for_model(model)
+    token_count = len(encoding.encode(text))
+    return token_count
+
+
+def connection_info_compression_percentage(input_text, compressed_text, model):
+    # Tokenize the input and compressed texts and get no of tokens
+    num_input_tokens = return_no_tokens(model, input_text)
+    num_compressed_tokens = return_no_tokens(model, compressed_text)
+
+    # Extract the content within curly braces in the compressed text
+    curly_braces_pattern = re.compile(r'AdjList:\s*\{(.+?)\}', re.DOTALL)
+    curly_braces_match = curly_braces_pattern.search(compressed_text)
+
+    if curly_braces_match:
+        # Tokenize the content within curly braces
+        curly_braces_content = curly_braces_match.group(1)
+        num_curly_braces_tokens = return_no_tokens(model, curly_braces_content)
+        
+        # Calculate the connection info compression percentage
+        connection_info_compression = (num_curly_braces_tokens / num_input_tokens)* 100
+    else:
+        # the pattern was not matched
+        return -1
+        
+    return connection_info_compression
+
+def token_compression_percentage(input_text, compressed_text, model):
+    # Tokenize the input and compressed texts and get no of tokens
+    num_input_tokens = return_no_tokens(model, input_text)
+    num_compressed_tokens = return_no_tokens(model, compressed_text)
+    
+    # Calculate the token compression percentage
+    compression_percentage = (num_compressed_tokens / num_input_tokens )* 100
+    
+    return compression_percentage
+    
+    
 
 # Define your custom failure and accuracy functions
 def is_failure(parsed_value):
@@ -83,7 +125,7 @@ model = 'gpt-4'
 rate_limit_pause = 1.2
 no_of_hops = 2
 no_of_runs = 3
-result_location = f'./results/{dataset_name}/compression/'
+result_location = f'./results/{dataset_name}/compression/token_loss/'
 # Define the number of ego graphs you want to sample
 num_samples = 20
 
@@ -131,6 +173,7 @@ for run in range(0,no_of_runs):
             error = ""
             compression = True
             prompt = get_prompt(text, compression)
+            input_text = prompt
             try:
                 response = get_completion(prompt, model)
             except Exception as e:
@@ -159,6 +202,9 @@ for run in range(0,no_of_runs):
             
             #Chain the response
             compr_prompt = response
+            compressed_text = compr_prompt
+            token_compression_perc = token_compression_percentage(input_text, compressed_text, model)
+            print(f'Token Compression percentage is {token_compression_perc}')
             try:
                 response = get_completion(compr_prompt, model)
             except Exception as e:
