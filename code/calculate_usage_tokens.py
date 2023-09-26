@@ -39,7 +39,7 @@ pricing = {GPT3_ID: {GENERAL_PRICE_PER_TOKEN_KEY: 0.02 / 1000},
 # Directory containing JSON files from today's usage
 today_date = datetime.now().strftime("%m-%d-%y")
 log_directory = f'./logs/{today_date}/'
-# yesterday and today
+# yesterday and today - modify this if you want just today
 list_log_dir = [f'./logs/09-25-23/', f'./logs/{today_date}/']
 # Initialize the total cost
 total_cost = 0

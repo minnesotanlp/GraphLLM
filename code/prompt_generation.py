@@ -1,6 +1,14 @@
 import openai
 import random
 from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list
+import tiktoken
+
+
+# uses a fast a fast BPE tokenizer specifically designed for OpenAI models
+def return_no_tokens(model, text): 
+    encoding = tiktoken.encoding_for_model(model)
+    token_count = len(encoding.encode(text))
+    return token_count
 
 def get_completion(prompt, model):
     messages = [{"role": "user", "content": prompt}]
@@ -11,7 +19,14 @@ def get_completion(prompt, model):
     )
     return response.choices[0].message["content"]
 
-
+def get_completion_json(prompt, model):
+    messages = [{"role": "user", "content": prompt}]
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=messages,
+        temperature=0, # this is the degree of randomness of the model's output
+    )
+    return response
 
 def generate_textprompt_egograph(graph, center_node, y_labels_dict, edge_text_flag, adjacency_flag):
     text = ""
