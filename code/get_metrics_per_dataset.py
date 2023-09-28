@@ -38,7 +38,7 @@ if __name__== '__main__':
     dataset_name = config["dataset_name"]
     NO_OF_HOPS = config["NO_OF_HOPS"]
     USE_EDGE_TEXT = config["USE_EDGE_TEXT"]
-    NO_OF_SAMPLED_NODES = config["NO_OF_SAMPLED_NODES"]
+    NO_OF_SAMPLED_NODES = config["NO_OF_SAMPLED_NODES"] # no of ego graphs
     RUN_COUNT = config["RUN_COUNT"]
     USE_ADJACENCY = config["USE_ADJACENCY"]
     model = config["model"]
@@ -58,6 +58,7 @@ if __name__== '__main__':
     #print_dataset_stats(data)
     #lets print the label distribution
     #plot_label_distribution(data)
+    
 
     # ------------------
    

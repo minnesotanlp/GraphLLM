@@ -6,8 +6,36 @@ import torch_geometric
 from torch_geometric.utils import to_networkx
 from ogb.nodeproppred import PygNodePropPredDataset
 from torch_geometric.datasets import Planetoid
-
+from datetime import datetime
+import os
 import json
+
+def save_response(response_json, log_dir, log_sub_dir):
+    logpath = log_dir + "/" + log_sub_dir + "/"
+    response_dict = response_json.to_dict()
+    # Get the current timestamp in a format like "yyyy-mm-dd_HH-MM-SS"
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    # Define the filename using the timestamp
+    output_filename = logpath + f"openai_resp_{timestamp}.json"
+    # Save the Python dictionary as JSON
+    with open(output_filename, "w") as json_file:
+        json.dump(response_dict, json_file, indent=4)
+
+def create_log_dir(logpath, date = None):
+    if date is None:
+        # Get today's date in the format mm-dd-yy
+        today_date = datetime.now().strftime("%m-%d-%y")
+        directory_name = today_date
+    else:
+        #use provided date
+        directory_name = date
+
+    if not os.path.exists(directory_name):
+        os.makedirs(logpath+directory_name, exist_ok=True)
+        print(f"Log Directory '{directory_name}' created successfully.")
+    return directory_name
+  
+
 
 def load_dataset(data_dir, dataset_name):
     if dataset_name == 'cora':
@@ -34,6 +62,7 @@ def draw_graph(edge_example):
     plt.show()
 
 def characterize_graph(G, plot_name):
+    print("On converting the PyG graph to NetworkX graph (this will effect no of edges)--> ")
     #Calculate the number of nodes and edges in the graph
     num_nodes = G.number_of_nodes()
     num_edges = G.number_of_edges()
@@ -102,9 +131,9 @@ def plot_label_distribution(data):
     plt.show()
 
 def print_dataset_stats(data): # modify
-    print(f'Number of nodes: {data.num_nodes}')
+    print(f'Number of nodes : {data.num_nodes}')
     # Number of nodes: 2708
-    print(f'Number of edges: {data.num_edges}')
+    print(f'Number of edges including self loops and duplicate edges: {data.num_edges}')
     # Number of edges: 10556
     print(f'Number of features: {data.num_node_features}')
     # Number of edge features: 0
