@@ -119,5 +119,17 @@ def edge_list_to_adjacency_list(edge_list):
             adjacency_list[u].append(v)
         else:
             adjacency_list[u] = [v]
-
     return adjacency_list
+
+def generate_GML(graph):
+    # For Normal GML Format
+    gml = nx.generate_gml(graph)
+    return "\n".join(gml)
+
+    # For XML GML Format
+    # graphml_string = ""
+    # for line in nx.generate_graphml(graph, prettyprint=True):
+    #     graphml_string += line + "\n"
+    # return graphml_string
+
+    

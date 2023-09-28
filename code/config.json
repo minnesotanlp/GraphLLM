@@ -1,14 +1,14 @@
 {
-    "dataset_name": "pubmed",
-    "NO_OF_HOPS": [1],
+    "dataset_name": "cora",
+    "NO_OF_HOPS": [1, 2],
     "USE_EDGE_TEXT": [false],
-    "NO_OF_SAMPLED_NODES": [2],
+    "NO_OF_SAMPLED_NODES": [20, 50],
     "RUN_COUNT": 2,
-    "USE_ADJACENCY": false,
+    "USE_ADJACENCY": true,
     "model": "gpt-4",
     "rate_limit_pause": 1.2,
     "data_dir": "./data",
-    "result_location": "./results/pubmed/",
-    "metrics_filename": "./results/pubmed/metrics.csv",
-    "csv_filename": "./results/pubmed/invalid_request_errors.csv"
+    "result_location": "../results/cora/",
+    "metrics_filename": "../results/cora/metrics.csv",
+    "csv_filename": "../results/cora/invalid_request_errors.csv"
 }
