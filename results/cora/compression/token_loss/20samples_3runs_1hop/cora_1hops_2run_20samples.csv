@@ -1,0 +1,42 @@
+GroundTruth,Parsed Value,Prompt,Response
+0,4,"""""Task:NodeLblPred. AdjLst:{94:[195,675,934,586,1966,1649,2355,2357,2263,2490,733],195:[94],675:[94],934:[94],586:[94],1966:[94],1649:[94],2355:[94,2357],2357:[2355,94],2263:[94,2490],2490:[2263,94],733:[94]}. NodeLblMap:195:0|675:4|934:4|586:?|1966:4|1649:4|2355:4|2357:4|2263:4|2490:4|733:0|94:0. RespFmt:Label of Node = <predicted label> or -1""""","""Label of Node 586 = 4"""
+3,3,"""""Task:NodeLblPred(?). AdjList:{231:[1701,1868],1701:[231,1868],1868:[1701,231,316,766],316:[1868,766],766:[1868,316]}. NodeLblMap:1701:3,231:?,1868:3,316:3,766:3. RespFmt:Label of Node=<predLbl> or -1 if undetermined.""""","""Label of Node=3"""
+3,"3""","""""Task: NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") 
+```Adjacency list: {507: [40], 40: [507, 866, 1364], 866: [40], 1364: [40]}
+Node to Label Mapping : 
+Node 40: Label 3| Node 866: Label ?| Node 507: Label 3| Node 1364: Label 3| ```""""","""""Label of Node = 3"""""
+5,5,"""""Task:NodeLblPred(?). AdjList:{1828:[1408,1409,1827,238],1408:[1828],1827:[1409,1828],1409:[1827,1828],238:[1828]}. NodeLblMap:1408:5|1409:5|1827:?|1828:5|238:5. RespFmt:Label of Node=<predLbl> or -1""""","""Label of Node=5"""
+1,3,"""""Task:NodeLblPred(?). AdjList:{1622:[1289,1270,124,2425],1289:[1622],1270:[1622],124:[1622],2425:[1622]}. NodeLblMap:1289:3,1270:3,1622:3,2425:3,124:?. RespFmt:Label of Node=<predLbl> or -1 if undetermined.""""","""Label of Node=3"""
+3,-1,"""""Task: NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") 
+```Adjacency list: {1413: [338, 1934], 338: [1413, 1934], 1934: [338, 1413]}
+Node to Label Mapping : 
+Node 338: Label 3| Node 1413: Label ?| Node 1934: Label 3| ```""""","""""Label of Node = -1"""""
+2,"2""","""""Task: Node Label Pred. (Predict ? node label, given adjacency list info as dict ""node:node neighborhood"" & node-label mapping in triple backticks. Resp. format ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") 
+```Adjacency list: {558: [2585, 1706], 2585: [558, 1706], 1706: [2585, 558]}
+Node to Label Mapping : 
+Node 2585: Label ?| Node 1706: Label 2| Node 558: Label 2| ```""""","""""Label of Node 2585 = 2"""""
+0,5'.,"""""Task:NodeLblPred. AdjList:{88:[130,2178,1288,1677,2394,1174,1309,415,162,300,815,1713,1847,696,1732,841,76,1741,851,1494,498,737,743,1394,1527,1658,1882,1908,2010,2011,2012,2013,2014,2015,2016,2017],130:[88,2017],2017:[130,815,88],76:[2178,88],2178:[76,88,415,737,1309],415:[2178,1677,1174,1309,88,300,737,851,1527,1847,1908,2014],737:[2178,415,88],1309:[2178,1288,1677,88,415,851,1741,1882,2015],1288:[88,1309],1677:[88,415,1309,1908],1908:[1677,415,88],2394:[88,1174],1174:[2394,88,162,415,815],162:[1174,88],815:[1174,88,2017],851:[1309,415,88],1741:[1309,88],1882:[1309,88],2015:[1309,88],300:[415,88],1527:[415,88],1847:[415,88],2014:[415,88],1713:[88],696:[88],1732:[88],841:[88],1494:[88],498:[88],743:[88],1394:[88],1658:[88],2010:[88,2016],2011:[88],2012:[88],2013:[88],2016:[88,2010]}. NodeLblMap:130:5,2178:5,1288:6,1677:5,2394:6,1174:0,1309:5,415:0,162:4,300:5,815:0,1713:0,1847:0,696:3,1732:2,841:3,76:5,1741:3,851:0,1494:5,88:?,1882:5,2010:0,2011:3,2012:3,2013:6,2014:3,2015:6,737:5,2016:0,2017:5,743:3,498:4,1394:5,1908:4,1527:0,1658:0. If ?->-1, return 'Label of Node = -1' else 'Label of Node = <predicted label>'""""","""The node 88 is connected to nodes with labels 0, 2, 3, 4, 5, and 6. The most common label among these nodes is 5. Therefore, the predicted label for node 88 is 5.
+
+So, the output is 'Label of Node = 5'."""
+1,-1,"""""Task:NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") 
+```AdjList: {2079: [1802, 236, 126], 1802: [2079], 126: [236, 2079], 236: [126, 2079]}
+NodeLblMap: 
+Node 1802: Label 3| Node 236: Label 1| Node 126: Label 1| Node 2079: Label ?| ```""""","""""Label of Node = -1"""""
+3,3,"""""Task:NodeLblPred(AdjList:{729:[1221,1701,1159,2534,669],1221:[729],1701:[729],1159:[729,2534],2534:[1159,729],669:[729]},NodeLblMap:1221:3,1701:3,1159:3,2534:?,729:3,669:3).RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=3"""
+2,2,"""""Task:NodeLblPred(?).AdjList:{757:[2421,1284,1358],2421:[757],1284:[757,1358],1358:[1284,757]}.NodeLblMap:2421:2,1284:2,757:2,1358:?.RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=2"""
+5,-1,"""Task: NodeLblPred (Predict ? label, given adjacency list & node-label mapping) 
+```AdjList: {1441: [648], 648: [1441]}
+Node2Label: 
+Node 648: Label ?| Node 1441: Label 5| ```
+RespFmt: ""Label of Node = <predicted label>"" or ""Label of Node = -1"" if undetermined.""","""Label of Node = -1"""
+3,3,"""""Task:NodeLblPred(?). AdjList:{571:[696,1570],696:[571,1570],1570:[696,571]}. NodeLblMap:696:3,1570:3,571:?. RespFmt:Label of Node=<predLbl> or -1 if undetermined.""""","""Label of Node=3"""
+2,"2""","""""Task: NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") 
+```Adjacency list: {806: [403, 1383], 403: [806, 1383], 1383: [403, 806]}
+Node to Label Mapping : 
+Node 403: Label 2| Node 806: Label 2| Node 1383: Label ?| ```""""","""""Label of Node = 2"""""
+6,6,"""""Task:NodeLblPred(?). AdjList:{147:[1976],1976:[147,502,1973],502:[1976],1973:[1976]}. NodeLblMap:1976:6|147:3|1973:?|502:0. RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=6"""
+4,The label of Node 857 is 4.,"""""Task:NodeLblPred(?). AdjList:{470:[1097,854,857,1115],1097:[470,854,857,1115,1869],854:[1097,470,857],857:[1097,470,854],1115:[1097,470],1869:[1097]}. NodeLblMap:1097:4,1869:3,470:4,854:4,857:?,1115:4. RespFmt:Label of Node=<predLbl> or -1 if undetermined.""""","""The label of Node 857 is 4."""
+4,4,"""""Task:NodeLblPred(?). AdjList:{1702:[1971,1966,1703],1971:[1702,1703,1966],1703:[1971,1966,1702],1966:[1971,1702,1703]}. NodeLblMap:1971:4,1966:?,1702:4,1703:4. RespFmt:Label of Node=<predLbl> or -1""""","""Label of Node=4"""
+3,3,"""""Task:NodeLblPred(?). AdjList:{1857:[304,1701,1708],304:[1857],1701:[1857],1708:[1857]}. NodeLblMap:304:0,1857:?,1708:3,1701:3. RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=3"""
+3,4,"""<<<Task: NodeLblPrdctn(?), AdjList: {385:[369,2483,2484],369:[385,2484],2484:[369,385,2483],2483:[385,2484]}, NodeLblMap: 369:4,385:4,2483:4,2484:? RespFmt: ""Lbl of Node = <predicted label>"" or ""Lbl of Node = -1"" if undetermined>>>""","""Lbl of Node = 4"""
+2,2,"""""Task:NodeLblPred(AdjList:{189:[1509,1262,1072,564],1509:[189,1262],1262:[1509,189,564,1072],564:[1262,189],1072:[1262,189]},NodeLblMap:1509:2,1262:?,1072:2,564:2,189:2).RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=2"""

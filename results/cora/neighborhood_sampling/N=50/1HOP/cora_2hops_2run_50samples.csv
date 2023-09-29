@@ -1,0 +1,305 @@
+GroundTruth,Parsed Value,Prompt,Response
+0,0,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2231: [2182], 2182: [2231]}
+Node to Label Mapping : 
+Node 2182: Label 0| Node 2231: Label ?| ```
+        ""","""Label of Node = 0"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1457: [1456, 649, 1019], 1456: [1457], 649: [1457], 1019: [1457]}
+Node to Label Mapping : 
+Node 1456: Label 3| Node 1457: Label ?| Node 649: Label 3| Node 1019: Label 3| ```
+        ""","""Label of Node = 3"""
+0,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {733: [1160, 794], 1160: [733, 794], 794: [1160, 733]}
+Node to Label Mapping : 
+Node 1160: Label 3| Node 794: Label ?| Node 733: Label 0| ```
+        ""","""Label of Node = -1"""
+5,0,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1677: [88, 1908, 415], 88: [1677, 415, 1908], 415: [88, 1908, 1677], 1908: [88, 1677, 415]}
+Node to Label Mapping : 
+Node 88: Label 0| Node 1908: Label 4| Node 1677: Label ?| Node 415: Label 0| ```
+        ""","""Label of Node = 0"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2146: [1242, 2148, 1101], 1242: [2146, 2148, 1101], 2148: [1242, 2146, 1101], 1101: [1242, 2148, 2146]}
+Node to Label Mapping : 
+Node 1242: Label ?| Node 2148: Label 3| Node 1101: Label 3| Node 2146: Label 3| ```
+        ""","""Label of Node = 3"""
+2,2,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1373: [1003], 1003: [1373]}
+Node to Label Mapping : 
+Node 1003: Label 2| Node 1373: Label ?| ```
+        ""","""Label of Node = 2"""
+0,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {702: [777], 777: [702]}
+Node to Label Mapping : 
+Node 777: Label ?| Node 702: Label 6| ```
+        ""","""Label of Node = -1"""
+6,6,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {69: [1920, 1914, 604], 1920: [69, 1914], 1914: [1920, 69, 604], 604: [1914, 69]}
+Node to Label Mapping : 
+Node 1920: Label 0| Node 1914: Label 6| Node 604: Label 6| Node 69: Label ?| ```
+        ""","""Label of Node = 6"""
+2,0,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1732: [1224], 1224: [1732]}
+Node to Label Mapping : 
+Node 1224: Label 0| Node 1732: Label ?| ```
+        ""","""Label of Node = 0"""
+1,1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1778: [1624], 1624: [1778]}
+Node to Label Mapping : 
+Node 1624: Label ?| Node 1778: Label 1| ```
+        ""","""Label of Node = 1"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {727: [1386, 2570], 1386: [727, 2570, 2571], 2570: [1386, 727], 2571: [1386]}
+Node to Label Mapping : 
+Node 1386: Label ?| Node 2571: Label 3| Node 2570: Label 3| Node 727: Label 3| ```
+        ""","""Label of Node = 3"""
+2,2,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1072: [1740, 1358, 1070, 1725], 1740: [1072, 1725, 1358], 1725: [1740, 1358, 1070, 1072], 1358: [1740, 1070, 1072, 1725], 1070: [1358, 1072, 1725]}
+Node to Label Mapping : 
+Node 1740: Label 2| Node 1358: Label 2| Node 1070: Label 2| Node 1072: Label ?| Node 1725: Label 2| ```
+        ""","""Label of Node = 2"""
+2,2,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {748: [1358, 1550], 1358: [748, 1550], 1550: [1358, 748]}
+Node to Label Mapping : 
+Node 1358: Label 2| Node 748: Label 2| Node 1550: Label ?| ```
+        ""","""Label of Node = 2"""
+5,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2058: [1378, 2150, 635], 1378: [2058, 2150], 2150: [1378, 2058], 635: [2058]}
+Node to Label Mapping : 
+Node 1378: Label 2| Node 2150: Label 5| Node 2058: Label ?| Node 635: Label 2| ```
+        ""","""Label of Node = -1"""
+5,5,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1022: [1962, 1963, 1276], 1962: [1022, 1276, 1963], 1276: [1962, 1022], 1963: [1962, 1022]}
+Node to Label Mapping : 
+Node 1962: Label ?| Node 1963: Label 5| Node 1276: Label 5| Node 1022: Label 5| ```
+        ""","""Label of Node = 5"""
+2,2,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1103: [1888, 1887], 1888: [1103, 1887], 1887: [1888, 1103]}
+Node to Label Mapping : 
+Node 1888: Label 2| Node 1103: Label 2| Node 1887: Label ?| ```
+        ""","""Label of Node = 2"""
+0,0,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1628: [2056], 2056: [1628]}
+Node to Label Mapping : 
+Node 2056: Label 0| Node 1628: Label ?| ```
+        ""","""Label of Node = 0"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {374: [2146, 1101], 2146: [374, 509, 1101, 1242, 2148], 509: [2146, 2148, 1101], 1101: [2146, 2148, 374, 509, 1242], 1242: [2146, 2148, 1101], 2148: [2146, 509, 1101, 1242]}
+Node to Label Mapping : 
+Node 2146: Label 3| Node 2148: Label 3| Node 1101: Label ?| Node 374: Label 3| Node 1242: Label 3| Node 509: Label 3| ```
+        ""","""Label of Node = 3"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1613: [1356], 1356: [1613]}
+Node to Label Mapping : 
+Node 1356: Label 3| Node 1613: Label ?| ```
+        ""","""Label of Node = 3"""
+3,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1999: [285], 285: [1999, 502], 502: [285]}
+Node to Label Mapping : 
+Node 285: Label ?| Node 502: Label 0| Node 1999: Label 3| ```
+        ""","""Label of Node = -1"""
+1,1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1623: [1781], 1781: [1623]}
+Node to Label Mapping : 
+Node 1781: Label ?| Node 1623: Label 1| ```
+        ""","""Label of Node = 1"""
+6,6,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2228: [2395, 1501], 2395: [2228, 1501], 1501: [2395, 2228]}
+Node to Label Mapping : 
+Node 2395: Label ?| Node 2228: Label 6| Node 1501: Label 6| ```
+        ""","""Label of Node = 6"""
+4,4,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {473: [194], 194: [473, 1050, 1451, 2564, 2646], 1050: [194, 2564], 1451: [194, 2564], 2564: [194, 1050, 1451], 2646: [194]}
+Node to Label Mapping : 
+Node 194: Label ?| Node 2564: Label 4| Node 1451: Label 4| Node 2646: Label 4| Node 473: Label 3| Node 1050: Label 4| ```
+        ""","""The node 194 is connected to nodes 473, 1050, 1451, 2564, and 2646. Out of these, nodes 1050, 1451, 2564, and 2646 have the same label 4 and node 473 has a different label 3. Since the majority of the connected nodes have label 4, we can predict that the label of node 194 is also 4.
+
+Label of Node = 4"""
+0,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {659: [354, 1803, 77], 354: [659, 1803], 1803: [354, 77, 659, 1072], 77: [1803, 659], 1072: [1803]}
+Node to Label Mapping : 
+Node 354: Label 0| Node 1803: Label ?| Node 77: Label 6| Node 1072: Label 2| Node 659: Label 0| ```
+        ""","""The label of node 1803 cannot be directly determined from the given information. However, we can make an educated guess based on the labels of its neighboring nodes. The neighbors of node 1803 are nodes 354, 77, 659, and 1072, with labels 0, 6, 0, and 2 respectively. Since the majority of its neighbors have the label 0, we could predict that node 1803 might also have the label 0. However, this is purely speculative and not a definitive answer. Therefore, the response is ""Label of Node = -1""."""
+4,4,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1230: [1342, 1050], 1342: [1230, 1050], 1050: [1342, 1230]}
+Node to Label Mapping : 
+Node 1342: Label 4| Node 1050: Label 4| Node 1230: Label ?| ```
+        ""","""Label of Node = 4"""
+2,2,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2366: [1738, 46, 686], 1738: [2366], 46: [2366], 686: [2366]}
+Node to Label Mapping : 
+Node 1738: Label 2| Node 46: Label 2| Node 686: Label 2| Node 2366: Label ?| ```
+        ""","""Label of Node = 2"""
+0,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {446: [1507, 118], 1507: [446, 1343, 118, 1645], 1343: [1507, 1645, 118], 118: [1507, 446, 1343], 1645: [1507, 1343]}
+Node to Label Mapping : 
+Node 1507: Label ?| Node 1645: Label 3| Node 118: Label 6| Node 446: Label 0| Node 1343: Label 4| ```
+        ""","""Label of Node = -1"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {710: [2212, 2213, 51, 1392], 2212: [710, 1392], 1392: [2212, 710, 51], 51: [2213, 710, 1392], 2213: [51, 710]}
+Node to Label Mapping : 
+Node 2212: Label 3| Node 2213: Label 3| Node 710: Label ?| Node 1392: Label 3| Node 51: Label 3| ```
+        ""","""Label of Node = 3"""
+5,5,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1311: [1313, 468], 1313: [1311, 468], 468: [1313, 647, 1311], 647: [468]}
+Node to Label Mapping : 
+Node 1313: Label 5| Node 468: Label ?| Node 1311: Label 5| Node 647: Label 5| ```
+        ""","""Label of Node = 5"""
+6,6,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2622: [145], 145: [2622]}
+Node to Label Mapping : 
+Node 145: Label 6| Node 2622: Label ?| ```
+        ""","""Label of Node = 6"""
+5,5,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2105: [517, 490], 517: [2105], 490: [2105]}
+Node to Label Mapping : 
+Node 517: Label 5| Node 490: Label 5| Node 2105: Label ?| ```
+        ""","""Label of Node = 5"""
+4,4,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2263: [1015], 1015: [2263]}
+Node to Label Mapping : 
+Node 1015: Label 4| Node 2263: Label ?| ```
+        ""","""Label of Node = 4"""
+0,0,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {95: [861], 861: [95]}
+Node to Label Mapping : 
+Node 861: Label ?| Node 95: Label 0| ```
+        ""","""Label of Node = 0"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {575: [2283], 2283: [575]}
+Node to Label Mapping : 
+Node 2283: Label 3| Node 575: Label ?| ```
+        ""","""Label of Node = 3"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {2075: [2667, 2668, 1020, 2076], 2667: [2075, 2076, 1020, 2668], 2076: [2667, 2075], 1020: [2667, 2075], 2668: [2667, 2075]}
+Node to Label Mapping : 
+Node 2667: Label ?| Node 2668: Label 3| Node 1020: Label 3| Node 2075: Label 3| Node 2076: Label 3| ```
+        ""","""Label of Node = 3"""
+0,0,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {270: [1195, 279], 1195: [270, 279, 868], 279: [1195, 270], 868: [1195]}
+Node to Label Mapping : 
+Node 1195: Label ?| Node 868: Label 3| Node 270: Label 0| Node 279: Label 0| ```
+        ""","""Label of Node = 0"""
+4,4,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1015: [1618, 2262, 1143], 1618: [1015, 1143], 1143: [1618, 1015, 2262], 2262: [1015, 1143]}
+Node to Label Mapping : 
+Node 1618: Label 4| Node 1015: Label 4| Node 2262: Label 4| Node 1143: Label ?| ```
+        ""","""Label of Node = 4"""
+4,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {763: [1635], 1635: [763]}
+Node to Label Mapping : 
+Node 1635: Label ?| Node 763: Label 0| ```
+        ""","""Label of Node = -1"""
+2,2,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1154: [2514, 2515], 2514: [1154, 2515], 2515: [2514, 1154]}
+Node to Label Mapping : 
+Node 2514: Label ?| Node 2515: Label 2| Node 1154: Label 2| ```
+        ""","""Label of Node = 2"""
+0,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {725: [440], 440: [725]}
+Node to Label Mapping : 
+Node 440: Label ?| Node 725: Label 0| ```
+        ""","""Label of Node = -1"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1151: [2570, 2700], 2570: [1151], 2700: [1151]}
+Node to Label Mapping : 
+Node 2570: Label 3| Node 2700: Label 3| Node 1151: Label ?| ```
+        ""","""Label of Node = 3"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {625: [1024], 1024: [625]}
+Node to Label Mapping : 
+Node 1024: Label ?| Node 625: Label 3| ```
+        ""","""Label of Node = 3"""
+5,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {702: [1368], 1368: [702]}
+Node to Label Mapping : 
+Node 1368: Label ?| Node 702: Label 6| ```
+        ""","""Label of Node = -1"""
+0,0,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {279: [32, 838, 2280, 2344, 1195, 270, 304, 242, 2165, 502, 666, 2423], 32: [279], 270: [838, 2280, 1195, 279], 838: [270, 279, 242, 2280], 242: [838, 2280, 279], 2280: [838, 270, 279, 242], 2344: [279], 1195: [270, 279], 304: [279, 2423], 2423: [304, 279], 2165: [279], 502: [279], 666: [279]}
+Node to Label Mapping : 
+Node 32: Label 0| Node 838: Label 0| Node 2280: Label 0| Node 2344: Label 3| Node 1195: Label 0| Node 270: Label 0| Node 304: Label 0| Node 242: Label 0| Node 2165: Label 6| Node 502: Label 0| Node 279: Label ?| Node 666: Label 0| Node 2423: Label 6| ```
+        ""","""The node 279 is connected to nodes with labels 0, 3, and 6. However, the majority of its neighbors have the label 0. Therefore, it is reasonable to predict that node 279 also has the label 0.
+
+Label of Node = 0"""
+3,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {387: [231], 231: [387]}
+Node to Label Mapping : 
+Node 231: Label ?| Node 387: Label 3| ```
+        ""","""Label of Node = -1"""
+5,6,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {822: [702], 702: [822]}
+Node to Label Mapping : 
+Node 702: Label 6| Node 822: Label ?| ```
+        ""","""Label of Node = 6"""
+6,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1973: [1683], 1683: [1973]}
+Node to Label Mapping : 
+Node 1683: Label ?| Node 1973: Label 6| ```
+        ""","""Label of Node = -1"""
+3,3,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {44: [2624, 1582, 2701], 2624: [44, 2701], 2701: [2624, 44], 1582: [44]}
+Node to Label Mapping : 
+Node 2624: Label 3| Node 44: Label ?| Node 2701: Label 3| Node 1582: Label 3| ```
+        ""","""Label of Node = 3"""
+6,6,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1170: [404, 1476], 404: [1170, 1476], 1476: [404, 1170]}
+Node to Label Mapping : 
+Node 404: Label ?| Node 1170: Label 6| Node 1476: Label 6| ```
+        ""","""Label of Node = 6"""
+5,-1,"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type ""node:node neighborhood"" and node-label mapping in the text enclosed in triple backticks. Response should be in the format ""Label of Node = <predicted label>"". If the predicted label cannot be determined, return ""Label of Node = -1"") 
+        ```Adjacency list: {1190: [1184, 1387, 37], 1184: [1190], 1387: [1190], 37: [1190]}
+Node to Label Mapping : 
+Node 1184: Label 5| Node 1387: Label 6| Node 37: Label 5| Node 1190: Label ?| ```
+        ""","""Label of Node = -1"""

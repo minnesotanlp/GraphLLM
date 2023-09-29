@@ -3,6 +3,17 @@ from torch_geometric.utils import to_networkx
 import networkx as nx
 import torch 
 
+def get_y_labels_egograph(data, ego_graph, ego_node):
+    y_labels_dict = {}
+    y_labels_dict[ego_node] = {}   # Initialize dictionary for this ego graph   
+    # Iterate over the nodes in the ego graph
+    for node in ego_graph.nodes():
+        # Get the label for the current node from the data
+        label = data.y[node].item()     
+        # Store the label in the y_labels_dict
+        y_labels_dict[ego_node][node] = label
+    return y_labels_dict
+
 def generate_edgelist(graph):
     # Print out the labels associated with a graph
     edge_list = list(graph.edges())

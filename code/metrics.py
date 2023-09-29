@@ -28,31 +28,24 @@ def is_accurate(parsed_value, ground_truth):
             return False
 
 
+import re
 
 def connection_info_compression_percentage(input_text, compressed_text, model):
-    # Tokenize the input and compressed texts and get no of tokens
-    #num_input_tokens = return_no_tokens(model, input_text)
-    #num_compressed_tokens = return_no_tokens(model, compressed_text)
-
     # Extract the content within curly braces in the input_text for token count
-    curly_braces_pattern_input = re.compile(r'Adjacency list:\s*\{(.+?)\}', re.DOTALL)
+    curly_braces_pattern_input = re.compile(r'(adjlist:|adj list:|adjacency list:)\s*\{(.+?)\}', re.DOTALL | re.IGNORECASE)
     curly_braces_match_input = curly_braces_pattern_input.search(input_text)
-
-    if not curly_braces_match_input:
-        # the pattern was not matched in the input_text
-        return -2
     
     # Tokenize the content within curly braces from input_text
-    curly_braces_content_input = curly_braces_match_input.group(1)
+    curly_braces_content_input = curly_braces_match_input.group(2)
     num_input_tokens = return_no_tokens(model, curly_braces_content_input)
     
     # Extract the content within curly braces in the compressed text
-    curly_braces_pattern_compressed = re.compile(r'AdjList:\s*\{(.+?)\}', re.DOTALL)
+    curly_braces_pattern_compressed = re.compile(r'(adjlist:|adj list:|adjacency list:)\s*\{(.+?)\}', re.DOTALL | re.IGNORECASE)
     curly_braces_match_compressed = curly_braces_pattern_compressed.search(compressed_text)
 
     if curly_braces_match_compressed:
         # Tokenize the content within curly braces from compressed_text
-        curly_braces_content_compressed = curly_braces_match_compressed.group(1)
+        curly_braces_content_compressed = curly_braces_match_compressed.group(2)
         num_curly_braces_tokens = return_no_tokens(model, curly_braces_content_compressed)
         
         # Calculate the connection info compression percentage
@@ -62,6 +55,8 @@ def connection_info_compression_percentage(input_text, compressed_text, model):
         return -1
         
     return connection_info_compression
+
+
 
 def token_compression_percentage(input_text, compressed_text, model):
     # Tokenize the input and compressed texts and get no of tokens
