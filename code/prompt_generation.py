@@ -1,6 +1,9 @@
 import openai
 import random
-from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list
+import networkx as nx
+import json
+import re
+from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list,generate_GML
 import tiktoken
 
 
@@ -124,4 +127,46 @@ def generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, edge_text_flag, ad
     text+=f"Node to Label Mapping : "+"\n"
     for node in node_label_dict:
         text+=f"Node {node}: Label {node_label_dict[node]}| "
+    return text, node_with_question_mark, ground_truth
+
+def generate_text_for_prompt_GML(i, nx_ids, graph, y_labels_dict, dataset_name):
+    text = ""
+    ground_truth = ""
+    center_node = nx_ids[i]
+    gml = generate_GML(graph)
+    text+="GraphML: "+gml+"\n"
+
+    # Randomly choose a node to have a "?" label
+    node_with_question_mark = random.choice(list(graph.nodes()))
+
+    text = re.sub("\"", "", text)
+
+    # # For textual Labels
+    # with open('label_data/' + dataset_name + '_labels.json', 'r') as label_file:
+    #     labels = json.load(label_file)
+
+    ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark, center_node, y_labels_dict)
+
+    # For GML Format
+    ids = (re.compile("label (.*)")).findall(text)
+    edges = (re.compile("source (.*)")).findall(text) + (re.compile("target (.*)")).findall(text)
+    for i in range(len(ids)):
+        text = re.sub("id " + str(i) + "\n", "id " + ids[i] + "\n", text)
+        text = re.sub("label " + ids[i] + "\n", "label " + str(node_label_dict[int(ids[i])]) + "\n", text)
+    for j in edges:
+        text = re.sub("source " + j + "\n", "source " + ids[int(j)] + "\n", text)
+        text = re.sub("target " + j + "\n", "target " + ids[int(j)] + "\n", text)
+
+    # # For GraphML Format
+    # ground_truth = labels[ground_truth]["label"]
+    # regex = re.compile("id=(.*) />")
+    # for id in regex.findall(text):
+    #     if (id != str(node_with_question_mark)):
+    #         # For no label names
+    #         # text = re.sub("id=" + id, "id=" + id + " label=" + str(node_label_dict[int(id)]), text)
+    #         # For label names
+    #         text = re.sub("id=" + id, "id=" + id + " label=" + labels[node_label_dict[int(id)]]["label"], text)
+    #     else:
+    #         text = re.sub("id=" + str(node_with_question_mark), 'id=' + str(node_with_question_mark) + " label=?" , text)
+
     return text, node_with_question_mark, ground_truth

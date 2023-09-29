@@ -23,7 +23,7 @@ from utils import draw_graph,plot_label_distribution, load_dataset,print_dataset
 from metrics import compute_accuracy,record_metrics
 from response_parser import parse_response
 from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list
-from prompt_generation import get_completion,generate_text_for_prompt
+from prompt_generation import get_completion,generate_text_for_prompt,generate_text_for_prompt_GML
 
 if __name__== '__main__':  
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -32,7 +32,7 @@ if __name__== '__main__':
 
     # ---- PARAMS --- #
     # Load configuration from the JSON file
-    with open('code/config.json', 'r') as config_file:
+    with open('config.json', 'r') as config_file:
         config = json.load(config_file)
     # Access parameters from the config dictionary
     dataset_name = config["dataset_name"]
@@ -102,7 +102,25 @@ if __name__== '__main__':
                             for i, graph in enumerate(graph_list):
                                 #print("Graph ",i)
                                 text, node_with_question_mark, ground_truth = generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, use_edge, USE_ADJACENCY)
+                                # text, node_with_question_mark, ground_truth = generate_text_for_prompt_GML(i, nx_ids, graph, y_labels_dict, dataset_name)
                                 error = ""
+
+                                # GML FORMAT EXPLAINATION
+                                # explaination = """A GraphML format consists of unordered sequence of node and edge elements enclosed within []. Each node element has a distinct id and label attribute contained within []. 
+                                # Each edge element has source and target attributes contained within [] that identify the endpoints of an edge by having the same value as the node id attributes of those endpoints."""
+
+                                # GRAPHML FORMAT EXPLAINATION
+                                # explaination = """A GraphML file consists of an XML file containing a graph element, within which is an unordered sequence of node and edge elements. Each node element should have a 
+                                # distinct id attribute as well as its label, and each edge element has source and target attributes that identify the endpoints of an edge by having the same value as the id attributes of those endpoints."""
+
+                                # GRAPHML PROMPT
+                                # prompt = f"""
+                                # Task : Node Label Prediction (Predict the label of the node marked with a ?, given the graph information in the form of a GraphML structure in the text enclosed in triple backticks. {explaination}
+                                # Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
+                                # ```{text}```
+                                # """
+
+                                # ADJACENCY LIST
                                 prompt = f"""
                                 Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type "node:node neighborhood"
                                 and node-label mapping in the text enclosed in triple backticks. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
