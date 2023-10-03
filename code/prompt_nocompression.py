@@ -1,96 +1,42 @@
 import networkx as nx
 import numpy as np
 import random 
-from utils import load_dataset
+from utils import load_dataset, save_response, create_log_dir
 from torch_geometric.utils import to_networkx
-from prompt_generation import generate_textprompt_egograph, get_completion
-from connection_information import generate_graphlist_constrained
+from prompt_generation import generate_textprompt_egograph, get_completion_json, get_prompt
+from connection_information import get_y_labels_egograph
+from metrics import is_failure,is_accurate
 from response_parser import parse_response
-import matplotlib.pyplot as plt
 import openai
-import time
 import csv
 import os
-import re
+import json
 
-# Define your custom failure and accuracy functions
-def is_failure(parsed_value):
-    if str(parsed_value) == '-1' or str(parsed_value) == '?':
-        return True
-    else :
-        return False
-
-def is_accurate(parsed_value, ground_truth):
-    ground_truth = str(ground_truth)
-    parsed_value = str(parsed_value)
-    matches = re.search(r'the label of node (\d+) is (\d+)', parsed_value, re.IGNORECASE)
-    if matches:
-        label_value = matches.group(1)
-        if label_value == ground_truth:
-            return True
-        else :
-            return False
-    else:
-        tokens = re.findall(r'\w+|[^\w\s]', parsed_value)
-        if tokens[0] == ground_truth:
-            return True
-        else:
-            return False
-        
-           
-    
-
-def get_y_labels_egograph(data, ego_graph, ego_node):
-    y_labels_dict = {}
-    y_labels_dict[ego_node] = {}   # Initialize dictionary for this ego graph   
-    # Iterate over the nodes in the ego graph
-    for node in ego_graph.nodes():
-        # Get the label for the current node from the data
-        label = data.y[node].item()     
-        # Store the label in the y_labels_dict
-        y_labels_dict[ego_node][node] = label
-    return y_labels_dict
-
-
-
-def get_prompt(connectivity_information, compression_flag):
-    if compression_flag:
-        text =f"""
-        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type "node:node neighborhood"
-        and node-label mapping in the text enclosed in triple backticks. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
-        ```{connectivity_information}```
-        """
-        prompt = f"""
-        Compress the following text in triple angular brackets '<<< >>>', into the size of a tweet such that you (GPT-4) can reconstruct the intention of the human who wrote text as close as possible to the original intention. Response format information given in the text needs to be retained in the reconstruction.This is for yourself. It does not need to be human readable or understandable. Abuse of language mixing, abbreviations, symbols (unicode and emoji), or any other encodings or internal representations is all permissible, as long as it, if pasted in a new inference cycle, will yield near-identical results as the original text.
-        <<<{text}>>>
-        """
-    else:
-        prompt = f"""
-        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type "node:node neighborhood"
-        and node-label mapping in the text enclosed in triple backticks. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
-        ```{connectivity_information}```
-        """
-    return prompt
-
- 
-#-- params -- 
-openai.api_key = os.environ["OPENAI_API_UMNKEY"]
-data_dir = './data'
-dataset_name = 'cora'
-use_edge = False
-USE_ADJACENCY = True
-model = 'gpt-4'
-rate_limit_pause = 1.2
-no_of_hops = 1
-no_of_runs = 3
-result_location = f'./results/{dataset_name}/compression/'
-# Define the number of ego graphs you want to sample
-num_samples = 20
-
-compression = True
-
-os.makedirs(result_location, exist_ok=True)
+# ---- PARAMS --- #
+#-------------------------------------------------------------
 random.seed(10)
+openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+# Load configuration from the JSON file
+with open('code/config1.json', 'r') as config_file:
+    config = json.load(config_file)
+# Access parameters from the config dictionary
+dataset_name = config["dataset_name"]
+no_of_hops = config["NO_OF_HOPS"]
+use_edge = config["USE_EDGE"]
+num_samples = config["NO_OF_SAMPLED_NODES"] # no of ego graphs
+no_of_runs = config["RUN_COUNT"]
+USE_ADJACENCY = config["USE_ADJACENCY"]
+compression = config['compression']
+model = config["model"]
+rate_limit_pause = config["rate_limit_pause"]
+data_dir = config["data_dir"]
+log_dir = config["log_dir"]
+result_location = config["result_location"]
+#-------------------------------------------------------------
+
+log_sub_dir = create_log_dir(log_dir)
+os.makedirs(result_location, exist_ok=True)
+
 #------------- 
 
 dataset = load_dataset(data_dir, dataset_name)
@@ -103,17 +49,21 @@ avg_failure_values = []
 avg_accuracy_values = []
 
 node_list = list(X.nodes())
-# Perform the experiment
+# Perform the experiment for N runs keeping hops and no of sampled ego graphs constant
 for run in range(0,no_of_runs):
     edges_list = []
-    filename = result_location + f'{dataset_name}_{no_of_hops}hops_{run}run_{num_samples}samples_baseline.csv'
-    with open(filename,'w') as csvfile:
-        csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
+    res_filename = result_location + f'{dataset_name}_{no_of_hops}hops_{run}run_{num_samples}samples.csv'
+    
+    with open(res_filename, 'w', newline='') as f1:
+        res_csv_writer = csv.writer(f1)        
+        res_csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
+        f1.flush() 
+
         error_count = 0
         token_err_count = 0
         accurate_labels = 0
         failure_labels = 0
+
         for _ in range(num_samples):
 
             while True:
@@ -129,10 +79,12 @@ for run in range(0,no_of_runs):
             y_labels_egograph = get_y_labels_egograph(data, ego_graph, ego_node)
             text, node_with_question_mark, ground_truth = generate_textprompt_egograph(ego_graph, ego_node, y_labels_egograph, use_edge, USE_ADJACENCY)
             error = ""
-            compression = False # we want the usual prompt
             prompt = get_prompt(text, compression)
+            
             try:
-                response = get_completion(prompt, model)
+                response_json = get_completion_json(prompt, model)
+                save_response(response_json, log_dir, log_sub_dir)
+                response = response_json.choices[0].message["content"]
             except Exception as e:
                 error_count+=1
                 if error_count>5:
@@ -157,18 +109,20 @@ for run in range(0,no_of_runs):
                     print(f"Pausing for {rate_limit_pause} seconds.")
                 continue
             
-            
+
             delimiter_options = ['=', ':']  # You can add more delimiters if needed
             parsed_value = None
             #attempt to parse the response
             for delimiter in delimiter_options: 
                 parsed_value = parse_response(response, delimiter) # check for better rules here!
                 if parsed_value is not None: # general checking for the delimiter responses
-                    csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"'])
+                    res_csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"'])
+                    f1.flush()
                     break
                 else :
-                    print("BUG : Delimiter not found in response from the LLM")
-                    csv_writer.writerow([ground_truth, response, f'"{prompt}"', f'"{response}"']) # this is handled in is accurate
+                    print("BUG : Delimiter not found in response from the LLM, response written instead of parsed value")
+                    res_csv_writer.writerow([ground_truth, response, f'"{prompt}"', f'"{response}"']) # this is handled in is accurate
+                    f1.flush()
                     break
 
             print("RESPONSE --> ", response)
@@ -186,6 +140,7 @@ for run in range(0,no_of_runs):
             failure = 0
         else :
             failure = failure_labels/(num_samples-accurate_labels)
+
         avg_failure_values.append(failure)
         avg_accuracy_values.append(accuracy)
 
@@ -198,5 +153,7 @@ print("Average accuracy across runs:", np.mean(avg_accuracy_values)," Standard d
 print("Average failure across runs:", np.mean(avg_failure_values)," Standard deviation of failure:", np.std(avg_failure_values))
 
 
-                       
+                    
+            
+            
     

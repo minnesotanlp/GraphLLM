@@ -1,0 +1,37 @@
+GroundTruth,Parsed Value,Prompt,Response
+1,1,"""""Task:NodeLblPred. AdjList:{36:[1505,1146,1552,2107],1505:[36,330,530,773,1072,1146,1552,1624,1699,1788,1801,2086,2107],330:[1505],530:[1505],773:[1505,1072],1072:[1505,773,1801],1146:[1505,36],1552:[1505,36],1624:[1505,1788],1699:[1505],1788:[1505,1624],1801:[1505,1072],2086:[1505],2107:[1505,36]}. NodeLblMap:1505:1|1699:1|36:1|773:?|2086:1|1801:0|330:4|1072:2|1552:1|530:0|1624:1|1146:1|2107:1|1788:1. RespFmt:Label of Node = <predicted label> or -1 if undetermined.""""","""Label of Node 773 = 1"""
+3,2,"""""Task:NodeLblPred(?). AdjList:{716:[2409],2409:[716,1057],1057:[2409]}. NodeLblMap:2409:2,716:?,1057:3. RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=2"""
+3,-1,"""""Task:NodeLblPred(?). AdjList:{1019:[1457],1457:[1019]}. NodeLblMap:1457:3,1019:?. RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=-1"""
+0,-1,"""""Task: NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") 
+```Adjacency list: {973: [880], 880: [973, 1013], 1013: [880]}
+Node to Label Mapping : 
+Node 880: Label ?| Node 1013: Label 0| Node 973: Label 5| ```""""","""Label of Node = -1"""
+0,4,"""""Task:NodeLblPred(?). AdjList:{2357:[39,2355,2356,94,1846],39:[2357],94:[2355,2357],2355:[94,2356,2357],2356:[2355,2357],1846:[2357]}. NodeLblMap:39:4|2355:4|2356:?|2357:4|1846:3|94:0. RespFmt:Label of Node=<predLbl> or -1 if undetermined.""""","""Label of Node=4"""
+3,-1,"""""Task: NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") ```Adjacency list: {1023: [2568], 2568: [1023]} Node to Label Mapping : Node 2568: Label 3| Node 1023: Label ?| ```""""","""Label of Node = -1"""
+1,1,"""""Task:NodeLblPred(?). AdjList:{1253:[308,302],308:[1253],302:[1253]}. NodeLblMap:308:1,1253:?,302:1. RespFmt:Label of Node=<predLbl>. If undetermined, return -1""""","""Label of Node=1"""
+5,-1,"""""Task:NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") ```Adjacency list: {1441: [648], 648: [1441]} Node to Label Mapping : Node 648: Label 5| Node 1441: Label ?| ```""""","""""Label of Node = -1"""""
+4,3,"""""Task:NodeLblPred(?).AdjList:{2406:[523,2043],523:[2406],2043:[2406]}.NodeLblMap:523:?,2406:3,2043:4.RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=3"""
+6,The label of node 1327 is 6.,"""""Task:NodeLblPred(?).AdjList:{495:[1328,2192,1327],1328:[495,1327],1327:[1328,495],2192:[495]}.NodeLblMap:1328:6,2192:6,1327:?,495:6.RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""The label of node 1327 is 6."""
+3,3,"""""Task:NodeLblPred(?). AdjList:{877:[1542,1176,1935],1542:[877,1176,1935],1176:[1542,295,877,1935,507],1935:[1542,877,1176],295:[1176],507:[1176]}. NodeLblMap:1542:3,295:3,877:3,1935:3,1176:?,507:3. RespFmt:Label of Node=<predLbl> or -1 if undetermined.""""","""Label of Node=3"""
+5,-1,"""Tsk:NodeLblPrdctn(?lbl,AdjLst:{1829:[940],940:[1829]},NodeLblMap:940:?,1829:5).RspFmt:""LblOfNode=<predicted label>"" or ""LblOfNode=-1"" if undetermined.""","""LblOfNode=-1"""
+2,-1,"""""Task:NodeLblPred(?). AdjList:{227:[883,534],883:[227],534:[227]}. NodeLblMap:883:?,227:2,534:2. RespFmt:Label of Node=<predLbl>. If undetermined, return -1""""","""Label of Node=-1"""
+3,3,"""""Task:NodeLblPrdctn(adjLst:{15:[1090,1093,1271,2367],1090:[15,1093,1271,2367],1093:[1090,15,599,1271,2367],1271:[1090,1093,15,599,2367],2367:[1090,1093,15,1271],599:[1093,1271]},nodeLblMap:1090:3,1093:3,15:3,599:?,1271:3,2367:3).RspnsFmt:Label of Node=<predicted label> or -1""""","""The task is to predict the label of node 599 based on the given adjacency list and node label map. The adjacency list shows the connections between different nodes, and the node label map shows the labels of certain nodes. 
+
+In the given node label map, all nodes except 599 have a label of 3. Node 599 is connected to nodes 1093 and 1271, both of which have a label of 3. 
+
+Therefore, it is reasonable to predict that node 599 also has a label of 3.
+
+Response: Label of Node=3"""
+3,-1,"""Task: NodeLblPred (Predict ? label, given adjacency list & node-label mapping) 
+```AdjList: {1684: [2513], 2513: [1684]}
+Node2Label: 
+Node 2513: Label ?| Node 1684: Label 3| ```
+RespFmt: ""Label of Node = <predicted label>"". If undetermined, ""Label of Node = -1""""","""Label of Node = -1"""
+4,4,"""""Task:NodeLblPred(?).AdjList:{1196:[1061,943,1367,1624,2300],1061:[1196],943:[1196],1367:[1196],1624:[1196],2300:[1196]}.NodeLblMap:1061:?,1196:4,943:4,1367:1,1624:1,2300:1.RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""Label of Node=4"""
+3,3,"""NLPred: {Task:NodeLblPred, AdjList: {150:[914], 914:[150,875], 875:[914]}, NodeLblMap: {914:'?', 875:3, 150:3}, RespFmt: ""Lbl of Node = <pred lbl>"", NoPred: ""Lbl of Node = -1""}""","""Lbl of Node = 3"""
+2,-1,"""""Task: NodeLblPred (Predict ? node label, given adjacency list & node-label mapping. Response: ""Label of Node = <predicted label>"". If undetermined, return ""Label of Node = -1"") 
+```AdjList: {1103: [1480, 1358], 1480: [1103, 1358], 1358: [1480, 1103]}
+NodeLblMap: 
+Node 1480: Label 2| Node 1358: Label ?| Node 1103: Label 2| ```""""","""Label of Node = -1"""
+2,2,"""""Task:NodeLblPred. AdjList:{389:[704,1483,1743,2450],704:[389,562,969,1412,1483,1743,2113,2450],562:[704,1483,2450],969:[704,1483,1743,2450],1412:[704,1483,1743,2450],1483:[704,2113,1412,389,969,562,1743],1743:[704,2113,1412,389,969,1483,2450],2113:[704,1483,1743,2450],2450:[704,2113,1412,389,969,1743,562]}. NodeLblMap:704:2,2113:2,1412:2,389:2,969:?,1483:2,1743:2,562:2,2450:2. RespFmt:Label of Node = <predicted label> or -1""""","""Label of Node 969 = 2"""
+2,"The label of node 534 is 2. All its adjacent nodes have the same label, which is 2. Therefore, the label of node 534 should also be 2 to satisfy the condition that each node has the same label as all its adjacent nodes.","""""Task:NodeLblPred(?).AdjList:{534:[609,227,933,629],609:[534],227:[534],933:[534],629:[534]}.NodeLblMap:609:2,227:2,933:2,629:2,534:?.RespFmt:Label of Node=<predLbl> or -1 if undetermined""""","""The label of node 534 is 2. All its adjacent nodes have the same label, which is 2. Therefore, the label of node 534 should also be 2 to satisfy the condition that each node has the same label as all its adjacent nodes."""
