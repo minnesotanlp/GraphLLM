@@ -59,7 +59,7 @@ def generate_textprompt_egograph(graph, center_node, y_labels_dict, edge_text_fl
 
 
 
-def generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, edge_text_flag, adjacency_flag):
+def generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, edge_text_flag, adjacency_flag, dataset_name):
     text = ""
     ground_truth = ""
     #text+= f"Edge Connectivity Information :"+"\n"
@@ -81,9 +81,22 @@ def generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, edge_text_flag, ad
 
     ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark, center_node, y_labels_dict)
 
+    # # For textual Labels
+    with open('label_data/' + dataset_name + '_labels.json', 'r') as label_file:
+        labels = json.load(label_file)
+    ground_truth = labels[ground_truth]["label"]
+
     text+=f"Node to Label Mapping : "+"\n"
     for node in node_label_dict:
-        text+=f"Node {node}: Label {node_label_dict[node]}| "
+        # For textual Labels
+        if node == node_with_question_mark:
+            text+=f"Node {node}: Label ?| "
+        else:
+            textual_label = labels[node_label_dict[node]]["label"]
+            text+=f"Node {node}: Label {textual_label}| "
+        
+        # text+=f"Node {node}: Label {node_label_dict[node]}| "
+
     return text, node_with_question_mark, ground_truth
 
 def generate_text_for_prompt_GML(i, nx_ids, graph, y_labels_dict, dataset_name):
