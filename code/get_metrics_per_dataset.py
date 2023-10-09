@@ -20,10 +20,10 @@ from networkx.algorithms import community
 import openai
 import random
 from utils import draw_graph,plot_label_distribution, load_dataset,print_dataset_stats
-from metrics import compute_accuracy,record_metrics
+from metrics import compute_accuracy,record_metrics,token_limit_percent
 from response_parser import parse_response
 from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list
-from prompt_generation import get_completion,generate_text_for_prompt,generate_text_for_prompt_GML
+from prompt_generation import get_completion,generate_text_for_prompt,generate_text_for_prompt_GML,get_completion_json
 
 if __name__== '__main__':  
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -64,7 +64,7 @@ if __name__== '__main__':
    
     with open(metrics_filename, 'w') as metrics_file:
         metrics_writer = csv.writer(metrics_file)
-        metrics_writer.writerow(["no of hops", "edgetext", "sampled nodes", "mean accuracy", "SD-accuracy","mean failure fraction","SD failure fraction"," mean token err frac", "SD token frac"])
+        metrics_writer.writerow(["no of hops", "edgetext", "sampled nodes", "mean accuracy", "SD-accuracy","mean failure fraction","SD failure fraction"," mean token err frac", "SD token frac", "mean percent token usage"])
     
     
     # This is to record errors
@@ -85,6 +85,7 @@ if __name__== '__main__':
                     acc_list = []
                     fail_list =[]
                     token_err_list = []
+                    token_count_list = []
                     for run_count in range(0,RUN_COUNT):
                         start_time = time.time()
                         print("Run Count : ", run_count+1)
@@ -96,12 +97,13 @@ if __name__== '__main__':
 
                         with open(filename,'w') as csvfile:
                             csv_writer = csv.writer(csvfile)
-                            csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
+                            csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response','Token % Usage'])
                             error_count = 0
                             token_err_count = 0
+                            token_count = -1
                             for i, graph in enumerate(graph_list):
                                 #print("Graph ",i)
-                                text, node_with_question_mark, ground_truth = generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, use_edge, USE_ADJACENCY)
+                                text, node_with_question_mark, ground_truth = generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, use_edge, USE_ADJACENCY, dataset_name)
                                 # text, node_with_question_mark, ground_truth = generate_text_for_prompt_GML(i, nx_ids, graph, y_labels_dict, dataset_name)
                                 error = ""
 
@@ -131,7 +133,9 @@ if __name__== '__main__':
                                 #```{text}```
                                 #"""
                                 try:
-                                    response = get_completion(prompt, model)
+                                    response_json = get_completion_json(prompt, model)
+                                    response = response_json.choices[0].message["content"]
+                                    token_count = token_limit_percent(response_json)
                                 except Exception as e:
                                     error_count+=1
                                     if error_count>5:
@@ -165,7 +169,7 @@ if __name__== '__main__':
                                 for delimiter in delimiter_options: 
                                     parsed_value = parse_response(response, delimiter) # check for better rules here!
                                     if parsed_value is not None: # general checking for the delimiter responses
-                                        csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"'])
+                                        csv_writer.writerow([ground_truth, parsed_value, f'"{prompt}"', f'"{response}"', f'{token_count}%'])
                                         break
                                     else :
                                         print("Delimiter not found in response from the LLM")
@@ -184,6 +188,7 @@ if __name__== '__main__':
                         acc_list.append(accuracy)
                         token_err_list.append(token_err_perc)
                         fail_list.append(failure_perc)
+                        token_count_list.append(token_count)
 
 
                     # Record average metrics in the metrics.csv file
@@ -193,9 +198,10 @@ if __name__== '__main__':
                     std_failure = statistics.stdev(fail_list)
                     mean_token_perc = statistics.mean(token_err_list)
                     std_token_perc = statistics.stdev(token_err_list)
+                    mean_token_count = statistics.mean(token_count_list)
 
                     # write the average metrics out
-                    record_metrics(metrics_filename, hops, use_edge, sampled_nodes, mean_accuracy, std_accuracy, mean_failure, std_failure, mean_token_perc, std_token_perc)
+                    record_metrics(metrics_filename, hops, use_edge, sampled_nodes, mean_accuracy, std_accuracy, mean_failure, std_failure, mean_token_perc, std_token_perc, mean_token_count)
                         
                         
                                         

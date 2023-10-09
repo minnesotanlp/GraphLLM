@@ -95,10 +95,13 @@ def compute_accuracy(csv_filename):
         else:
             failure_perc = fail_count / (total_count-correct_count)
         return accuracy, failure_perc
+    
+def token_limit_percent(response):
+    return 100 * (response["usage"]["prompt_tokens"])/(8192)
 
 # Function to record metrics in "metrics.csv"
-def record_metrics(metrics_filename, hops, use_edge, sampled_nodes, mean_accuracy, std_accuracy, mean_failure, std_failure, mean_token_perc, std_token_perc):
+def record_metrics(metrics_filename, hops, use_edge, sampled_nodes, mean_accuracy, std_accuracy, mean_failure, std_failure, mean_token_perc, std_token_perc, token_limit):
     with open(metrics_filename, 'a') as metrics_file:
         metrics_writer = csv.writer(metrics_file)
-        metrics_writer.writerow([hops, use_edge, sampled_nodes, mean_accuracy, std_accuracy, mean_failure, std_failure, mean_token_perc, std_token_perc])
+        metrics_writer.writerow([hops, use_edge, sampled_nodes, mean_accuracy, std_accuracy, mean_failure, std_failure, mean_token_perc, std_token_perc, token_limit])
 
