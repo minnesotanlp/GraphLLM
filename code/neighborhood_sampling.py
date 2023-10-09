@@ -4,7 +4,7 @@ import random
 from utils import load_dataset, save_response, create_log_dir
 from torch_geometric.utils import to_networkx
 from prompt_generation import get_completion_json, get_prompt, generate_textprompt_anygraph
-from connection_information import get_y_labels_egograph
+from connection_information import get_y_labels_graph
 from metrics import is_failure,is_accurate
 from response_parser import parse_response
 import openai
@@ -78,7 +78,7 @@ for run in range(0,no_of_runs):
             
           
             #get labels for the subgraph 
-            y_labels_egograph = get_y_labels_egograph(data, ego_graph, ego_node)
+            y_labels_egograph = get_y_labels_graph(data, ego_graph, True, ego_node)
 
             # first subgraph is taken out. Let us now randomly assign one node as ? and extract the 2 hop subgraph if needed
             node_with_question_mark = random.choice(list(ego_graph.nodes()))

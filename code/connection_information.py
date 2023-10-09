@@ -3,22 +3,35 @@ from torch_geometric.utils import to_networkx
 import networkx as nx
 import torch 
 
-def get_y_labels_egograph(data, ego_graph, ego_node):
-    y_labels_dict = {}
-    y_labels_dict[ego_node] = {}   # Initialize dictionary for this ego graph   
-    # Iterate over the nodes in the ego graph
-    for node in ego_graph.nodes():
-        # Get the label for the current node from the data
-        label = data.y[node].item()     
-        # Store the label in the y_labels_dict
-        y_labels_dict[ego_node][node] = label
+# get the y labels for the graph passed
+def get_y_labels_graph(data, graph_passed, ego_flag, ego_node = None):
+    if ego_flag:
+        y_labels_dict = {}
+        y_labels_dict[ego_node] = {}   # Initialize dictionary for this ego graph   
+        # Iterate over the nodes in the ego graph
+        for node in graph_passed.nodes():
+            # Get the label for the current node from the data
+            label = data.y[node].item()     
+            # Store the label in the y_labels_dict
+            y_labels_dict[ego_node][node] = label
+    else:
+        y_labels_dict = {} 
+        # Iterate over the nodes in the ego graph
+        for node in graph_passed.nodes():
+            # Get the label for the current node from the data
+            label = data.y[node].item()     
+            # Store the label in the y_labels_dict
+            y_labels_dict[node] = label
     return y_labels_dict
 
+
+# This function generates a edgelist from the graph
 def generate_edgelist(graph):
     # Print out the labels associated with a graph
     edge_list = list(graph.edges())
     return edge_list
 
+# This function generates a compressed textual version (Node A - Node B) of the edgelist from the graph
 def generate_textual_edgelist2(edge_list):           
         # Convert the edge list information into text
         edgelist_converted = ''
@@ -27,6 +40,7 @@ def generate_textual_edgelist2(edge_list):
             edgelist_converted += f'Node {source} - Node {target}. '
         return edgelist_converted
 
+# This function generates a textual version (Node A is connected to Node B) of the edgelist from the graph
 def generate_textual_edgelist(edge_list):           
         # Convert the edge list information into text
         edgelist_converted = ''
@@ -35,20 +49,8 @@ def generate_textual_edgelist(edge_list):
             edgelist_converted += f'Node {source} is connected to Node {target}. '
         return edgelist_converted
 
-def generate_node_label_dict(graph, node_with_question_mark, center_node, y_labels_dict): 
-    ground_truth =  y_labels_dict[center_node][node_with_question_mark]
-    node_label_dict= {} # node: label
-    for node in graph.nodes():
-        if node == node_with_question_mark:
-            label = "?"
-        else:
-            label = y_labels_dict[center_node][node]  # Extract node label
-        node_label_dict[node]=label
-    return ground_truth, node_label_dict
 
-
-
-# modified such that it only has <50 nodes and <50 edges
+# generates graph list which has graphs <100 edges
 def generate_graphlist_constrained(num_nodes_to_sample, no_of_hops, data):
     # stores labels of each sub graph --> center node : {node: label}, ..
     y_labels_dict = {}
@@ -86,7 +88,7 @@ def generate_graphlist_constrained(num_nodes_to_sample, no_of_hops, data):
 
     return y_labels_dict, nx_ids, graph_list
 
-
+# generates graphlist which can have any no of edges
 def generate_graphlist(num_nodes_to_sample,no_of_hops,data):
     # stores labels of each sub graph --> center node : {node: label}, ..
     y_labels_dict= {}
@@ -99,15 +101,6 @@ def generate_graphlist(num_nodes_to_sample,no_of_hops,data):
 
     # Convert sampled indices to integers, list of center nodes
     nx_ids = [int(node_id.item()) for node_id in sampled_indices]
-
-    # Sample and yield subgraphs one at a time
-    #for center_node in nx_ids:
-    #    sampled_subgraph = nx.ego_graph(nx_graph, center_node, radius=no_of_hops, undirected=True)
-    #    y_labels_dict[center_node] = {}  # Initialize dictionary for this center node
-    #    for node in sampled_subgraph.nodes():
-    #        y_labels_dict[center_node][node] = data.y[node].item()  # Store y label
-    #    yield y_labels_dict[center_node], center_node, sampled_subgraph
-
    
     for center_node in nx_ids:
         sampled_subgraph = nx.ego_graph(nx_graph, center_node, radius=no_of_hops, undirected=True)
@@ -117,6 +110,7 @@ def generate_graphlist(num_nodes_to_sample,no_of_hops,data):
         graph_list.append(sampled_subgraph)
     return y_labels_dict, nx_ids, graph_list
 
+# This function converts the edge list to adjacency list
 def edge_list_to_adjacency_list(edge_list):
     adjacency_list = {}
 
@@ -136,15 +130,20 @@ def edge_list_to_adjacency_list(edge_list):
             adjacency_list[u] = [v]
     return adjacency_list
 
-def generate_GML(graph):
-    # For Normal GML Format
-    gml = nx.generate_gml(graph)
-    return "\n".join(gml)
+# This function generates a gml or graph ML format of the graph
+def generate_GML(graph, format):
+    if format == "graphml":
+        #For XML GML Format
+        graphml_string = ""
+        for line in nx.generate_graphml(graph, prettyprint=True):
+            graphml_string += line + "\n"
+        return graphml_string
+    else:
+        # For Normal GML Format
+        gml = nx.generate_gml(graph)
+        return "\n".join(gml)
 
-    # For XML GML Format
-    # graphml_string = ""
-    # for line in nx.generate_graphml(graph, prettyprint=True):
-    #     graphml_string += line + "\n"
-    # return graphml_string
+     
+    
 
     

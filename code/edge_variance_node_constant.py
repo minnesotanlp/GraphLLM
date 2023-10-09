@@ -3,8 +3,10 @@ import numpy as np
 import random 
 from utils import load_dataset
 from torch_geometric.utils import to_networkx
-from prompt_generation import generate_textprompt_egograph, get_completion
+from prompt_generation import generate_textprompt_anygraph, get_completion
+from connection_information import get_y_labels_graph
 from response_parser import parse_response
+from plotting import visualize_ego_graph
 import matplotlib.pyplot as plt
 import openai
 import time
@@ -29,40 +31,6 @@ def is_accurate(parsed_value, ground_truth):
     else:
         return False
     
-
-def get_y_labels_egograph(data, ego_graph, ego_node):
-    y_labels_dict = {}
-    y_labels_dict[ego_node] = {}   # Initialize dictionary for this ego graph   
-    # Iterate over the nodes in the ego graph
-    for node in ego_graph.nodes():
-        # Get the label for the current node from the data
-        label = data.y[node].item()     
-        # Store the label in the y_labels_dict
-        y_labels_dict[ego_node][node] = label
-    return y_labels_dict
-
-
-def visualize_ego_graph(ego_graph, y_labels, ego_node):
-    y_labels_egograph = y_labels[ego_node]
-    # Create a subgraph to include only the ego graph
-    subgraph = ego_graph.subgraph(list(y_labels_egograph.keys()))
-    
-    # Get node labels from y_labels_egograph
-    node_labels = {node: str(label) for node, label in y_labels_egograph.items()}
-    
-    # Get node colors based on labels (assuming labels are integers)
-    node_colors = [y_labels_egograph[node] for node in subgraph.nodes()]
-    
-    # Draw the ego graph with labels and colors
-    pos = nx.spring_layout(subgraph)  # Layout for node positioning
-    nx.draw(subgraph, pos, with_labels=True, labels=node_labels,
-            node_color=node_colors, cmap=plt.cm.jet, node_size=200)
-    
-    # Set plot title
-    plt.title(f'Ego Graph Visualization (Ego Node: {ego_node})')
-    
-    # Show the plot
-    plt.show()
 
 def get_prompt(text):
     prompt = f"""
@@ -129,11 +97,11 @@ for run in range(0,no_of_runs):
             # Compute metrics on the ego graph
             num_edges = ego_graph.number_of_edges()
             edges_list.append(num_edges)
-            y_labels_egograph = get_y_labels_egograph(data, ego_graph, ego_node)
+            y_labels_egograph = get_y_labels_graph(data, ego_graph, True, ego_node)
             #visualize_ego_graph(ego_graph, y_labels_egograph, ego_node)
             
             # HERE IS WHERE WE DO PROMPTING
-            text, node_with_question_mark, ground_truth = generate_textprompt_egograph(ego_graph, ego_node, y_labels_egograph, use_edge, USE_ADJACENCY)
+            text, node_with_question_mark, ground_truth = generate_textprompt_anygraph(ego_graph, ego_node, y_labels_egograph, ego_node, use_edge, USE_ADJACENCY, True)
             error = ""
             #print(text)
             prompt = get_prompt(text)

@@ -3,8 +3,8 @@ import numpy as np
 import random 
 from utils import load_dataset, save_response, create_log_dir
 from torch_geometric.utils import to_networkx
-from prompt_generation import generate_textprompt_egograph, get_completion_json, get_prompt
-from connection_information import get_y_labels_egograph
+from prompt_generation import generate_textprompt_anygraph, get_completion_json, get_prompt
+from connection_information import get_y_labels_graph
 from metrics import is_failure,is_accurate
 from response_parser import parse_response
 import openai
@@ -76,8 +76,8 @@ for run in range(0,no_of_runs):
             
             # Compute metrics on the ego graph
 
-            y_labels_egograph = get_y_labels_egograph(data, ego_graph, ego_node)
-            text, node_with_question_mark, ground_truth = generate_textprompt_egograph(ego_graph, ego_node, y_labels_egograph, use_edge, USE_ADJACENCY)
+            y_labels_egograph = get_y_labels_graph(data, ego_graph, True, ego_node)
+            text, node_with_question_mark, ground_truth = generate_textprompt_anygraph(ego_graph, ego_node, y_labels_egograph, ego_node, use_edge, USE_ADJACENCY, True)
             error = ""
             prompt = get_prompt(text, compression)
             
