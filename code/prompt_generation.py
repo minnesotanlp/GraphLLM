@@ -3,7 +3,7 @@ import random
 import networkx as nx
 import json
 import re
-from connection_information import generate_edgelist,generate_node_label_dict,generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list,generate_GML
+from connection_information import generate_edgelist,generate_node_label_dict_ego, generate_node_label_dict, generate_textual_edgelist,generate_textual_edgelist2,generate_graphlist,generate_graphlist_constrained,edge_list_to_adjacency_list,generate_GML
 import tiktoken
 
 
@@ -50,7 +50,7 @@ def get_prompt(connectivity_information, compression_flag):
     return prompt
 
 
-def generate_textprompt_anygraph(graph, center_node, y_labels_dict, node_with_question_mark, edge_text_flag, adjacency_flag):
+def generate_textprompt_anygraph(graph, center_node, y_labels_dict, node_with_question_mark, edge_text_flag, adjacency_flag, ego_flag):
     text = ""
     ground_truth = ""
 
@@ -66,7 +66,10 @@ def generate_textprompt_anygraph(graph, center_node, y_labels_dict, node_with_qu
     else:
         text+="Edge list: "+str(edge_list)+"\n"
 
-    ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark, center_node, y_labels_dict)
+    if ego_flag :
+        ground_truth, node_label_dict = generate_node_label_dict_ego(graph, node_with_question_mark, center_node, y_labels_dict)
+    else:
+        ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark, y_labels_dict)
 
     text+=f"Node to Label Mapping : "+"\n"
     for node in node_label_dict:
@@ -93,7 +96,7 @@ def generate_textprompt_egograph(graph, center_node, y_labels_dict, edge_text_fl
     # Randomly choose a node to have a "?" label
     node_with_question_mark = random.choice(list(graph.nodes()))
 
-    ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark, center_node, y_labels_dict)
+    ground_truth, node_label_dict = generate_node_label_dict_ego(graph, node_with_question_mark, center_node, y_labels_dict)
 
     text+=f"Node to Label Mapping : "+"\n"
     for node in node_label_dict:
