@@ -58,21 +58,31 @@ def run_experiment(no_of_runs, no_of_hops, desired_sizes, data, graph, og_result
     for run in range(0,no_of_runs): 
         result_location = os.path.join(og_result_location, f'run_{run}')
         create_result_location(result_location)  
-        with open(os.path.join(result_location, f'run_{run}_graph_image_values.csv'), 'w') as csvfile:
+        with open(os.path.join(result_location, f'ego_run_{run}_graph_image_values.csv'), 'w') as csvfile, open(os.path.join(result_location, f'ff_run_{run}_graph_image_values.csv'), 'w') as csvfile2:
             csvwriter = csv.writer(csvfile)
+            csvwriter2 = csv.writer(csvfile2)
             csvwriter.writerow(['graph_id', 'size', 'node_id', 'label'])
+            csvwriter2.writerow(['graph_id', 'size', 'node_id', 'label'])
             for index, size in enumerate(desired_sizes):
                 ego_node, ego_graph = generate_egograph_sample(graph, no_of_hops, size)
                 y_labels_egograph = get_y_labels_graph(data, ego_graph, ego_flag=True, ego_node=ego_node)
                 node_with_question_mark = ego_node
                 ground_truth_ego = y_labels_egograph[ego_node][node_with_question_mark] #? is the ego node
-                csvwriter.writerow([index, size, node_with_question_mark, ground_truth_ego])
                 if neighborhood_sampling_flag: # use only the 2 hop neighborhood -- go change config
                     # use 2 hop subgraph        
                     ego_graph = nx.ego_graph(ego_graph, ego_node, radius=neighborhood_hop)
+                csvwriter.writerow([index, size, node_with_question_mark, ground_truth_ego])
                 plot_graph_structure_community_colored(ego_graph, y_labels_egograph, node_with_question_mark, size, f'ego_{index}_graphsize_', result_location, ego_flag=True)
     
-
+                ff_graph = generate_forestfire_sample(graph, size)
+                y_labels_ffgraph = get_y_labels_graph(data, ff_graph, ego_flag=False)
+                node_with_question_mark_ff = random.choice(list(ff_graph.nodes()))
+                ground_truth_ff = y_labels_ffgraph[node_with_question_mark_ff]
+                if neighborhood_sampling_flag:
+                    # use 2 hop subgraph        
+                    ff_graph = nx.ego_graph(ff_graph, node_with_question_mark_ff, radius=neighborhood_hop)
+                csvwriter2.writerow([index, size, node_with_question_mark_ff, ground_truth_ff])
+                plot_graph_structure_community_colored(ff_graph, y_labels_ffgraph, node_with_question_mark_ff, size, f'ff_{index}_graphsize_', result_location, ego_flag=False)    
 
 
 def main():
