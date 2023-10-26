@@ -1,0 +1,12 @@
+{
+    "dataset_name": "cora",
+    "NO_OF_HOPS": 2,
+    "NO_OF_SAMPLED_NODES": 20, 
+    "RUN_COUNT": 3,
+    "neighborhood_sampling": true,
+    "data_dir": "./data",
+    "result_location": "./results/cora/graph_images/",
+    "average_2hop_size" : 36,
+    "neighborhood_hop_size" : 2
+}
+

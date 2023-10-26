@@ -49,6 +49,7 @@ X = to_networkx(data, to_undirected=True)
 
 avg_failure_values = []
 avg_accuracy_values = []
+avg_inaccuracy_values = []
 
 node_list = list(X.nodes())
 # Perform the experiment for N runs keeping hops and no of sampled ego graphs constant
@@ -65,6 +66,7 @@ for run in range(0,no_of_runs):
         token_err_count = 0
         accurate_labels = 0
         failure_labels = 0
+        inaccurate_labels = 0
 
         for _ in range(num_samples):
 
@@ -159,18 +161,22 @@ for run in range(0,no_of_runs):
         if accuracy == 1.0 :
             failure = 0
         else :
-            failure = failure_labels/(num_samples-accurate_labels)
+            failure = failure_labels/(num_samples)
+            #failure = failure_labels/(num_samples-accurate_labels)
 
         avg_failure_values.append(failure)
         avg_accuracy_values.append(accuracy)
+        avg_inaccuracy_values.append(1-accuracy)
 
 
 print("Accuracy", avg_accuracy_values)
 print("Failure", avg_failure_values)
+print("Inaccuracy", avg_inaccuracy_values)
 
 
 print("Average accuracy across runs:", np.mean(avg_accuracy_values)," Standard deviation of accuracy:", np.std(avg_accuracy_values))
 print("Average failure across runs:", np.mean(avg_failure_values)," Standard deviation of failure:", np.std(avg_failure_values))
+print("Average inaccuracy across runs:", np.mean(avg_inaccuracy_values)," Standard deviation of inaccuracy:", np.std(avg_inaccuracy_values))
 
 
                     

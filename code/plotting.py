@@ -2,22 +2,76 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 # This function plots the given graph structure with its labels 
-def plot_graph_structure(graph, y_labels_graph, ego_node, size, title, ego_flag):
+def plot_graph_structure(graph, y_labels_graph, node_with_question_mark, size, title, ego_flag):
     # Setup plot environment
     plt.figure(figsize=(12, 6))
     if ego_flag : # if its a ego graph the y_labels structure is {ego node: {node: label, node: label}}
-        ego_labels = y_labels_graph[ego_node]  # Extract inner dictionary of labels
-        ego_colors = [ego_labels[node] for node in graph.nodes()]  # Map labels to nodes
-        #plt.subplot(121)
-        nx.draw(graph, node_color=ego_colors, with_labels=True, font_weight='bold', node_size=700, cmap=plt.cm.Blues)
-        plt.title(f'{title} {size}')
+        # Creating new labels for display
+        display_labels = {node: ('?' if node == node_with_question_mark else y_labels_graph[node_with_question_mark][node]) for node in graph.nodes()}
+        
+        # Setting color of the ego_node to red and others to skyblue
+        colors = ['red' if node == node_with_question_mark else 'skyblue' for node in graph.nodes()]
+        
     else: # if its a normal graph the y_labels structure is {node: label, node: label}
-        ff_colors = [y_labels_graph.get(node, 'y') for node in graph.nodes()]  # Map labels to nodes, use a default color if node not found
-        #plt.subplot(122)
-        nx.draw(graph, node_color=ff_colors, with_labels=True, font_weight='bold', node_size=700, cmap=plt.cm.Reds)
-        plt.title(f'{title} {size}')
-        # Show the plot
-        plt.show()
+
+         # Creating new labels for display
+        display_labels = {node: ('?' if node == node_with_question_mark else y_labels_graph[node]) for node in graph.nodes()}
+        
+        # Setting color of the node_with_question_mark to red and others to skyblue
+        colors = ['red' if node == node_with_question_mark else 'skyblue' for node in graph.nodes()]
+    
+    nx.draw(graph, labels=display_labels, node_color=colors, with_labels=True, font_weight='bold', node_size=700)
+    plt.title(f'{title}_{size}')
+    
+    plt.savefig(f'code/plots/{title}{size}.png') 
+    plt.close()
+        
+# plot the graph structure where you're coloring the graphs of the same label with the same color
+def plot_graph_structure_community_colored(graph, y_labels_graph, node_with_question_mark, size, title, result_location, ego_flag):
+    # Define a set of colors for nodes
+    colors_list = ['blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'grey',
+                   'lime', 'navy', 'gold', 'maroon', 'turquoise', 'olive', 'indigo', 'lightcoral',
+                   'darkgreen', 'chocolate', 'magenta', 'lightseagreen', 'black']
+    
+    
+    # Setup plot environment
+    plt.figure(figsize=(12, 6))
+    
+    # Color mapping based on labels
+    color_mapping = {}
+    current_color_index = 0
+    
+    colors = []
+    for node in graph.nodes():
+        if ego_flag:
+            label = '?' if node == node_with_question_mark else y_labels_graph[node_with_question_mark][node]
+        else:
+            label = '?' if node == node_with_question_mark else y_labels_graph[node]
+            
+        if label == '?':
+            colors.append('red')  # Node with '?' label will be red
+        else:
+            if label not in color_mapping:
+                color_mapping[label] = colors_list[current_color_index]
+                current_color_index += 1  # Move to the next color for a new label
+
+            colors.append(color_mapping[label])
+    
+    # Creating new labels for display
+    display_labels = {}
+    for node in graph.nodes():
+        if node == node_with_question_mark:
+            display_labels[node] = '?'
+        else :
+            display_labels[node] = y_labels_graph[node_with_question_mark][node] if ego_flag else y_labels_graph[node]
+
+    nx.draw(graph, labels=display_labels, node_color=colors, with_labels=True, font_weight='bold', node_size=700)
+    plt.title(f'{title}_{size}')
+    
+    plt.savefig(f'{result_location}/{title}{size}.png')
+    plt.close()
+
+
 
 # think this does the same as the above function
 def visualize_ego_graph(ego_graph, y_labels, ego_node):
