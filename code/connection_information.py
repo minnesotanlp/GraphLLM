@@ -36,7 +36,7 @@ def generate_edgelist(graph):
 def write_edgelist_to_file(edge_list, filename):
     with open(filename, 'w') as file:
         for edge in edge_list:
-            file.write(f"{edge[0]}, {edge[1]}\n")
+            file.write(f"{edge[0]} {edge[1]}\n")
 
 #This function writes the y_labels to a json
 def write_labels_to_json(labels_dict, filename):

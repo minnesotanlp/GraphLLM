@@ -68,7 +68,7 @@ def process_text(text, assay_info, ground_truth, node_with_question_mark, log_di
 
     accurate_labels = is_accurate(parsed_value, ground_truth)
     failure_labels = is_failure(parsed_value)
-    return 0, accurate_labels, failure_labels, prompt, response, parsed_value
+    return error_count, accurate_labels, failure_labels, prompt, response, parsed_value
 
 
 def get_desired_sizes(average_2hop_size, num_samples_per_size = 1):
@@ -88,7 +88,6 @@ def load_and_prepare_data(data_dir, dataset_name):
     data = dataset[0]
     graph = to_networkx(data, to_undirected=True)
     return data, graph
-
 
 
 def run_experiment(desired_sizes, no_of_runs, no_of_hops, data, graph, og_result_location, log_dir, log_sub_dir, model, rate_limit_pause,  use_edge, USE_ADJACENCY, neighborhood_hop=2, neighborhood_sampling_flag=False):

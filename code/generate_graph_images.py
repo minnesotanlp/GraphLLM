@@ -112,7 +112,7 @@ def run_experiment(no_of_runs, no_of_hops, desired_sizes, data, graph, og_result
 def main():
     data, graph = load_and_prepare_data(data_dir, dataset_name)
     #get the stratified sample 
-    desired_sizes = get_desired_sizes(average_2hop_size, num_samples_per_size = 10) # total sample size = 50
+    desired_sizes = get_desired_sizes(average_2hop_size, num_samples_per_size = 10) # 4, S-20 ; 10, S-50
     print("Desired sizes: ", desired_sizes)
     run_experiment(no_of_runs, no_of_hops, desired_sizes, data, graph, result_location, neighborhood_sampling_flag)
 

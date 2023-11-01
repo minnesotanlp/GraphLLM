@@ -108,6 +108,13 @@ def get_prompt_assays(connectivity_information, assay_information, flag = True, 
             <<<{assay_information}>>>
             """
     return prompt
+
+def get_prompt_network_only(connectivity_information):
+    prompt = f"""Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type "node:node neighborhood" and node-label mapping in the text enclosed in triple backticks). Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1". 
+    ```{connectivity_information}```
+    """
+
+    return prompt
     
 # generates different kinds of prompt templates depending on the compression flag
 def get_prompt(connectivity_information, compression_flag, modification = 0):
@@ -148,6 +155,27 @@ def generate_textprompt_anygraph_labelmaps(graph, center_node, y_labels_dict, no
         text+=f"Node {node}: Label {node_label_dict[node]}| "
     return text
     
+
+# text encoder which has the adjacency list and the node label mapping
+def generate_text_encoder(graph, y_labels, node_with_question_mark):
+    text = ""
+    edge_list = generate_edgelist(graph)
+    adjacency_list = edge_list_to_adjacency_list(edge_list)
+    text+="Adjacency list: "+str(adjacency_list)+"\n"
+    node_label_dict= {} # node: label
+    for node in graph.nodes():
+        if node == node_with_question_mark:
+            label = "?"
+        else:
+            label = y_labels[node]  # Extract node label
+        node_label_dict[node]=label
+    text+=f"Node to Label Mapping : "+"\n"
+    for node in node_label_dict:
+        text+=f"Node {node}: Label {node_label_dict[node]}| "
+    return text
+    
+
+
 
 def generate_textprompt_anygraph(graph, center_node, y_labels_dict, node_with_question_mark, edge_text_flag, adjacency_flag, ego_flag):
     text = ""
