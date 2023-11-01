@@ -1,6 +1,0 @@
-,Mean accuracy,acc_std,Mean failure,fail_std
-full subgraph,0.68,0.12,0.78,0.17
-Full subgraph + instruction to use 2 hops,0.83,0.047,0.16,0.23
-neighborhood = 1 hop,0.65,0.07,0.83,0.13
-neighborhood = 2 hop,0.83,0.08,1,0
-neighborhood = 3 hop,0.73,0.1,0.67,0.24

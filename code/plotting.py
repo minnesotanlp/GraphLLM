@@ -27,7 +27,7 @@ def plot_graph_structure(graph, y_labels_graph, node_with_question_mark, size, t
     plt.close()
         
 # plot the graph structure where you're coloring the graphs of the same label with the same color
-def plot_graph_structure_community_colored(graph, y_labels_graph, node_with_question_mark, size, title, result_location, ego_flag):
+def plot_graph_structure_community_colored(graph, y_labels_graph, node_with_question_mark, index, title, result_location, ego_flag):
     # Define a set of colors for nodes
     colors_list = ['blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'grey',
                    'lime', 'navy', 'gold', 'maroon', 'turquoise', 'olive', 'indigo', 'lightcoral',
@@ -66,9 +66,9 @@ def plot_graph_structure_community_colored(graph, y_labels_graph, node_with_ques
             display_labels[node] = y_labels_graph[node_with_question_mark][node] if ego_flag else y_labels_graph[node]
 
     nx.draw(graph, labels=display_labels, node_color=colors, with_labels=True, font_weight='bold', node_size=700)
-    plt.title(f'{title}_{size}')
+    plt.title(f'{title}')
     
-    plt.savefig(f'{result_location}/{title}{size}.png')
+    plt.savefig(f'{result_location}/{index}.png')
     plt.close()
 
 

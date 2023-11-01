@@ -5,7 +5,7 @@
     "RUN_COUNT": 3,
     "neighborhood_sampling": true,
     "data_dir": "./data",
-    "result_location": "./results/cora/graph_images/",
+    "result_location": "./results/cora/graph_images/sample_size_50/",
     "average_2hop_size" : 36,
     "neighborhood_hop_size" : 2
 }

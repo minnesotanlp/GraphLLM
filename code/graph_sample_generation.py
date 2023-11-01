@@ -27,6 +27,6 @@ def generate_egograph_sample(graph, hops, sample_size):
 
 def generate_forestfire_sample(graph, sample_size):
     current_time = int(time.time())
-    sampler = ForestFireSampler(number_of_nodes=sample_size, p=0.4, seed=current_time)
+    sampler = ForestFireSampler(number_of_nodes=sample_size, p=0.3, seed=current_time)
     ff_graph = sampler.sample(graph)
     return ff_graph

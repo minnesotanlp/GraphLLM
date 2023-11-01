@@ -2,6 +2,7 @@ import random
 from torch_geometric.utils import to_networkx
 import networkx as nx
 import torch 
+import json
 
 # get the y labels for the graph passed
 def get_y_labels_graph(data, graph_passed, ego_flag, ego_node = None):
@@ -30,6 +31,18 @@ def generate_edgelist(graph):
     # Print out the labels associated with a graph
     edge_list = list(graph.edges())
     return edge_list
+
+# This function writes an egelist to file
+def write_edgelist_to_file(edge_list, filename):
+    with open(filename, 'w') as file:
+        for edge in edge_list:
+            file.write(f"{edge[0]}, {edge[1]}\n")
+
+#This function writes the y_labels to a json
+def write_labels_to_json(labels_dict, filename):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(labels_dict, file, ensure_ascii=False, indent=4)
+
 
 # This function generates a compressed textual version (Node A - Node B) of the edgelist from the graph
 def generate_textual_edgelist2(edge_list):           
@@ -145,5 +158,11 @@ def generate_GML(graph, format):
 
      
     
+#G = nx.Graph([(1, 2), (2, 3), (3, 4), (4, 1)])
 
+# Generate an edge list from the graph
+#edge_list = generate_edgelist(G)
+
+# Write the edge list to a file
+#write_edgelist_to_file(edge_list, 'code/plots/edgelist.txt')
     

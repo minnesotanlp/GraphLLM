@@ -83,6 +83,32 @@ def get_completion_json(prompt, model):
     )
     return response
 
+def get_prompt_assays(connectivity_information, assay_information, flag = True, connection_flag = True):
+    if connection_flag == False:
+        #return only assay information - this is meaningless 
+        #prompt = f"""
+        #    Task : Node Label Prediction (Predict the label of the node connected to the triangles), given the graph motif information enclosed within angular brackets <<< >>>. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
+        #    <<<{assay_information}>>>
+        #    """
+        prompt = f"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?), given the node label mapping enclosed in triple backticks ```and graph motif information enclosed within angular brackets <<< >>>. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
+           ```{connectivity_information}```
+            <<<{assay_information}>>>
+            """
+    elif flag:
+        #default case(no assay)
+        prompt = f"""
+        Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type "node:node neighborhood" and node-label mapping in the text enclosed in triple backticks. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
+        ```{connectivity_information}```
+        """
+    else:
+        prompt = f"""
+            Task : Node Label Prediction (Predict the label of the node marked with a ?), given the adjacency list information as a dictionary of type "node:node neighborhood", node-label mapping in the text enclosed in triple backticks, and graph motif information enclosed within angular brackets <<< >>>. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1") 
+            ```{connectivity_information}```
+            <<<{assay_information}>>>
+            """
+    return prompt
+    
 # generates different kinds of prompt templates depending on the compression flag
 def get_prompt(connectivity_information, compression_flag, modification = 0):
     if compression_flag:
@@ -108,6 +134,20 @@ def get_prompt(connectivity_information, compression_flag, modification = 0):
         """
     return prompt
 
+# this generates only the labels for the nodes, not the adjacency list
+def generate_textprompt_anygraph_labelmaps(graph, center_node, y_labels_dict, node_with_question_mark, edge_text_flag, adjacency_flag, ego_flag):
+    text = ""
+    ground_truth = ""
+    if ego_flag :
+        ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark, y_labels_dict, True, ego_node=center_node)
+    else:
+        ground_truth, node_label_dict = generate_node_label_dict(graph, node_with_question_mark, y_labels_dict, False)
+
+    text+=f"Node to Label Mapping : "+"\n"
+    for node in node_label_dict:
+        text+=f"Node {node}: Label {node_label_dict[node]}| "
+    return text
+    
 
 def generate_textprompt_anygraph(graph, center_node, y_labels_dict, node_with_question_mark, edge_text_flag, adjacency_flag, ego_flag):
     text = ""
