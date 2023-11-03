@@ -39,7 +39,6 @@ def count_star_graphs(G):
 
     return star_graph_count
 
-import networkx as nx
 
 def find_star_graphs(G, specific_vertex):
     # Function to check if a vertex forms a star graph
@@ -60,19 +59,48 @@ def find_star_graphs(G, specific_vertex):
     
     return star_graphs
 
+
+# Function to get star motifs that a node is part of
+def get_star_motifs_connected_to_node(graph, node):
+    star_motifs = []
+    neighbors = list(graph.neighbors(node))
+
+    # If the node has more than two neighbors and no edges between those neighbors,
+    # then it is the center of a star motif
+    if len(neighbors) > 2 and all(not graph.has_edge(neighbors[i], neighbors[j]) 
+                                   for i in range(len(neighbors)) 
+                                   for j in range(i + 1, len(neighbors))):
+        star_motifs.append([node] + neighbors)
+    
+    # If the node is not the center, check if it's part of a star motif
+    for neighbor in neighbors:
+        # Get the neighbors of 'neighbor', excluding 'node', and make a list out of it
+        sub_neighbors_list = list(set(graph.neighbors(neighbor)) - {node})
+        
+        # Check if 'neighbor' is the center of a star motif
+        if len(sub_neighbors_list) > 1 and all(not graph.has_edge(sub_neighbors_list[i], sub_neighbors_list[j]) 
+                                           for i in range(len(sub_neighbors_list)) 
+                                           for j in range(i + 1, len(sub_neighbors_list))):
+            star_motifs.append([neighbor] + sub_neighbors_list + [node])
+
+    return star_motifs
+
+
 # Example usage:
-G = nx.Graph()
-edges1 = [(1, 5), (2, 5), (3, 5), (7, 5), (6, 5), (4, 5)]
-G.add_edges_from(edges1)
-print(find_star_graphs(G, 5))  # Output: [[5, 1, 2, 3, 7, 6, 4]]
+#G = nx.Graph()
+#edges1 = [(1, 5), (2, 5), (3, 5), (7, 5), (6, 5), (4, 5)]
+#G.add_edges_from(edges1)
+#print(get_star_motifs(G, 5))  # Output: [[5, 1, 2, 3, 7, 6, 4]]
 
-G = nx.Graph()
-edges2 = [(1, 2), (2, 3), (4, 2), (4,6), (5, 6), (7, 6), (8, 6)]
-G.add_edges_from(edges2)
-print(find_star_graphs(G, 4))  # Output: [[6, 5, 7, 8]]
+#G = nx.Graph()
+#edges2 = [(1, 5), (2, 5), (3, 5), (7, 5), (6, 5), (4, 5), (5,8), (8,9), (8,10)]
+#G.add_edges_from(edges2)
+#print(get_star_motifs(G, 8))  # Output: [[8, 5, 1, 2, 3, 7, 6, 4]]
 
-
-
+#G = nx.Graph()
+#edges3 = [(1, 2), (2, 3), (4, 2), (4,6), (5, 6), (7, 6), (8, 6)]
+#G.add_edges_from(edges3)
+#print(get_star_motifs(G, 4))  # Output: [[6, 5, 7, 8]]
 
 # Test the function with the provided examples
 #G = nx.Graph()
