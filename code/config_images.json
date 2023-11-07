@@ -1,12 +1,12 @@
 {
-    "dataset_name": "citeseer",
+    "dataset_name": "pubmed",
     "NO_OF_HOPS": 2,
     "NO_OF_SAMPLED_NODES": 50, 
     "RUN_COUNT": 3,
     "neighborhood_sampling": true,
     "data_dir": "./data",
-    "result_location": "./results/citeseer/graph_images/sample_size_50/",
-    "average_2hop_size" : 15,
+    "result_location": "./results/pubmed/graph_images/sample_size_50/",
+    "average_2hop_size" : 60,
     "neighborhood_hop_size" : 2
 }
 
