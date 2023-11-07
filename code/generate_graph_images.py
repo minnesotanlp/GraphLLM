@@ -16,12 +16,12 @@ from connection_information import generate_edgelist, write_edgelist_to_file, wr
 
 # ---- PARAMS --- #
 #-------------------------------------------------------------
-random.seed(10)
 # Load configuration from the JSON file
 with open('code/config_images.json', 'r') as config_file:
     config = json.load(config_file)
 
 # Access parameters from the config dictionary
+fixed_seed = 42
 dataset_name = config["dataset_name"]
 no_of_hops = config["NO_OF_HOPS"]
 no_of_runs = config["RUN_COUNT"]
@@ -31,29 +31,20 @@ neighborhood_sampling_flag = config["neighborhood_sampling"]
 average_2hop_size = config["average_2hop_size"]
 neighborhood_hop = config["neighborhood_hop_size"]
 number_of_samples = config["NO_OF_SAMPLED_NODES"]
-if number_of_samples == 20:
-    num_samples_per_size = 4
-elif number_of_samples == 50:
-    num_samples_per_size = 10
-else:
-    num_samples_per_size = 1
+
 #------------------------------------------------
 
 def create_result_location(result_location):
     os.makedirs(result_location, exist_ok=True)
 
-def get_desired_sizes(average_2hop_size, num_samples_per_size = 1):
-    sizes = [
-        int(average_2hop_size * 0.25),  
-        int(average_2hop_size * 0.5),  
-        average_2hop_size,             
-        int(average_2hop_size * 1.5),  
-        int(average_2hop_size * 2),    
-    ]
-    final_desired_sizes = [size for size in sizes for _ in range(num_samples_per_size)]
-    return final_desired_sizes
-    #[size for size in sizes if size > 0]
-
+def get_desired_sizes(average_hop_size, num_samples, seed = 0):
+    random.seed(seed)
+    # Calculate the lower and upper bounds for the sizes
+    lower_bound = int(0.25 * average_hop_size)
+    upper_bound = int(2 * average_hop_size)
+    # Generate the list of sizes
+    sizes = [random.randint(lower_bound, upper_bound) for _ in range(num_samples)]
+    return sizes
 
 def load_and_prepare_data(data_dir, dataset_name):
     dataset = load_dataset(data_dir, dataset_name)
@@ -89,6 +80,7 @@ def run_experiment(no_of_runs, no_of_hops, desired_sizes, data, graph, og_result
                 no_nodes = ego_graph.number_of_nodes()
                 no_edges = ego_graph.number_of_edges()
                 graph_edge_path = result_location + f'/ego/'
+
                 # record the ground truth, the edgelist and the y_labels
                 csvwriter.writerow([index, size, no_nodes, no_edges, node_with_question_mark, ground_truth_ego])
                 write_edgelist_to_file(generate_edgelist(ego_graph), os.path.join(graph_edge_path, f'{index}_edgelist.txt'))
@@ -105,21 +97,30 @@ def run_experiment(no_of_runs, no_of_hops, desired_sizes, data, graph, og_result
                 if neighborhood_sampling_flag:
                     # use 2 hop subgraph        
                     ff_graph = nx.ego_graph(ff_graph, node_with_question_mark_ff, radius=neighborhood_hop)
-                
                 no_nodes = ff_graph.number_of_nodes()
                 no_edges = ff_graph.number_of_edges()
                 graph_edge_path = result_location + f'/ff/'
+
                 # record the ground truth, the edgelist and the y_labels
                 csvwriter2.writerow([index, size, no_nodes, no_edges, node_with_question_mark_ff, ground_truth_ff])
                 write_edgelist_to_file(generate_edgelist(ff_graph), os.path.join(graph_edge_path, f'{index}_edgelist.txt'))
                 labels_dict = {int(key): int(value) for key, value in y_labels_ffgraph.items()}
                 write_labels_to_json(labels_dict, os.path.join(graph_edge_path, f'{index}_ylabels.json'))
-                plot_graph_structure_community_colored(ff_graph, y_labels_ffgraph, node_with_question_mark_ff, size, f'{setting}_graphsize_{size}', graph_edge_path, ego_flag=False)
+                plot_graph_structure_community_colored(ff_graph, y_labels_ffgraph, node_with_question_mark_ff, index, f'{setting}_graphsize_{size}', graph_edge_path, ego_flag=False)
+
+def get_desired_sizes(average_hop_size, num_samples, seed = 0):
+    random.seed(seed)
+    # Calculate the lower and upper bounds for the sizes
+    lower_bound = int(0.25 * average_hop_size)
+    upper_bound = int(2 * average_hop_size)
+    # Generate the list of sizes
+    sizes = [random.randint(lower_bound, upper_bound) for _ in range(num_samples)]
+    return sizes
 
 def main():
     data, graph = load_and_prepare_data(data_dir, dataset_name)
-    #get the stratified sample 
-    desired_sizes = get_desired_sizes(average_2hop_size, num_samples_per_size = num_samples_per_size) # 4, S-20 ; 10, S-50
+    #get the stratified sample sizes (0.25x to 2x)
+    desired_sizes = get_desired_sizes(average_2hop_size, num_samples = number_of_samples, seed=fixed_seed)
     print("Desired sizes: ", desired_sizes)
     run_experiment(no_of_runs, no_of_hops, desired_sizes, data, graph, result_location, neighborhood_sampling_flag)
 
