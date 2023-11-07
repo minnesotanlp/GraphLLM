@@ -174,8 +174,8 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
                 ylabelsjson_name = f"{graph_info_location}/{graph_id}_ylabels.json"
                 G = load_edgelist(edgelist_name)
                 y_labels = load_graph_node_json(ylabelsjson_name)
-                print("graph id: " , graph_id, "setting: ", setting,"run: ",  run)
-                print("y_labels", y_labels)
+                #print("graph id: " , graph_id, "setting: ", setting,"run: ",  run)
+                #print("y_labels", y_labels)
                 #now generate a text prompt based on this assay information + y label information
                 assay_dictionary = generate_assays(G, node_with_question_mark)
                 text_for_prompt = generate_text_motif_encoder(G, assay_dictionary, y_labels, node_with_question_mark)
