@@ -7,27 +7,64 @@ import networkx as nx
 import numpy as np
 import json
 import csv
+import time
 from torch_geometric.utils import to_networkx
 from utils import load_dataset, save_response, create_log_dir
 from prompt_generation import get_image_completion_json
 from response_parser import parse_response
 from metrics import is_failure,is_accurate
 
+def create_result_location(result_location):
+    os.makedirs(result_location, exist_ok=True)
+
+
 # Function to encode the image
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
+
+def handle_openai_errors(e, error_count, rate_limit_pause, model):
+    error_count += 1
+    if error_count > 3:
+      if isinstance(e, openai.error.RateLimitError):
+          raise Exception("Rate limit exceeded too many times.") from e
+      elif isinstance(e, openai.error.ServiceUnavailableError):
+          raise Exception("Service unavailable too many times.") from e
+      else:
+          raise e
+      return -1
+
+    if isinstance(e, openai.error.RateLimitError):
+        print(f"Rate limit exceeded. Pausing for {rate_limit_pause} seconds.")
+    elif isinstance(e, openai.error.ServiceUnavailableError):
+        print(f"Service unavailable; Pausing for {rate_limit_pause} seconds to help reset things and then retrying.")
+    elif isinstance(e, openai.error.InvalidRequestError):
+        print(f'Prompt tokens > context limit of {model}.')
+    else:
+        print(f"Type of error: {type(e)}. Error: {e}")
+
+    print(f"Pausing for {rate_limit_pause} seconds before retrying.")
+    time.sleep(rate_limit_pause)  # Pausing before retrying
+
+    return error_count
+
 def process_text(prompt, base64_image, detail, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause):
-    print(prompt)
     error_count = 0
-    try:
-        response_json = get_image_completion_json(prompt, model, base64_image, detail=detail)
-        save_response(response_json, log_dir, log_sub_dir)
-        response = response_json.choices[0].message["content"]
-    except Exception as e:
-        error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
-        return error_count, 0, 0
+    while error_count <= 3: #this is no of attempts per prompt
+        try:
+            response_json = get_image_completion_json(prompt, model, base64_image, detail=detail)
+            save_response(response_json, log_dir, log_sub_dir)
+            response = response_json.choices[0].message["content"]
+            break  # If the call was successful, break out of the loop
+        except Exception as e:
+            error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
+            if error_count == -1:  # If error_count returned as -1, stop trying
+                return error_count, 0, 0, None, None, None
+
+    # If error_count has exceeded 3, this point would only be reached if the last attempt also failed
+    if error_count > 3:
+        return error_count, 0, 0, None, None, None
 
     delimiter_options = ['=', ':']
     parsed_value = None
@@ -43,34 +80,6 @@ def process_text(prompt, base64_image, detail, ground_truth, node_with_question_
     accurate_labels = is_accurate(parsed_value, ground_truth)
     failure_labels = is_failure(parsed_value)
     return error_count, accurate_labels, failure_labels, prompt, response, parsed_value
-
-
-def create_result_location(result_location):
-    os.makedirs(result_location, exist_ok=True)
-
-def handle_openai_errors(e, error_count, rate_limit_pause, model):
-    error_count += 1
-    if error_count > 5:
-        if isinstance(e, openai.error.RateLimitError):
-            raise Exception("Rate limit exceeded too many times.") from e
-        elif isinstance(e, openai.error.ServiceUnavailableError):
-            raise Exception("Service unavailable too many times.") from e
-        else:
-            raise e
-
-    if isinstance(e, openai.error.RateLimitError):
-        print(f"Rate limit exceeded. Pausing for {rate_limit_pause} seconds.")
-    elif isinstance(e, openai.error.ServiceUnavailableError):
-        print(f"Service unavailable; Pausing for {rate_limit_pause} seconds to help reset things and then retrying.")
-    elif isinstance(e, openai.error.InvalidRequestError):
-        print(f'Prompt tokens > context limit of {model}')
-        print(e)
-    else:
-        print(f"Type of error: {type(e)}")
-        print(f"Error: {e}")
-        print(f"Pausing for {rate_limit_pause} seconds.")
-    return error_count
-
 
 
 def extract_columns_from_csv_dict(run_location, filename):
@@ -113,6 +122,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
                 node_with_question_mark = str(graph['ques_node_id'])
 
                 image_path = f"{graph_info_location}/{graph_id}.png"
+                print(image_path)
                 # Getting the base64 string
                 base64_image = encode_image(image_path)
                 text_for_prompt = f'Your task is Node Label Prediction (Predict the label of the red node marked with a ?, given the graph structure information in the image). Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1'
