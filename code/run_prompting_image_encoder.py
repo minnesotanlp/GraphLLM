@@ -120,7 +120,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
                 graph_id = graph['graph_id']
                 ground_truth = graph['label']
                 node_with_question_mark = str(graph['ques_node_id'])
-
+                  
                 image_path = f"{graph_info_location}/{graph_id}.png"
                 print(image_path)
                 # Getting the base64 string

@@ -1,8 +1,8 @@
 {
     "dataset_name": "cora",
-    "no_of_runs": 3,
+    "no_of_runs": 1,
     "no_of_samples": 20,
-    "settings": ["ego", "ff"],
+    "settings": ["ego"],
     "input_location": "./results/cora/graph_images/sample_size_20/",
     "result_location": "./results/cora/graph_images/sample_size_20/",
     "log_dir": "./logs/",
