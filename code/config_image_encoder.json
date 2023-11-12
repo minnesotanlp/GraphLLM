@@ -1,12 +1,12 @@
 {
     "dataset_name": "cora",
-    "no_of_runs": 1,
+    "no_of_runs": 2,
     "no_of_samples": 20,
     "settings": ["ego"],
     "input_location": "./results/cora/graph_images/sample_size_20/",
     "result_location": "./results/cora/graph_images/sample_size_20/",
     "log_dir": "./logs/",
     "model": "gpt-4-vision-preview",
-    "rate_limit_pause": 6,
+    "rate_limit_pause": 3,
     "detail" : "high"
 }
