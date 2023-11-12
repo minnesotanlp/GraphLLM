@@ -191,7 +191,8 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
 
                     
             
-openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
+
 with open('code/config_textencoder.json', 'r') as config_file:
     config = json.load(config_file)
 dataset_name = config["dataset_name"]
@@ -203,6 +204,7 @@ log_dir = config["log_dir"]
 model = config["model"]
 rate_limit_pause = config["rate_limit_pause"]
 log_sub_dir = create_log_dir(log_dir)      
+input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'
 
 def main():
     with open(f"{input_location}/text_encoder_across_runs_metrics.csv", mode='w') as metrics_file:

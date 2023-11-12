@@ -1,14 +1,14 @@
 {
-    "dataset_name": "cora",
+    "dataset_name": "pubmed",
     "no_of_runs": 3,
-    "no_of_samples": 20,
+    "no_of_samples": 50,
     "settings": ["ego", "ff"],
-    "input_location": "./results/cora/graph_images/sample_size_20/",
-    "result_location": "./results/cora/graph_images/sample_size_20/",
+    "input_location": "./results/",
     "log_dir": "./logs/",
     "model": "gpt-4",
     "rate_limit_pause": 1.2
 }
+
 
 
 

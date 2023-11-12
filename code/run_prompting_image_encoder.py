@@ -150,8 +150,11 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
             avg_token_limit_fraction.append(np.mean(token_limit_fractions))
     return avg_accuracy_values, avg_inaccuracy_values, avg_failure_values, avg_token_limit_fraction
 
-     
-openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+
+openai.api_key = os.environ["OPENAI_API_MYKEY"] # my personal api key    
+
+#openai.api_key = os.environ["OPENAI_API_UMNKEY"] #uni key
+
 with open('code/config_image_encoder.json', 'r') as config_file:
     config = json.load(config_file)
 dataset_name = config["dataset_name"]
@@ -163,7 +166,8 @@ log_dir = config["log_dir"]
 model = config["model"]
 rate_limit_pause = config["rate_limit_pause"]
 detail = config["detail"]
-log_sub_dir = create_log_dir(log_dir)      
+log_sub_dir = create_log_dir(log_dir)
+input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'      
 
 def main():
     with open(f"{input_location}/text_image_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
