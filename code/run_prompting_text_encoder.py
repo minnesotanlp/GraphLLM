@@ -3,6 +3,7 @@ import numpy as np
 import openai
 import random
 import json
+import time
 import csv
 import os
 from torch_geometric.utils import to_networkx
@@ -15,15 +16,22 @@ from metrics import is_failure,is_accurate, get_token_limit_fraction
 def process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause):
     error_count = 0
     prompt = get_prompt_network_only(text_for_prompt)
-    try:
-        response_json = get_completion_json(prompt, model)
-        save_response(response_json, log_dir, log_sub_dir)
-        usage = int(response_json.usage.total_tokens)
-        response = response_json.choices[0].message["content"]
-    except Exception as e:
-        error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
-        return error_count, 0, 0
+    while(error_count <= 3):
+        try:
+            response_json = get_completion_json(prompt, model)
+            save_response(response_json, log_dir, log_sub_dir)
+            usage = int(response_json.usage.total_tokens)
+            response = response_json.choices[0].message["content"]
+            break
+        except Exception as e:
+            error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
+            if error_count == -1:  # If error_count returned as -1, stop trying
+                return error_count, 0, 0, None, None, None
 
+    # If error_count has exceeded 3, this point would only be reached if the last attempt also failed
+    if error_count > 3:
+        return error_count, 0, 0, None, None, None
+    
     delimiter_options = ['=', ':']
     parsed_value = None
     for delimiter in delimiter_options: 
@@ -47,45 +55,29 @@ def create_result_location(result_location):
 
 def handle_openai_errors(e, error_count, rate_limit_pause, model):
     error_count += 1
-    if error_count > 5:
-        if isinstance(e, openai.error.RateLimitError):
-            raise Exception("Rate limit exceeded too many times.") from e
-        elif isinstance(e, openai.error.ServiceUnavailableError):
-            raise Exception("Service unavailable too many times.") from e
-        else:
-            raise e
+    if error_count > 3:
+      if isinstance(e, openai.error.RateLimitError):
+          raise Exception("Rate limit exceeded too many times.") from e
+      elif isinstance(e, openai.error.ServiceUnavailableError):
+          raise Exception("Service unavailable too many times.") from e
+      else:
+          raise e
+      return -1
 
     if isinstance(e, openai.error.RateLimitError):
         print(f"Rate limit exceeded. Pausing for {rate_limit_pause} seconds.")
     elif isinstance(e, openai.error.ServiceUnavailableError):
         print(f"Service unavailable; Pausing for {rate_limit_pause} seconds to help reset things and then retrying.")
     elif isinstance(e, openai.error.InvalidRequestError):
-        print(f'Prompt tokens > context limit of {model}')
-        print(e)
+        print(f'Prompt tokens > context limit of {model}.')
     else:
-        print(f"Type of error: {type(e)}")
-        print(f"Error: {e}")
-        print(f"Pausing for {rate_limit_pause} seconds.")
+        print(f"Type of error: {type(e)}. Error: {e}")
+
+    print(f"Pausing for {rate_limit_pause} seconds before retrying.")
+    time.sleep(rate_limit_pause)  # Pausing before retrying
+
     return error_count
 
-
-def get_desired_sizes(average_2hop_size, num_samples_per_size = 1):
-    sizes = [
-        int(average_2hop_size * 0.25),  
-        int(average_2hop_size * 0.5),  
-        average_2hop_size,             
-        int(average_2hop_size * 1.5),  
-        int(average_2hop_size * 2),    
-    ]
-    final_desired_sizes = [size for size in sizes for _ in range(num_samples_per_size)]
-    return final_desired_sizes
-    #[size for size in sizes if size > 0]
-
-def load_and_prepare_data(data_dir, dataset_name):
-    dataset = load_dataset(data_dir, dataset_name)
-    data = dataset[0]
-    graph = to_networkx(data, to_undirected=True)
-    return data, graph
 
 def extract_columns_from_csv_dict(run_location, filename):
     extracted_data = []
