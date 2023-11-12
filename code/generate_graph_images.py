@@ -89,15 +89,14 @@ def create_graphs(input_location, setting, no_of_runs):
             plot_graph_structure_community_colored(G, y_labels, node_with_question_mark, graph_id, f'{setting}_graphsize_{size}', graph_info_location, ego_flag=ego_flag)
             print(f'Image ID {graph_id} generated for setting {setting} and run {run}')
        
-
-
-
                     
 
 def main():
     settings = ["ego", "ff"]
     no_of_runs = 3
-    input_location = "./results/cora/graph_images/sample_size_20/"
+    no_of_samples = 50
+    dataset_name = "pubmed"
+    input_location = f"./results/{dataset_name}/graph_images/sample_size_{no_of_samples}/"
     for setting in settings:
         create_graphs(input_location, setting, no_of_runs)
 main()

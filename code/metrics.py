@@ -3,6 +3,16 @@ import csv
 import re
 from prompt_generation import return_no_tokens
 
+def get_token_limit_fraction(usage_tokens, model):
+    if model == 'gpt-4':
+        token_limit = 8192
+    elif model == 'gpt-4-vision-preview':
+        token_limit = 128000
+    else: # use default model as chatgpt
+        #model = 'gpt-3.5-turbo-16k'
+        token_limit = 16384
+    return usage_tokens / token_limit
+
 # Define your custom failure and accuracy functions
 def is_failure(parsed_value):
     if str(parsed_value) == '-1' or str(parsed_value) == '?':

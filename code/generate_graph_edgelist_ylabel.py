@@ -28,9 +28,17 @@ no_of_runs = config["RUN_COUNT"]
 data_dir = config["data_dir"]
 result_location = config["result_location"]
 neighborhood_sampling_flag = config["neighborhood_sampling"]
-average_2hop_size = config["average_2hop_size"]
 neighborhood_hop = config["neighborhood_hop_size"]
 number_of_samples = config["NO_OF_SAMPLED_NODES"]
+
+if dataset_name == 'cora':
+    average_2hop_size = 36
+elif dataset_name == 'citeseer':
+    average_2hop_size = 15
+elif dataset_name == 'pubmed':
+    average_2hop_size = 60
+else:
+    average_2hop_size = 10 # some random value
 
 #------------------------------------------------
 
