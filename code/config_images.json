@@ -1,11 +1,11 @@
 {
-    "dataset_name": "pubmed",
+    "dataset_name": "cora",
     "NO_OF_HOPS": 2,
     "NO_OF_SAMPLED_NODES": 50, 
     "RUN_COUNT": 3,
     "neighborhood_sampling": true,
     "data_dir": "./data",
-    "result_location": "./results/pubmed/graph_images/sample_size_50/",
+    "result_location": "./results/cora/graph_images/sample_size_50/",
     "neighborhood_hop_size" : 2
 }
 

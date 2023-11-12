@@ -95,7 +95,7 @@ def main():
     settings = ["ego", "ff"]
     no_of_runs = 3
     no_of_samples = 50
-    dataset_name = "pubmed"
+    dataset_name = "cora"
     input_location = f"./results/{dataset_name}/graph_images/sample_size_{no_of_samples}/"
     for setting in settings:
         create_graphs(input_location, setting, no_of_runs)

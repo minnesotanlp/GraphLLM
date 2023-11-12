@@ -1,6 +1,7 @@
 import networkx as nx
 import numpy as np
 import openai
+import time
 import random
 import json
 import csv
@@ -9,20 +10,29 @@ from torch_geometric.utils import to_networkx
 from utils import load_dataset, save_response, create_log_dir
 from prompt_generation import get_prompt_network_only, get_completion_json, generate_text_motif_encoder
 from response_parser import parse_response
-from metrics import is_failure,is_accurate
+from metrics import is_failure,is_accurate, get_token_limit_fraction
 from graph_assays import count_star_graphs, count_triangles_nx, find_3_cliques_connected_to_node, get_star_motifs_connected_to_node
 
 def process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause):
     error_count = 0
     prompt = get_prompt_network_only(text_for_prompt, flag = 2)
-    try:
-        response_json = get_completion_json(prompt, model)
-        save_response(response_json, log_dir, log_sub_dir)
-        response = response_json.choices[0].message["content"]
-    except Exception as e:
-        error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
-        return error_count, 0, 0
+    while(error_count <= 3):
+        try:
+            response_json = get_completion_json(prompt, model)
+            save_response(response_json, log_dir, log_sub_dir)
+            usage = int(response_json.usage.total_tokens)
+            response = response_json.choices[0].message["content"]
+            break
+        except Exception as e:
+            error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
+            if error_count == -1:  # If error_count returned as -1, stop trying
+                return error_count, 0, 0, None, None, None
 
+     # If error_count has exceeded 3, this point would only be reached if the last attempt also failed
+    if error_count > 3:
+        return error_count, 0, 0, None, None, None
+    
+    
     delimiter_options = ['=', ':']
     parsed_value = None
     for delimiter in delimiter_options: 
@@ -36,7 +46,8 @@ def process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir
 
     accurate_labels = is_accurate(parsed_value, ground_truth)
     failure_labels = is_failure(parsed_value)
-    return error_count, accurate_labels, failure_labels, prompt, response, parsed_value
+    token_labels = get_token_limit_fraction(usage, model)
+    return error_count, accurate_labels, failure_labels, prompt, response, parsed_value, token_labels
 
 
 
@@ -45,45 +56,28 @@ def create_result_location(result_location):
 
 def handle_openai_errors(e, error_count, rate_limit_pause, model):
     error_count += 1
-    if error_count > 5:
-        if isinstance(e, openai.error.RateLimitError):
-            raise Exception("Rate limit exceeded too many times.") from e
-        elif isinstance(e, openai.error.ServiceUnavailableError):
-            raise Exception("Service unavailable too many times.") from e
-        else:
-            raise e
+    if error_count > 3:
+      if isinstance(e, openai.error.RateLimitError):
+          raise Exception("Rate limit exceeded too many times.") from e
+      elif isinstance(e, openai.error.ServiceUnavailableError):
+          raise Exception("Service unavailable too many times.") from e
+      else:
+          raise e
+      return -1
 
     if isinstance(e, openai.error.RateLimitError):
         print(f"Rate limit exceeded. Pausing for {rate_limit_pause} seconds.")
     elif isinstance(e, openai.error.ServiceUnavailableError):
         print(f"Service unavailable; Pausing for {rate_limit_pause} seconds to help reset things and then retrying.")
     elif isinstance(e, openai.error.InvalidRequestError):
-        print(f'Prompt tokens > context limit of {model}')
-        print(e)
+        print(f'Prompt tokens > context limit of {model}.')
     else:
-        print(f"Type of error: {type(e)}")
-        print(f"Error: {e}")
-        print(f"Pausing for {rate_limit_pause} seconds.")
+        print(f"Type of error: {type(e)}. Error: {e}")
+
+    print(f"Pausing for {rate_limit_pause} seconds before retrying.")
+    time.sleep(rate_limit_pause)  # Pausing before retrying
+
     return error_count
-
-
-def get_desired_sizes(average_2hop_size, num_samples_per_size = 1):
-    sizes = [
-        int(average_2hop_size * 0.25),  
-        int(average_2hop_size * 0.5),  
-        average_2hop_size,             
-        int(average_2hop_size * 1.5),  
-        int(average_2hop_size * 2),    
-    ]
-    final_desired_sizes = [size for size in sizes for _ in range(num_samples_per_size)]
-    return final_desired_sizes
-    #[size for size in sizes if size > 0]
-
-def load_and_prepare_data(data_dir, dataset_name):
-    dataset = load_dataset(data_dir, dataset_name)
-    data = dataset[0]
-    graph = to_networkx(data, to_undirected=True)
-    return data, graph
 
 def extract_columns_from_csv_dict(run_location, filename):
     extracted_data = []
@@ -151,12 +145,15 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
     avg_accuracy_values = []
     avg_failure_values = []
     avg_inaccuracy_values = []
+    avg_token_limit_fraction = []
 
     for run in range(0,no_of_runs): 
         run_location = os.path.join(input_location, f'run_{run}')
         error_count = 0
         accurate_labels = 0
         failure_labels = 0      
+        token_limit_fraction = 0  
+        token_limit_fractions = [] 
         # get the ground truth labels for the graphs in the setting
         ground_truth_filename = f'{setting}_run_{run}_graph_image_values.csv'
         result_filename = f'{setting}_run_{run}_{setting}_text_motif_encoder_results.csv'
@@ -164,7 +161,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
         graph_info_location = os.path.join(run_location, f'{setting}')
         with open(f"{run_location}/{result_filename}", mode='w') as result_file:
             csvwriter = csv.writer(result_file)
-            csvwriter.writerow(['setting', 'run', 'graph_id','node_with_question_mark', 'ground_truth', 'prompt', 'response', 'parsed_response'])
+            csvwriter.writerow(['setting', 'run', 'graph_id','node_with_question_mark', 'ground_truth', 'prompt', 'response', 'parsed_response', 'token_limit_fraction'])
             for graph in ground_truth_info:
                 graph_id = graph['graph_id']
                 ground_truth = graph['label']
@@ -174,18 +171,19 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
                 ylabelsjson_name = f"{graph_info_location}/{graph_id}_ylabels.json"
                 G = load_edgelist(edgelist_name)
                 y_labels = load_graph_node_json(ylabelsjson_name)
-                #print("graph id: " , graph_id, "setting: ", setting,"run: ",  run)
+                print("graph id: " , graph_id, "setting: ", setting,"run: ",  run)
                 #print("y_labels", y_labels)
                 #now generate a text prompt based on this assay information + y label information
                 assay_dictionary = generate_assays(G, node_with_question_mark)
                 text_for_prompt = generate_text_motif_encoder(G, assay_dictionary, y_labels, node_with_question_mark)
                 
                 #prompt the                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        LLM for prediction
-                error_count, acc, fail, prompt, response, parsed_response = process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause)
-                csvwriter.writerow([setting, run, graph_id, node_with_question_mark, ground_truth, prompt, response, parsed_response])
+                error_count, acc, fail, prompt, response, parsed_response, token_limit_fraction = process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause)
+                csvwriter.writerow([setting, run, graph_id, node_with_question_mark, ground_truth, prompt, response, parsed_response, token_limit_fraction])
                 #check if the parsed prediction is correct compared to ground truth
                 accurate_labels += acc
                 failure_labels += fail
+                token_limit_fractions.append(token_limit_fraction) # for a single graph
             #compute the accuracy, inaccuracy and failure metrics
             accuracy = accurate_labels / no_of_samples
             failure = 0 if accuracy == 1.0 else failure_labels / (no_of_samples)
@@ -193,7 +191,9 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
             avg_accuracy_values.append(accuracy)
             avg_inaccuracy_values.append(inaccuracy)
             avg_failure_values.append(failure)
-    return avg_accuracy_values, avg_inaccuracy_values, avg_failure_values
+            avg_token_limit_fraction.append(np.mean(token_limit_fractions)) # to calculate across all runs 
+
+    return avg_accuracy_values, avg_inaccuracy_values, avg_failure_values, avg_token_limit_fraction
 
      
 openai.api_key = os.environ["OPENAI_API_UMNKEY"]
@@ -207,25 +207,26 @@ settings = config["settings"]
 log_dir = config["log_dir"]
 model = config["model"]
 rate_limit_pause = config["rate_limit_pause"]
-log_sub_dir = create_log_dir(log_dir)      
+log_sub_dir = create_log_dir(log_dir)  
+input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'    
 
 def main():
     with open(f"{input_location}/text_motif_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
             csvwriterf = csv.writer(metrics_file)
-            csvwriterf.writerow(['setting', 'mean_accuracy', 'std_accuracy', 'mean_inaccuracy', 'std_inaccuracy', 'mean_failure', 'std_failure'])
+            csvwriterf.writerow(['setting', 'mean_accuracy', 'std_accuracy', 'mean_inaccuracy', 'std_inaccuracy', 'mean_failure', 'std_failure', 'mean_token_limit_fraction', 'std_token_limit_fraction'])
             for setting in settings:
-                avg_accuracy_runs, avg_inaccuracy_runs, avg_failure_runs = run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause)
+                avg_accuracy_runs, avg_inaccuracy_runs, avg_failure_runs, avg_tokenfraction_runs = run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause)
                 # write the per run results to a csv file
-                csvwriterf.writerow([setting, np.mean(avg_accuracy_runs), np.std(avg_accuracy_runs), np.mean(avg_inaccuracy_runs), np.std(avg_inaccuracy_runs), np.mean(avg_failure_runs), np.std(avg_failure_runs)])
+                csvwriterf.writerow([setting, np.mean(avg_accuracy_runs), np.std(avg_accuracy_runs), np.mean(avg_inaccuracy_runs), np.std(avg_inaccuracy_runs), np.mean(avg_failure_runs), np.std(avg_failure_runs), np.mean(avg_tokenfraction_runs), np.std(avg_tokenfraction_runs)])
                 print("SETTING : ", setting)
                 print("Average accuracy across runs:", np.mean(avg_accuracy_runs), "Standard deviation of accuracy across runs:", np.std(avg_accuracy_runs))
                 print("Average Inaccuracy across runs:", np.mean(avg_inaccuracy_runs), "Standard deviation of inaccuracy across runs:   ", np.std(avg_inaccuracy_runs))
                 print("Average failure across runs:", np.mean(avg_failure_runs), "Standard deviation of failure across runs:", np.std(avg_failure_runs))
+                print("Average token limit fraction across runs:", np.mean(avg_tokenfraction_runs), "Standard deviation of token fraction across runs:", np.std(avg_tokenfraction_runs))
+
                 print("="*30)
 
 
-
-# Example usage:
 
 main()
 
