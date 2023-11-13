@@ -2,7 +2,7 @@
     "dataset_name": "cora",
     "no_of_runs": 2,
     "no_of_samples": 50,
-    "settings": ["ego"],
+    "settings": ["ff"],
     "input_location": "./results/",
     "log_dir": "./logs/",
     "model": "gpt-4-vision-preview",

@@ -152,8 +152,9 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
 
 
 openai.api_key = os.environ["OPENAI_API_MYKEY"] # my personal api key    
-
+#openai.api_key = os.environ["OPENAI_ADI_KEY"]
 #openai.api_key = os.environ["OPENAI_API_UMNKEY"] #uni key
+print(openai.api_key)
 
 with open('code/config_image_encoder.json', 'r') as config_file:
     config = json.load(config_file)
