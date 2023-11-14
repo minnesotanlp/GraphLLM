@@ -125,6 +125,9 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
                 graph_id = graph['graph_id']
                 ground_truth = graph['label']
                 node_with_question_mark = str(graph['ques_node_id'])
+
+                if graph_id <'20':
+                    continue
                 # ---------------- ISHAAN CODE ----------------
                 # Ishaan, get the image path to your changed images here  
                 image_path = f"{graph_info_location}/{graph_id}.png"
@@ -151,9 +154,9 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
     return avg_accuracy_values, avg_inaccuracy_values, avg_failure_values, avg_token_limit_fraction
 
 
-openai.api_key = os.environ["OPENAI_API_MYKEY"] # my personal api key    
-#openai.api_key = os.environ["OPENAI_ADI_KEY"]
-#openai.api_key = os.environ["OPENAI_API_UMNKEY"] #uni key
+#openai.api_key = os.environ["OPENAI_API_MYKEY"] # my personal api key 
+#openai.api_key = os.environ["OPENAI_ADI_KEY"] #adi's key
+openai.api_key = os.environ["OPENAI_API_UMNKEY"] #uni key
 print(openai.api_key)
 
 with open('code/config_image_encoder.json', 'r') as config_file:

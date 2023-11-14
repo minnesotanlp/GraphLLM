@@ -85,11 +85,57 @@ def get_star_motifs_connected_to_node(graph, node):
 
     return star_motifs
 
+def get_count_and_cliques_of_node(graph, node):
+    # Find all maximal cliques in the graph
+    all_cliques = nx.find_cliques(graph)
+    # Filter cliques that are larger than size 4 and contain the specified node
+    relevant_cliques = [clique for clique in all_cliques if node in clique and len(clique) > 3]
+
+    # Count of such cliques
+    count = len(relevant_cliques)
+
+    return count, relevant_cliques
+
+def is_node_attached_to_clique(graph, clique, node):
+    # Count the number of connections node has with nodes in the clique
+    connections = sum(1 for member in clique if graph.has_edge(member, node))
+    # A node is attached to a clique if it is connected to all but at most one of the clique's nodes
+    return connections >= len(clique) - 1
+
+def find_cliques_connected_node(graph, node):
+    # Find all maximal cliques in the graph
+    cliques_connected = []
+    c_flag = False
+    all_cliques = nx.find_cliques(graph)
+    # Check if the node is attached to any of these cliques
+    for clique in all_cliques:
+        if len(clique) > 3 and is_node_attached_to_clique(graph, clique, node):
+            c_flag = True
+            cliques_connected.append(clique) # The node is attached to at least one clique
+    if c_flag:
+        return cliques_connected
+    else:
+        return [] # The node is not attached to any clique
+
+# Example usage
+G = nx.Graph()
+G.add_edges_from([(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4), (3, 5)])
+print(find_cliques_connected_node(G, 5)) 
 
 # Example usage:
-#G = nx.Graph()
-#edges1 = [(1, 5), (2, 5), (3, 5), (7, 5), (6, 5), (4, 5)]
-#G.add_edges_from(edges1)
+G = nx.Graph()
+edges1 = [(1, 5), (2, 5), (3, 5), (7, 5), (6, 5), (4, 5)]
+G.add_edges_from(edges1)
+print(find_cliques_connected_node(G, 5))  # Output: 0, []
+
+G = nx.Graph()
+edges1 = [(1, 2), (1,4), (1,5),(2,1),(2,4),(2, 3),(2,5), (3,2), (4,1),(4,2),(4, 5), (5,1),(5,2),(5,4)]
+G.add_edges_from(edges1)
+print(find_cliques_connected_node(G, 3))  # Output: 0, []
+
+edges = [(1, 2), (1, 3), (1, 4), (2, 3),(2, 4), (3, 4)]
+G.add_edges_from(edges)
+print(find_cliques_connected_node(G, 3))
 #print(get_star_motifs(G, 5))  # Output: [[5, 1, 2, 3, 7, 6, 4]]
 
 #G = nx.Graph()
