@@ -71,6 +71,53 @@ def plot_graph_structure_community_colored(graph, y_labels_graph, node_with_ques
     plt.savefig(f'{result_location}/{index}.png')
     plt.close()
 
+def plot_graphviz_graph(graph, y_labels_graph, node_with_question_mark, index, title, result_location, node_neighbors, ego_flag):
+    # Define a set of colors for nodes
+    colors_list = ['blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'grey',
+                   'lime', 'navy', 'gold', 'maroon', 'turquoise', 'olive', 'indigo', 'lightcoral',
+                   'darkgreen', 'chocolate', 'magenta', 'lightseagreen', 'black']
+    
+    dark_colors = ['blue', 'purple', 'navy', 'indigo', 'black', 'darkgreen']
+    
+    # Color mapping based on labels
+    color_mapping = {}
+    current_color_index = 0
+    
+    graph.graph_attr["overlap"] = False
+    graph.graph_attr['splines'] = True
+    graph.graph_attr['sep'] = '+2'
+    graph.graph_attr['esep'] = '+1'
+
+    for node in graph.nodes():
+        node.attr["fontsize"] = "25pt"
+        node.attr["style"] = "filled"
+        if ego_flag:
+            label = '?' if str(node) == node_with_question_mark else y_labels_graph[node_with_question_mark][str(node)]
+        else:
+            label = '?' if str(node) == node_with_question_mark else y_labels_graph[str(node)]
+        
+        if label == '?':
+            node.attr["color"] = "red"
+        else:
+            if label not in color_mapping:
+                color_mapping[label] = colors_list[current_color_index]
+                current_color_index += 1  # Move to the next color for a new label
+            node.attr["color"] = color_mapping[label]
+            if color_mapping[label] in dark_colors:
+                node.attr["fontcolor"] = 'white'
+
+    # Set Labels in GraphViz
+    for node in graph.nodes():
+        if str(node) == node_with_question_mark:
+            node.attr["label"] = '?'
+            node.attr['fontsize'] = '35pt'
+        else:
+            node.attr["label"] = y_labels_graph[node_with_question_mark][str(node)] if ego_flag else y_labels_graph[str(node)]
+
+        if str(node) in node_neighbors:
+            node.attr['fontsize'] = '35pt'
+
+    graph.draw(f'{result_location}/{index}_new.png', prog="neato")
 
 
 # think this does the same as the above function
