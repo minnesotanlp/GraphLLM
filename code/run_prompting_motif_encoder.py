@@ -1,28 +1,58 @@
-
-import openai
-import os
-import base64
-import requests
 import networkx as nx
 import numpy as np
+import openai
+import time
+import random
 import json
 import csv
-import time
+import os
 from torch_geometric.utils import to_networkx
 from utils import load_dataset, save_response, create_log_dir
-from prompt_generation import get_image_completion_json
+from prompt_generation import get_prompt_network_only, get_completion_json, generate_text_motif_encoder
 from response_parser import parse_response
 from metrics import is_failure,is_accurate, get_token_limit_fraction
+from graph_assays import count_star_graphs, count_triangles_nx, find_3_cliques_connected_to_node, get_star_motifs_connected_to_node
+
+def process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause):
+    error_count = 0
+    prompt = get_prompt_network_only(text_for_prompt, flag = 2)
+    while(error_count <= 3):
+        try:
+            response_json = get_completion_json(prompt, model)
+            save_response(response_json, log_dir, log_sub_dir)
+            usage = int(response_json.usage.total_tokens)
+            response = response_json.choices[0].message["content"]
+            break
+        except Exception as e:
+            error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
+            if error_count == -1:  # If error_count returned as -1, stop trying
+                return error_count, 0, 0, None, None, None
+
+     # If error_count has exceeded 3, this point would only be reached if the last attempt also failed
+    if error_count > 3:
+        return error_count, 0, 0, None, None, None
+    
+    
+    delimiter_options = ['=', ':']
+    parsed_value = None
+    for delimiter in delimiter_options: 
+        parsed_value = parse_response(response, delimiter)
+        if parsed_value is not None:
+            break
+
+    print("RESPONSE --> ", response)
+    print("Node with ?: ", node_with_question_mark, "Label: ",ground_truth)
+    print("="*30)
+
+    accurate_labels = is_accurate(parsed_value, ground_truth)
+    failure_labels = is_failure(parsed_value)
+    token_labels = get_token_limit_fraction(usage, model)
+    return error_count, accurate_labels, failure_labels, prompt, response, parsed_value, token_labels
+
+
 
 def create_result_location(result_location):
     os.makedirs(result_location, exist_ok=True)
-
-
-# Function to encode the image
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
-
 
 def handle_openai_errors(e, error_count, rate_limit_pause, model):
     error_count += 1
@@ -49,41 +79,6 @@ def handle_openai_errors(e, error_count, rate_limit_pause, model):
 
     return error_count
 
-def process_text(prompt, base64_image, detail, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause):
-    error_count = 0
-    while error_count <= 3: #this is no of attempts per prompt
-        try:
-            response_json = get_image_completion_json(prompt, model, base64_image, detail=detail)
-            save_response(response_json, log_dir, log_sub_dir)
-            usage = int(response_json.usage.total_tokens)
-            response = response_json.choices[0].message["content"]
-            break  # If the call was successful, break out of the loop
-        except Exception as e:
-            error_count = handle_openai_errors(e, error_count, rate_limit_pause, model)
-            if error_count == -1:  # If error_count returned as -1, stop trying
-                return error_count, 0, 0, None, None, None
-
-    # If error_count has exceeded 3, this point would only be reached if the last attempt also failed
-    if error_count > 3:
-        return error_count, 0, 0, None, None, None
-
-    delimiter_options = ['=', ':']
-    parsed_value = None
-    for delimiter in delimiter_options: 
-        parsed_value = parse_response(response, delimiter)
-        if parsed_value is not None:
-            break
-
-    print("RESPONSE --> ", response)
-    print("Node with ?: ", node_with_question_mark, "Label: ",ground_truth)
-    print("="*30)
-
-    accurate_labels = is_accurate(parsed_value, ground_truth)
-    failure_labels = is_failure(parsed_value)
-    token_labels = get_token_limit_fraction(usage, model)
-    return error_count, accurate_labels, failure_labels, prompt, response, parsed_value, token_labels
-
-
 def extract_columns_from_csv_dict(run_location, filename):
     extracted_data = []
     
@@ -100,7 +95,53 @@ def extract_columns_from_csv_dict(run_location, filename):
     return extracted_data
 
 
-def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause, detail):
+def load_graph_node_json(json_file_path):
+    """
+    Load a JSON file containing node information and return it as a dictionary.
+    
+    :param json_file_path: str, the full path of the JSON file
+    :return: dict, containing the loaded node information
+    """
+    try:
+        # Open and load the JSON file
+        with open(json_file_path, 'r') as file:
+            node_data = json.load(file)
+        
+        # Returning the loaded data as a dictionary
+        return node_data
+    
+    except FileNotFoundError:
+        print(f"JSON file not found at path: {json_file_path}")
+        return None
+    
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON file at path: {json_file_path}")
+        return None
+
+
+def load_edgelist(filename):
+    #node_counts = 0    
+    try:
+        # Reading the edgelist and creating a graph
+        G = nx.read_edgelist(filename)
+        
+        # Calculating the number of nodes
+        #node_counts = len(G.nodes())
+        
+    except FileNotFoundError:
+        print(f"Graph File not found.")
+    
+    return G
+
+def generate_assays(G, node_with_question_mark):
+    assay_dictionary = dict()
+    assay_dictionary['No of star motifs'] = count_star_graphs(G)
+    assay_dictionary['No of triangle motifs'] = count_triangles_nx(G)
+    assay_dictionary['Triangle motifs attached to ? node'] = find_3_cliques_connected_to_node(G, node_with_question_mark)
+    assay_dictionary['Star motifs connected to ? node'] = get_star_motifs_connected_to_node(G, node_with_question_mark)
+    return assay_dictionary
+
+def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause):
     avg_accuracy_values = []
     avg_failure_values = []
     avg_inaccuracy_values = []
@@ -110,12 +151,12 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
         run_location = os.path.join(input_location, f'run_{run}')
         error_count = 0
         accurate_labels = 0
-        failure_labels = 0 
+        failure_labels = 0      
         token_limit_fraction = 0  
-        token_limit_fractions = []      
+        token_limit_fractions = [] 
         # get the ground truth labels for the graphs in the setting
         ground_truth_filename = f'{setting}_run_{run}_graph_image_values.csv'
-        result_filename = f'{setting}_run_{run}_{setting}_image_encoder_results.csv'
+        result_filename = f'{setting}_run_{run}_{setting}_text_motif_encoder_results.csv'
         ground_truth_info = extract_columns_from_csv_dict(run_location, ground_truth_filename)
         graph_info_location = os.path.join(run_location, f'{setting}')
         with open(f"{run_location}/{result_filename}", mode='w') as result_file:
@@ -125,42 +166,41 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
                 graph_id = graph['graph_id']
                 ground_truth = graph['label']
                 node_with_question_mark = str(graph['ques_node_id'])
-
-                #if graph_id <'20':
-                #    continue
-                # ---------------- ISHAAN CODE ----------------
-                # Ishaan, get the image path to your changed images here  
-                image_path = f"{graph_info_location}/{graph_id}_new.png"
-                print(image_path)
-                # Getting the base64 string
-                base64_image = encode_image(image_path)
-                text_for_prompt = f'Your task is Node Label Prediction (Predict the label of the red node marked with a ?, given the graph structure information in the image). Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1'
+                # Constructing the filename based on the graph_id
+                edgelist_name = f"{graph_info_location}/{graph_id}_edgelist.txt"
+                ylabelsjson_name = f"{graph_info_location}/{graph_id}_ylabels.json"
+                G = load_edgelist(edgelist_name)
+                y_labels = load_graph_node_json(ylabelsjson_name)
+                print("graph id: " , graph_id, "setting: ", setting,"run: ",  run)
+                #print("y_labels", y_labels)
+                #now generate a text prompt based on this assay information + y label information
+                assay_dictionary = generate_assays(G, node_with_question_mark)
+                text_for_prompt = generate_text_motif_encoder(G, assay_dictionary, y_labels, node_with_question_mark)
+                
                 #prompt the                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        LLM for prediction
-                error_count, acc, fail, prompt, response, parsed_response, token_limit_fraction = process_text(text_for_prompt, base64_image, detail, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause)
+                error_count, acc, fail, prompt, response, parsed_response, token_limit_fraction = process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause)
                 csvwriter.writerow([setting, run, graph_id, node_with_question_mark, ground_truth, prompt, response, parsed_response, token_limit_fraction])
                 #check if the parsed prediction is correct compared to ground truth
                 accurate_labels += acc
                 failure_labels += fail
-                token_limit_fractions.append(token_limit_fraction)
+                token_limit_fractions.append(token_limit_fraction) # for a single graph
             #compute the accuracy, inaccuracy and failure metrics
             accuracy = accurate_labels / no_of_samples
             failure = 0 if accuracy == 1.0 else failure_labels / (no_of_samples)
             inaccuracy = 1 - (accuracy + failure)
-
             avg_accuracy_values.append(accuracy)
             avg_inaccuracy_values.append(inaccuracy)
             avg_failure_values.append(failure)
-            avg_token_limit_fraction.append(np.mean(token_limit_fractions))
+            avg_token_limit_fraction.append(np.mean(token_limit_fractions)) # to calculate across all runs 
+
     return avg_accuracy_values, avg_inaccuracy_values, avg_failure_values, avg_token_limit_fraction
 
-
-openai.api_key = os.environ["OPENAI_API_MYKEY"] # my personal api key 
-#openai.api_key = os.environ["OPENAI_API_UMNKEY"] #uni key
-
-#openai.api_key = os.environ["OPENAI_ADI_KEY"] #adi's key
+     
+openai.api_key = os.environ["OPENAI_API_MYKEY"]
+#openai.api_key = os.environ["OPENAI_ADI_KEY"]
 #print(openai.api_key)
 
-with open('code/config/config_image_encoder.json', 'r') as config_file:
+with open('code/config_textmotif_encoder.json', 'r') as config_file:
     config = json.load(config_file)
 dataset_name = config["dataset_name"]
 input_location = config["input_location"]
@@ -170,17 +210,15 @@ settings = config["settings"]
 log_dir = config["log_dir"]
 model = config["model"]
 rate_limit_pause = config["rate_limit_pause"]
-detail = config["detail"]
-log_sub_dir = create_log_dir(log_dir)
-input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'      
+log_sub_dir = create_log_dir(log_dir)  
+input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'    
 
-print(input_location)
 def main():
-    with open(f"{input_location}/text_image_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
+    with open(f"{input_location}/text_motif_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
             csvwriterf = csv.writer(metrics_file)
             csvwriterf.writerow(['setting', 'mean_accuracy', 'std_accuracy', 'mean_inaccuracy', 'std_inaccuracy', 'mean_failure', 'std_failure', 'mean_token_limit_fraction', 'std_token_limit_fraction'])
             for setting in settings:
-                avg_accuracy_runs, avg_inaccuracy_runs, avg_failure_runs, avg_tokenfraction_runs = run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause, detail)
+                avg_accuracy_runs, avg_inaccuracy_runs, avg_failure_runs, avg_tokenfraction_runs = run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause)
                 # write the per run results to a csv file
                 csvwriterf.writerow([setting, np.mean(avg_accuracy_runs), np.std(avg_accuracy_runs), np.mean(avg_inaccuracy_runs), np.std(avg_inaccuracy_runs), np.mean(avg_failure_runs), np.std(avg_failure_runs), np.mean(avg_tokenfraction_runs), np.std(avg_tokenfraction_runs)])
                 print("SETTING : ", setting)
@@ -192,7 +230,7 @@ def main():
                 print("="*30)
 
 
-main()
 
+main()
 
 

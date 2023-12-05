@@ -1,21 +1,22 @@
 import networkx as nx
 import numpy as np
 import openai
-import time
 import random
 import json
+import time
 import csv
 import os
 from torch_geometric.utils import to_networkx
 from utils import load_dataset, save_response, create_log_dir
-from prompt_generation import get_prompt_network_only, get_completion_json, generate_text_motif_encoder
+from prompt_generation import generate_textandmotif_encoder, get_prompt_network_only, get_completion_json
 from response_parser import parse_response
 from metrics import is_failure,is_accurate, get_token_limit_fraction
 from graph_assays import count_star_graphs, count_triangles_nx, find_3_cliques_connected_to_node, get_star_motifs_connected_to_node
 
+
 def process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause):
     error_count = 0
-    prompt = get_prompt_network_only(text_for_prompt, flag = 2)
+    prompt = get_prompt_network_only(text_for_prompt, flag = 3)
     while(error_count <= 3):
         try:
             response_json = get_completion_json(prompt, model)
@@ -28,10 +29,9 @@ def process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir
             if error_count == -1:  # If error_count returned as -1, stop trying
                 return error_count, 0, 0, None, None, None
 
-     # If error_count has exceeded 3, this point would only be reached if the last attempt also failed
+    # If error_count has exceeded 3, this point would only be reached if the last attempt also failed
     if error_count > 3:
         return error_count, 0, 0, None, None, None
-    
     
     delimiter_options = ['=', ':']
     parsed_value = None
@@ -78,6 +78,7 @@ def handle_openai_errors(e, error_count, rate_limit_pause, model):
     time.sleep(rate_limit_pause)  # Pausing before retrying
 
     return error_count
+
 
 def extract_columns_from_csv_dict(run_location, filename):
     extracted_data = []
@@ -141,6 +142,7 @@ def generate_assays(G, node_with_question_mark):
     assay_dictionary['Star motifs connected to ? node'] = get_star_motifs_connected_to_node(G, node_with_question_mark)
     return assay_dictionary
 
+
 def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause):
     avg_accuracy_values = []
     avg_failure_values = []
@@ -151,12 +153,12 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
         run_location = os.path.join(input_location, f'run_{run}')
         error_count = 0
         accurate_labels = 0
-        failure_labels = 0      
+        failure_labels = 0  
         token_limit_fraction = 0  
-        token_limit_fractions = [] 
+        token_limit_fractions = []  
         # get the ground truth labels for the graphs in the setting
         ground_truth_filename = f'{setting}_run_{run}_graph_image_values.csv'
-        result_filename = f'{setting}_run_{run}_{setting}_text_motif_encoder_results.csv'
+        result_filename = f'{setting}_run_{run}_{setting}_text+motif_encoder_results.csv'
         ground_truth_info = extract_columns_from_csv_dict(run_location, ground_truth_filename)
         graph_info_location = os.path.join(run_location, f'{setting}')
         with open(f"{run_location}/{result_filename}", mode='w') as result_file:
@@ -171,13 +173,11 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
                 ylabelsjson_name = f"{graph_info_location}/{graph_id}_ylabels.json"
                 G = load_edgelist(edgelist_name)
                 y_labels = load_graph_node_json(ylabelsjson_name)
-                print("graph id: " , graph_id, "setting: ", setting,"run: ",  run)
-                #print("y_labels", y_labels)
-                #now generate a text prompt based on this assay information + y label information
                 assay_dictionary = generate_assays(G, node_with_question_mark)
-                text_for_prompt = generate_text_motif_encoder(G, assay_dictionary, y_labels, node_with_question_mark)
-                
-                #prompt the                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        LLM for prediction
+
+                text_for_prompt = generate_textandmotif_encoder(G, y_labels, assay_dictionary, node_with_question_mark)
+              
+                #prompt the LLM for prediction
                 error_count, acc, fail, prompt, response, parsed_response, token_limit_fraction = process_text(text_for_prompt, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause)
                 csvwriter.writerow([setting, run, graph_id, node_with_question_mark, ground_truth, prompt, response, parsed_response, token_limit_fraction])
                 #check if the parsed prediction is correct compared to ground truth
@@ -188,19 +188,21 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
             accuracy = accurate_labels / no_of_samples
             failure = 0 if accuracy == 1.0 else failure_labels / (no_of_samples)
             inaccuracy = 1 - (accuracy + failure)
+
             avg_accuracy_values.append(accuracy)
             avg_inaccuracy_values.append(inaccuracy)
             avg_failure_values.append(failure)
             avg_token_limit_fraction.append(np.mean(token_limit_fractions)) # to calculate across all runs 
-
     return avg_accuracy_values, avg_inaccuracy_values, avg_failure_values, avg_token_limit_fraction
 
-     
-openai.api_key = os.environ["OPENAI_API_MYKEY"]
-#openai.api_key = os.environ["OPENAI_ADI_KEY"]
-#print(openai.api_key)
 
-with open('code/config_textmotif_encoder.json', 'r') as config_file:
+
+
+                    
+            
+openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
+
+with open('code/config/config_textmotifencoder.json', 'r') as config_file:
     config = json.load(config_file)
 dataset_name = config["dataset_name"]
 input_location = config["input_location"]
@@ -210,11 +212,11 @@ settings = config["settings"]
 log_dir = config["log_dir"]
 model = config["model"]
 rate_limit_pause = config["rate_limit_pause"]
-log_sub_dir = create_log_dir(log_dir)  
-input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'    
+log_sub_dir = create_log_dir(log_dir)      
+input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'
 
 def main():
-    with open(f"{input_location}/text_motif_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
+    with open(f"{input_location}/text+motif_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
             csvwriterf = csv.writer(metrics_file)
             csvwriterf.writerow(['setting', 'mean_accuracy', 'std_accuracy', 'mean_inaccuracy', 'std_inaccuracy', 'mean_failure', 'std_failure', 'mean_token_limit_fraction', 'std_token_limit_fraction'])
             for setting in settings:
@@ -226,11 +228,7 @@ def main():
                 print("Average Inaccuracy across runs:", np.mean(avg_inaccuracy_runs), "Standard deviation of inaccuracy across runs:   ", np.std(avg_inaccuracy_runs))
                 print("Average failure across runs:", np.mean(avg_failure_runs), "Standard deviation of failure across runs:", np.std(avg_failure_runs))
                 print("Average token limit fraction across runs:", np.mean(avg_tokenfraction_runs), "Standard deviation of token fraction across runs:", np.std(avg_tokenfraction_runs))
-
                 print("="*30)
-
-
-
 main()
 
 
