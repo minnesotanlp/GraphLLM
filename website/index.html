@@ -55,6 +55,7 @@
     <script src="static/js/bulma-slider.min.js"></script>
     <script src="static/js/bulma-tabs.js"></script>
     <script src="static/js/index.js"></script>
+    <script src="static/js/tab-content.js"></script>
   </head>
   <body>
     <section class="hero">
@@ -65,40 +66,13 @@
               <h1 class="title is-1 publication-title">
                 Understanding Graphs with Large Language Models
               </h1>
-              <div class="is-size-5 publication-authors">
-                <!-- Paper authors -->
-                <span class="author-block">
-                  <a href="FIRST AUTHOR PERSONAL LINK" target="_blank"
-                    >Debarati Das</a
-                  ><sup>*</sup>,</span
-                >
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank"
-                    >Ishaan Gupta</a
-                  ><sup>*</sup>,</span
-                >
-                <span class="author-block">
-                  <a href="THIRD AUTHOR PERSONAL LINK" target="_blank"
-                    >Third Author</a
-                  >
-                </span>
-              </div>
-
-              <div class="is-size-5 publication-authors">
-                <span class="author-block">University of Minnesota</span>
-                <span class="eql-cntrb"
-                  ><small
-                    ><br /><sup>*</sup>Indicates Equal Contribution</small
-                  ></span
-                >
-              </div>
 
               <div class="column has-text-centered">
                 <div class="publication-links">
                   <!-- Arxiv PDF link -->
                   <span class="link-block">
                     <a
-                      href="https://arxiv.org/pdf/2311.09862.pdf"
+                      href=""
                       target="_blank"
                       class="external-link button is-normal is-rounded is-dark"
                     >
@@ -123,19 +97,6 @@
                     </a>
                   </span>
 
-                  <!-- ArXiv abstract Link -->
-                  <span class="link-block">
-                    <a
-                      href="https://arxiv.org/abs/2311.09862"
-                      target="_blank"
-                      class="external-link button is-normal is-rounded is-dark"
-                    >
-                      <span class="icon">
-                        <i class="ai ai-arxiv"></i>
-                      </span>
-                      <span>arXiv</span>
-                    </a>
-                  </span>
                 </div>
               </div>
             </div>
@@ -143,6 +104,44 @@
         </div>
       </div>
     </section>
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <div class="row" style="padding-left: 0; width: 27cm">
+            <div class="column">
+              <p>
+                Large language models (LLMs) are revolutionizing various fields
+                by leveraging large text corpora for context-aware intelligence.
+                Due to the context size, however, encoding an entire graph with
+                LLMs is fundamentally limited. This paper explores how to
+                integrate graph data with LLMs better and presents a novel
+                approach using various encoding modalities (e.g., text, image,
+                and motif) and approximation of global connectivity of a graph
+                using different prompting methods to enhance LLMs' effectiveness
+                in handling complex graph structures. The study also introduces
+                GRAPHTMI, a new benchmark for evaluating LLMs in graph structure
+                analysis, focusing on factors such as homophily, motif presence,
+                and graph difficulty. Key findings reveal that image modality,
+                supported by advanced vision-language models like GPT-4V, is
+                more effective than text in managing token limits while
+                retaining critical information. The research also examines the
+                influence of different factors on each encoding modality's
+                performance. This study highlights the current limitations and
+                charts future directions for LLMs in graph understanding and
+                reasoning tasks
+              </p>
+            </div>
+            <div class="column">
+              <img src="static/images/abstract.png" class="center-image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
 
     <section class="section hero is-small">
       <div class="container is-max-desktop">
@@ -158,44 +157,38 @@
       </div>
     </section>
 
-    <!-- Paper abstract -->
+    <!-- Contributions -->
     <section class="section hero is-light">
       <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <div class="content has-text-justified">
-              <p>
-                The emergence of Large Language Models (LLMs) like ChatGPT has
-                revolutionized research and practical applications,
-                necessitating a comprehensive understanding of their
-                capabilities and limitations. This survey conducts an in-depth
-                analysis of LLMs, focusing on their safety, reliability, and
-                potential risks, including a systematic literature review across
-                various data types. Our study is the first to critically analyze
-                a range of LLM-generated data, identifying common patterns and
-                biases, and proposing new evaluation metrics beyond traditional
-                standards. Key findings include the distinctiveness of
-                human-authored texts, biases in synthetic datasets, and the need
-                for diverse metrics in assessing LLMs. Our findings highlight
-                the importance of nuanced understanding in domains like
-                sentiment analysis and the generalizability issues in training
-                models. This analysis forms the basis for developing universal
-                evaluation protocols, crucial for advancing LLM research and
-                ensuring the reliability of their generated data across diverse
-                applications.
-              </p>
-            </div>
-          </div>
+        <h2 class="title is-3">Main Contributions</h2>
+        <div class="content has-text-justified">
+          <ul>
+            <li>
+              We conduct a comprehensive breadth-first analysis of
+              graph-structure prompting in different modalities, including text,
+              image, and motif, using large language and vision-language models
+              for node classification tasks.
+            </li>
+            <li>
+              We also conduct a depth-first analysis of how different factors
+              influence the performance of each encoding modality.
+            </li>
+            <li>
+              We introduce Graph TMI a novel graph benchmark featuring a
+              hierarchy of graphs, associated prompts, and encoding modalities
+              designed to further the community's understanding of graph
+              structure effects using LLMs.
+            </li>
+          </ul>
         </div>
       </div>
     </section>
-    <!-- End paper abstract -->
 
     <!-- Table showing Motifs -->
     <div class="container is-max-desktop">
       <nav class="tabs is-boxed is-centered is-large">
-        <div class="container">
+        <div class="container" style="padding-top: 20px">
+          <h2 class="title is-3 is-centered">GraphTMI</h2>
           <ul>
             <li class="tab is-active" onclick="openTab(event,'Easy')">
               <a>Easy</a>
@@ -213,323 +206,305 @@
 
     <div class="container section is-max-desktop">
       <div id="Easy" class="content-tab">
-        <div class="card">
-          <div class="row">
-            <div class="col" style="border-right: 0cm">
-              <img
-                src="static\images\graph_images\easy.png"
-                alt="Placeholder image"
-                style="height: 400px; padding-left: 0.5cm"
-              />
-            </div>
-            <div class="col" style="padding: 0%">
-              <div class="row" style="height: 200px">
-                <p style="overflow: auto">
-                  <b><u>Text Encoding:</u></b> <br />
-                  <b>Adjacency list: </b> {'710': ['2212', '2213', '51',
-                  '1392'], '2212': ['710', '1392', '2216'], '1392': ['2212',
-                  '710', '51'], '2216': ['2212', '2214', '2215', '457', '421',
-                  '1724'], '2213': ['710', '51', '421'], '51': ['710', '1392',
-                  '2213', '2214', '2215', '457'], '2214': ['2216', '51',
-                  '1201'], '2215': ['2216', '51', '457', '1724'], '457':
-                  ['2216', '51', '1201', '2215'], '421': ['2216', '2213'],
-                  '1724': ['2216', '2215'], '1201': ['2214', '457']} <br />
-                  <br />
-                  <b>Node to Label Mapping: </b> Node 2212: Label 3| Node 710:
-                  Label 3| Node 1392: Label 3| Node 2216: Label 3| Node 2213:
-                  Label 3| Node 51: Label 3| Node 421: Label 3| Node 2214: Label
-                  3| Node 1201: Label 3| Node 2215: Label 3| Node 457: Label 3|
-                  Node 1724: Label 2|
-                </p>
+        <div id="output0">
+          <div class="card">
+            <div class="row">
+              <div class="col" style="border-right: 0cm">
+                <img
+                  src="static\images\graph_images\easy.png"
+                  alt="Placeholder image"
+                  style="height: 400px; padding-left: 0.5cm"
+                />
               </div>
-              <div class="row" style="height: 200px; border-top: solid">
-                <p style="overflow: auto">
-                  <b><u>Motif Encoding:</u></b> <br />
-                  <b>No of star motifs:</b> 0 <br />
-                  <b>No of triangle motifs:</b> 6 <br /><b
-                    >Triangle motifs attached to ? node:</b
-                  >
-                  [[710, 1392, 51], [710, 2213, 51], [51, 2215, 457]] <br /><b
-                    >Star motifs connected to ? node:</b
-                  >
-                  [[2213, 421, 710, 51], [2214, 2216, 1201, 51]]
-                </p>
+              <div class="col" style="padding: 0%">
+                <div class="row" style="height: 200px">
+                  <p style="overflow: auto">
+                    <b><u>Text Encoding:</u></b> <br />
+                    <b>Adjacency list: </b> {'710': ['2212', '2213', '51',
+                    '1392'], '2212': ['710', '1392', '2216'], '1392': ['2212',
+                    '710', '51'], '2216': ['2212', '2214', '2215', '457', '421',
+                    '1724'], '2213': ['710', '51', '421'], '51': ['710', '1392',
+                    '2213', '2214', '2215', '457'], '2214': ['2216', '51',
+                    '1201'], '2215': ['2216', '51', '457', '1724'], '457':
+                    ['2216', '51', '1201', '2215'], '421': ['2216', '2213'],
+                    '1724': ['2216', '2215'], '1201': ['2214', '457']} <br />
+                    <br />
+                    <b>Node to Label Mapping: </b> Node 2212: Label 3| Node 710:
+                    Label 3| Node 1392: Label 3| Node 2216: Label 3| Node 2213:
+                    Label 3| Node 51: Label 3| Node 421: Label 3| Node 2214:
+                    Label 3| Node 1201: Label 3| Node 2215: Label 3| Node 457:
+                    Label 3| Node 1724: Label 2|
+                  </p>
+                </div>
+                <div class="row" style="height: 200px; border-top: solid">
+                  <p style="overflow: auto">
+                    <b><u>Motif Encoding:</u></b> <br />
+                    <b>No of star motifs:</b> 0 <br />
+                    <b>No of triangle motifs:</b> 6 <br /><b
+                      >Triangle motifs attached to ? node:</b
+                    >
+                    [[710, 1392, 51], [710, 2213, 51], [51, 2215, 457]] <br /><b
+                      >Star motifs connected to ? node:</b
+                    >
+                    [[2213, 421, 710, 51], [2214, 2216, 1201, 51]]
+                  </p>
+                </div>
               </div>
             </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">Ground Truth = 3</p>
+            </footer>
+            <footer class="card-footer">
+              <button onclick="motifFunction(0)" class="card-footer-item">
+                Show all
+              </button>
+            </footer>
           </div>
-          <footer class="card-footer">
-            <p class="card-footer-item">Ground Truth = 3</p>
-          </footer>
         </div>
       </div>
       <div id="Medium" class="content-tab" style="display: none">
-        <div class="card">
-          <div class="row">
-            <div class="col" style="border-right: 0cm">
-              <img
-                src="static\images\graph_images\medium.png"
-                alt="Placeholder image"
-                style="height: 400px; padding-left: 0.5cm"
-              />
-            </div>
-            <div class="col" style="padding: 0%">
-              <div class="row" style="height: 200px">
-                <p style="overflow: auto">
-                  <b><u>Text Encoding:</u></b> <br />
-                  <b>Adjacency list: </b> {'55': ['771', '1156'], '771': ['55',
-                  '65', '1080', '1156'], '65': ['771', '1156'], '1080': ['771',
-                  '149', '2344', '61', '697', '738', '2162'], '1156': ['771',
-                  '55', '65'], '149': ['1080', '1416', '1655', '2025'], '2344':
-                  ['1080', '279', '2343', '2475'], '61': ['1080', '1416',
-                  '2312', '1309', '2162'], '697': ['1080', '30'], '738':
-                  ['1080', '1927', '405', '30', '2162'], '2162': ['1080', '738',
-                  '30', '61', '2163'], '405': ['1927', '738'], '1927': ['405',
-                  '738'], '30': ['738', '1416', '697', '2162', '2343'], '1416':
-                  ['30', '61', '149'], '2343': ['30', '2344'], '2312': ['61'],
-                  '1309': ['61'], '1655': ['149'], '2025': ['149'], '279':
-                  ['2344'], '2475': ['2344'], '2163': ['2162']} <br />
-                  <br />
-                  <b>Node to Label Mapping: </b> Node 771: Label 0| Node 55:
-                  Label 4| Node 65: Label 0| Node 1080: Label 3| Node 1156:
-                  Label 0| Node 1927: Label 0| Node 405: Label 0| Node 738:
-                  Label 0| Node 1416: Label 0| Node 30: Label 3| Node 61: Label
-                  0| Node 149: Label 0| Node 2312: Label 0| Node 1655: Label 0|
-                  Node 2025: Label 0| Node 279: Label 0| Node 2344: Label 3|
-                  Node 1309: Label 5| Node 697: Label 3| Node 2162: Label 3|
-                  Node 2343: Label 3| Node 2475: Label 3| Node 2163: Label 3|
-                </p>
+        <div id="output1">
+          <div class="card">
+            <div class="row">
+              <div class="col" style="border-right: 0cm">
+                <img
+                  src="static\images\graph_images\medium.png"
+                  alt="Placeholder image"
+                  style="height: 400px; padding-left: 0.5cm"
+                />
               </div>
-              <div class="row" style="height: 200px; border-top: solid">
-                <p style="overflow: auto">
-                  <b><u>Motif Encoding:</u></b> <br />
-                  <b>No of star motifs:</b> 0 <br />
-                  <b>No of triangle motifs:</b> 6 <br /><b
-                    >Triangle motifs attached to ? node:</b
-                  >
-                  [[738, 2162, 1080], [2162, 1080, 61]] <br /><b
-                    >Star motifs connected to ? node:</b
-                  >
-                  [[149, 1416, 2025, 1655, 1080], [2344, 2475, 279, 2343, 1080],
-                  [61, 1416, 2312, 2162, 1309, 1080]]
-                </p>
+              <div class="col" style="padding: 0%">
+                <div class="row" style="height: 200px">
+                  <p style="overflow: auto">
+                    <b><u>Text Encoding:</u></b> <br />
+                    <b>Adjacency list: </b> {'55': ['771', '1156'], '771':
+                    ['55', '65', '1080', '1156'], '65': ['771', '1156'], '1080':
+                    ['771', '149', '2344', '61', '697', '738', '2162'], '1156':
+                    ['771', '55', '65'], '149': ['1080', '1416', '1655',
+                    '2025'], '2344': ['1080', '279', '2343', '2475'], '61':
+                    ['1080', '1416', '2312', '1309', '2162'], '697': ['1080',
+                    '30'], '738': ['1080', '1927', '405', '30', '2162'], '2162':
+                    ['1080', '738', '30', '61', '2163'], '405': ['1927', '738'],
+                    '1927': ['405', '738'], '30': ['738', '1416', '697', '2162',
+                    '2343'], '1416': ['30', '61', '149'], '2343': ['30',
+                    '2344'], '2312': ['61'], '1309': ['61'], '1655': ['149'],
+                    '2025': ['149'], '279': ['2344'], '2475': ['2344'], '2163':
+                    ['2162']} <br />
+                    <br />
+                    <b>Node to Label Mapping: </b> Node 771: Label 0| Node 55:
+                    Label 4| Node 65: Label 0| Node 1080: Label 3| Node 1156:
+                    Label 0| Node 1927: Label 0| Node 405: Label 0| Node 738:
+                    Label 0| Node 1416: Label 0| Node 30: Label 3| Node 61:
+                    Label 0| Node 149: Label 0| Node 2312: Label 0| Node 1655:
+                    Label 0| Node 2025: Label 0| Node 279: Label 0| Node 2344:
+                    Label 3| Node 1309: Label 5| Node 697: Label 3| Node 2162:
+                    Label 3| Node 2343: Label 3| Node 2475: Label 3| Node 2163:
+                    Label 3|
+                  </p>
+                </div>
+                <div class="row" style="height: 200px; border-top: solid">
+                  <p style="overflow: auto">
+                    <b><u>Motif Encoding:</u></b> <br />
+                    <b>No of star motifs:</b> 0 <br />
+                    <b>No of triangle motifs:</b> 6 <br /><b
+                      >Triangle motifs attached to ? node:</b
+                    >
+                    [[738, 2162, 1080], [2162, 1080, 61]] <br /><b
+                      >Star motifs connected to ? node:</b
+                    >
+                    [[149, 1416, 2025, 1655, 1080], [2344, 2475, 279, 2343,
+                    1080], [61, 1416, 2312, 2162, 1309, 1080]]
+                  </p>
+                </div>
               </div>
             </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">Ground Truth = 3</p>
+            </footer>
+            <footer class="card-footer">
+              <button onclick="motifFunction(1)" class="card-footer-item">
+                Show all
+              </button>
+            </footer>
           </div>
-          <footer class="card-footer">
-            <p class="card-footer-item">Ground Truth = 3</p>
-          </footer>
         </div>
       </div>
       <div id="Hard" class="content-tab" style="display: none">
-        <div class="card">
-          <div class="row">
-            <div class="col" style="border-right: 0cm">
-              <img
-                src="static\images\graph_images\hard.png"
-                alt="Placeholder image"
-                style="height: 400px; padding-left: 0.5cm"
-              />
-            </div>
-            <div class="col" style="padding: 0%">
-              <div class="row" style="height: 200px">
-                <p style="overflow: auto">
-                  <b><u>Text Encoding:</u></b> <br />
-                  <b>Adjacency list: </b> {'1072': ['773', '1797', '1798',
-                  '1799', '1800', '1801', '1802', '1803', '1804', '1805', '20',
-                  '417', '1070', '189', '236', '244', '306', '342', '945',
-                  '958', '973', '1262', '1358', '1478', '1483', '1505', '1725',
-                  '1733', '1740', '1784'], '773': ['1072', '1505'], '1505':
-                  ['773', '1072', '1801'], '1797': ['1072', '306'], '1798':
-                  ['1072', '306', '958'], '1799': ['1072', '306'], '1800':
-                  ['1072'], '1801': ['1072', '1505'], '1802': ['1072', '306'],
-                  '1803': ['1072'], '1804': ['1072', '306', '1740'], '1805':
-                  ['1072', '306'], '20': ['1072'], '417': ['1072', '306'],
-                  '1070': ['1072', '728', '1358', '1725'], '189': ['1072',
-                  '1262'], '236': ['1072', '306'], '244': ['1072', '1358'],
-                  '306': ['1072', '1797', '1798', '1799', '1802', '1804',
-                  '1805', '417', '236', '958', '973', '1483'], '342': ['1072',
-                  '1512'], '945': ['1072', '1911', '2388', '1512'], '958':
-                  ['1072', '306', '1798'], '973': ['1072', '306'], '1262':
-                  ['1072', '189'], '1358': ['1072', '1740', '1070', '1725',
-                  '1733', '1483', '244'], '1478': ['1072'], '1483': ['1072',
-                  '306', '1358'], '1725': ['1072', '1740', '1070', '1358'],
-                  '1733': ['1072', '1358'], '1740': ['1072', '1804', '1725',
-                  '1358'], '1784': ['1072'], '728': ['1296', '1070', '2388',
-                  '2553'], '1296': ['728', '1911'], '1911': ['1296', '945',
-                  '1368', '2553'], '2388': ['728', '551', '175', '945', '1377',
-                  '1914'], '2553': ['728', '1911', '1368'], '1368': ['1911',
-                  '2553'], '551': ['2388'], '175': ['2388', '1914'], '1377':
-                  ['2388'], '1914': ['2388', '175'], '1512': ['342', '945',
-                  '2145', '2023'], '2145': ['1512'], '2023': ['1512']} <br />
-                  <br />
-                  <b>Node to Label Mapping: </b> Node 773: Label 1| Node 1072:
-                  Label 2| Node 1505: Label 1| Node 1797: Label 1| Node 306:
-                  Label 1| Node 1798: Label 1| Node 958: Label 1| Node 1799:
-                  Label 3| Node 1800: Label 1| Node 1801: Label 0| Node 1802:
-                  Label 3| Node 1803: Label 0| Node 1804: Label 2| Node 1740:
-                  Label 2| Node 1805: Label 1| Node 1296: Label 0| Node 728:
-                  Label 5| Node 1911: Label 5| Node 20: Label 5| Node 417: Label
-                  3| Node 551: Label 6| Node 2388: Label 5| Node 1070: Label 2|
-                  Node 1358: Label 2| Node 1725: Label 2| Node 175: Label 6|
-                  Node 1914: Label 6| Node 189: Label 2| Node 236: Label 1| Node
-                  244: Label 2| Node 342: Label 1| Node 945: Label 1| Node 973:
-                  Label 5| Node 1262: Label 2| Node 1478: Label 5| Node 1483:
-                  Label 2| Node 1733: Label 2| Node 1784: Label 1| Node 1512:
-                  Label 5| Node 1377: Label 5| Node 1368: Label 5| Node 2553:
-                  Label 5| Node 2145: Label 1| Node 2023: Label 5|
-                </p>
+        <div id="output2">
+          <div class="card">
+            <div class="row">
+              <div class="col" style="border-right: 0cm">
+                <img
+                  src="static\images\graph_images\hard.png"
+                  alt="Placeholder image"
+                  style="height: 400px; padding-left: 0.5cm"
+                />
               </div>
-              <div class="row" style="height: 200px; border-top: solid">
-                <p style="overflow: auto">
-                  <b><u>Motif Encoding:</u></b> <br />
-                  <b>No of star motifs:</b> 0 <br />
-                  <b>No of triangle motifs:</b> 29 <br /><b
-                    >Triangle motifs attached to ? node:</b
-                  >
-                  [] <br /><b>Star motifs connected to ? node:</b>
-                  [[945, 1072, 1512, 1911, 2388], [1512, 2145, 342, 2023, 945]]
-                </p>
+              <div class="col" style="padding: 0%">
+                <div class="row" style="height: 200px">
+                  <p style="overflow: auto">
+                    <b><u>Text Encoding:</u></b> <br />
+                    <b>Adjacency list: </b> {'1072': ['773', '1797', '1798',
+                    '1799', '1800', '1801', '1802', '1803', '1804', '1805',
+                    '20', '417', '1070', '189', '236', '244', '306', '342',
+                    '945', '958', '973', '1262', '1358', '1478', '1483', '1505',
+                    '1725', '1733', '1740', '1784'], '773': ['1072', '1505'],
+                    '1505': ['773', '1072', '1801'], '1797': ['1072', '306'],
+                    '1798': ['1072', '306', '958'], '1799': ['1072', '306'],
+                    '1800': ['1072'], '1801': ['1072', '1505'], '1802': ['1072',
+                    '306'], '1803': ['1072'], '1804': ['1072', '306', '1740'],
+                    '1805': ['1072', '306'], '20': ['1072'], '417': ['1072',
+                    '306'], '1070': ['1072', '728', '1358', '1725'], '189':
+                    ['1072', '1262'], '236': ['1072', '306'], '244': ['1072',
+                    '1358'], '306': ['1072', '1797', '1798', '1799', '1802',
+                    '1804', '1805', '417', '236', '958', '973', '1483'], '342':
+                    ['1072', '1512'], '945': ['1072', '1911', '2388', '1512'],
+                    '958': ['1072', '306', '1798'], '973': ['1072', '306'],
+                    '1262': ['1072', '189'], '1358': ['1072', '1740', '1070',
+                    '1725', '1733', '1483', '244'], '1478': ['1072'], '1483':
+                    ['1072', '306', '1358'], '1725': ['1072', '1740', '1070',
+                    '1358'], '1733': ['1072', '1358'], '1740': ['1072', '1804',
+                    '1725', '1358'], '1784': ['1072'], '728': ['1296', '1070',
+                    '2388', '2553'], '1296': ['728', '1911'], '1911': ['1296',
+                    '945', '1368', '2553'], '2388': ['728', '551', '175', '945',
+                    '1377', '1914'], '2553': ['728', '1911', '1368'], '1368':
+                    ['1911', '2553'], '551': ['2388'], '175': ['2388', '1914'],
+                    '1377': ['2388'], '1914': ['2388', '175'], '1512': ['342',
+                    '945', '2145', '2023'], '2145': ['1512'], '2023': ['1512']}
+                    <br />
+                    <br />
+                    <b>Node to Label Mapping: </b> Node 773: Label 1| Node 1072:
+                    Label 2| Node 1505: Label 1| Node 1797: Label 1| Node 306:
+                    Label 1| Node 1798: Label 1| Node 958: Label 1| Node 1799:
+                    Label 3| Node 1800: Label 1| Node 1801: Label 0| Node 1802:
+                    Label 3| Node 1803: Label 0| Node 1804: Label 2| Node 1740:
+                    Label 2| Node 1805: Label 1| Node 1296: Label 0| Node 728:
+                    Label 5| Node 1911: Label 5| Node 20: Label 5| Node 417:
+                    Label 3| Node 551: Label 6| Node 2388: Label 5| Node 1070:
+                    Label 2| Node 1358: Label 2| Node 1725: Label 2| Node 175:
+                    Label 6| Node 1914: Label 6| Node 189: Label 2| Node 236:
+                    Label 1| Node 244: Label 2| Node 342: Label 1| Node 945:
+                    Label 1| Node 973: Label 5| Node 1262: Label 2| Node 1478:
+                    Label 5| Node 1483: Label 2| Node 1733: Label 2| Node 1784:
+                    Label 1| Node 1512: Label 5| Node 1377: Label 5| Node 1368:
+                    Label 5| Node 2553: Label 5| Node 2145: Label 1| Node 2023:
+                    Label 5|
+                  </p>
+                </div>
+                <div class="row" style="height: 200px; border-top: solid">
+                  <p style="overflow: auto">
+                    <b><u>Motif Encoding:</u></b> <br />
+                    <b>No of star motifs:</b> 0 <br />
+                    <b>No of triangle motifs:</b> 29 <br /><b
+                      >Triangle motifs attached to ? node:</b
+                    >
+                    [] <br /><b>Star motifs connected to ? node:</b>
+                    [[945, 1072, 1512, 1911, 2388], [1512, 2145, 342, 2023,
+                    945]]
+                  </p>
+                </div>
               </div>
             </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">Ground Truth = 1</p>
+            </footer>
+            <footer class="card-footer">
+              <button onclick="motifFunction(2)" class="card-footer-item">
+                Show all
+              </button>
+            </footer>
           </div>
-          <footer class="card-footer">
-            <p class="card-footer-item">Ground Truth = 1</p>
-          </footer>
         </div>
       </div>
     </div>
 
     <!-- End Table showing Motifs -->
 
-    <section class="section hero is-small">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column is-full">
-            <div class="content">
-              <h2 class="title is-3">
-                Methods to stress test LLM Generated Data
-              </h2>
-              <div class="level-set has-text-justified">
-                <p>
-                  Blablabla, Blablablablablablabla blablablabla
-                  blablablablablabla blabla.<br />
-
-                  Blabla, Blablablabla, blablabla blablablabla.
-                </p>
-              </div>
-              <img
-                src="static\images\stress_testing_methods.jpg"
-                alt="Testing methods"
-                class="center-image"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section hero is-small">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column is-full">
-            <div class="content">
-              <h2 class="title is-3">First and Second Order Impact</h2>
-              <div class="level-set has-text-justified">
-                <p>
-                  Blablabla, Blablablablablablabla blablablabla
-                  blablablablablabla blabla.<br />
-
-                  Blabla, Blablablabla, blablabla blablablabla.
-                </p>
-              </div>
-              <img
-                src="static\images\order_effect.jpg"
-                alt="Testing methods"
-                class="center-image"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Image carousel -->
     <section class="section hero is-light">
       <div class="container is-max-desktop">
         <div class="hero-body">
-          <h2 class="title is-3">
-            Artifacts in Different Kinds of Generated Data
-          </h2>
+          <h2 class="title is-3">Key Results and Findings</h2>
           <div class="level-set has-text-justified">
-            <p>
-              Blablabla, Blablablablablablabla blablablabla blablablablablabla
-              blabla.<br />
-
-              Blabla, Blablablabla, blablabla blablablabla.
-            </p>
+            <p>Scroll to see Graphics of Our Key Results and Findings</p>
           </div>
           <div id="results-carousel" class="carousel results-carousel">
-            <div class="item blend-img-item">
+            <div class="item blend-img-item center-item-carousel">
               <!-- Your image here -->
               <img
                 class="center-image-carousel blend-img-background"
-                src="static/images/free-text.png"
+                src="static/images/results/metric_modality.png"
+                alt="free-text"
+                style="height: 5cm"
+              />
+              <h2 class="subtitle has-text-centered">
+                <strong>Comparing Modality Type on Mean Metrics</strong>
+              </h2>
+            </div>
+            <div class="item blend-img-item center-item-carousel">
+              <!-- Your image here -->
+              <img
+                class="center-image-carousel blend-img-background"
+                src="static/images/results/combo_task_heirarchy.png"
                 alt="free-text"
               />
               <h2 class="subtitle has-text-centered">
-                <strong>Free Text</strong> Blablablablablablabla blablablabla
-                blablablablablabla blabla.
+                <strong
+                  >Modality Encoder Trends based on graph task
+                  difficulty</strong
+                >
               </h2>
             </div>
             <div class="item blend-img-item center-item-carousel">
               <!-- Your image here -->
               <img
                 class="center-image-carousel blend-img-background"
-                src="static/images/labels.png"
-                alt="labels"
+                src="static/images/results/edge_rep.png"
+                alt="free-text"
               />
-              <h2 class="subtitle has-text-centered blend-img-background">
-                <strong>Labels</strong> Blablablablablablabla blablablabla
-                blablablablablabla blabla.
+              <h2 class="subtitle has-text-centered">
+                <strong>Comparing Edge Respresentations on Mean Metrics</strong>
               </h2>
             </div>
-
             <div class="item blend-img-item center-item-carousel">
               <!-- Your image here -->
               <img
                 class="center-image-carousel blend-img-background"
-                src="static/images/instructions.png"
-                alt="instructions"
+                src="static/images/results/compare_datasets.png"
+                alt="free-text"
               />
-              <h2 class="subtitle has-text-centered blend-img-background">
-                <strong>Instructions</strong> Blablablablablablabla blablablabla
-                blablablablablabla blabla.
+              <h2 class="subtitle has-text-centered">
+                <strong
+                  >Comparing Mean Metrics on each dataset. Green is accuracy,
+                  Blue is Mismatch, Red is Denial and Pink is token limit
+                  Fraction</strong
+                >
               </h2>
             </div>
-
             <div class="item blend-img-item center-item-carousel">
               <!-- Your image here -->
               <img
                 class="center-image-carousel blend-img-background"
-                src="static/images/preferences.png"
-                alt="preferences"
+                src="static/images/results/modality.png"
+                alt="free-text"
               />
-              <h2 class="subtitle has-text-centered blend-img-background">
-                <strong>Preferences</strong> Blablablablablablabla blablablabla
-                blablablablablabla blabla.
+              <h2 class="subtitle has-text-centered">
+                <strong
+                  >Comparing Motif Respresentations on Mean Metrics</strong
+                >
               </h2>
             </div>
-
-            <div class="item blend-img-item center-item-carousel">
+            <div class="item blend-img-itemcenter-item-carousel">
               <!-- Your image here -->
               <img
                 class="center-image-carousel blend-img-background"
-                src="static/images/simulation.png"
-                alt="simulation"
+                src="static/images/results/image_settings_squares.png"
+                alt="free-text"
               />
-              <h2 class="subtitle has-text-centered blend-img-background">
-                <strong>Simulation</strong> Blablablablablablabla blablablabla
-                blablablablablabla blabla.
+              <h2 class="subtitle has-text-centered">
+                <strong
+                  >Comparing Image Respresentations on Mean Metrics</strong
+                >
               </h2>
             </div>
           </div>
@@ -539,7 +514,7 @@
     <!-- End image carousel -->
 
     <!-- Paper poster -->
-    <section class="hero is-small is-light">
+    <!-- <section class="hero is-small is-light">
       <div class="hero-body">
         <div class="container">
           <h2 class="title">Poster</h2>
@@ -548,17 +523,8 @@
           </iframe>
         </div>
       </div>
-    </section>
+    </section> -->
     <!--End paper poster -->
-
-    <!--BibTex citation -->
-    <section class="section" id="BibTeX">
-      <div class="container is-max-desktop content">
-        <h2 class="title">BibTeX</h2>
-        <pre><code>BibTex Code Here</code></pre>
-      </div>
-    </section>
-    <!--End BibTex citation -->
 
     <footer class="footer">
       <div class="container">
