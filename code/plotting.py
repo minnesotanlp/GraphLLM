@@ -71,9 +71,15 @@ def plot_graph_structure_community_colored(graph, y_labels_graph, node_with_ques
     plt.savefig(f'{result_location}/{index}.png')
     plt.close()
 
-def plot_graphviz_graph(graph, y_labels_graph, node_with_question_mark, index, title, result_location, node_neighbors, ego_flag):
+def plot_graphviz_graph(graph, y_labels_graph, node_with_question_mark, index, title, result_location, node_neighbors, ego_flag, choice=6):
     # Define a set of colors for nodes
-    colors_list = ['blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'grey',
+    
+    colors_list = ['blue', 'darkgreen', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'grey',
+                   'lime', 'navy', 'gold', 'maroon', 'turquoise', 'olive', 'indigo', 'lightcoral',
+                   'darkgreen', 'chocolate', 'magenta', 'lightseagreen', 'black']
+    
+    if choice >= 5:
+        colors_list = ['blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan', 'grey',
                    'lime', 'navy', 'gold', 'maroon', 'turquoise', 'olive', 'indigo', 'lightcoral',
                    'darkgreen', 'chocolate', 'magenta', 'lightseagreen', 'black']
     
@@ -89,7 +95,10 @@ def plot_graphviz_graph(graph, y_labels_graph, node_with_question_mark, index, t
     graph.graph_attr['esep'] = '+1'
 
     for node in graph.nodes():
-        node.attr["fontsize"] = "25pt"
+        if choice >= 3:
+            node.attr["fontsize"] = "25pt"
+        else:
+            node.attr["fontsize"] = "15pt"
         node.attr["style"] = "filled"
         if ego_flag:
             label = '?' if str(node) == node_with_question_mark else y_labels_graph[node_with_question_mark][str(node)]
@@ -103,21 +112,28 @@ def plot_graphviz_graph(graph, y_labels_graph, node_with_question_mark, index, t
                 color_mapping[label] = colors_list[current_color_index]
                 current_color_index += 1  # Move to the next color for a new label
             node.attr["color"] = color_mapping[label]
-            if color_mapping[label] in dark_colors:
-                node.attr["fontcolor"] = 'white'
+            if choice >= 4:
+                if color_mapping[label] in dark_colors:
+                    node.attr["fontcolor"] = 'white'
 
     # Set Labels in GraphViz
     for node in graph.nodes():
+        node.attr['penwidth'] = 2
         if str(node) == node_with_question_mark:
             node.attr["label"] = '?'
-            node.attr['fontsize'] = '35pt'
+            # node.attr['shape'] = 'square' 
+            if choice >= 6:
+                node.attr['fontsize'] = '35pt'
         else:
             node.attr["label"] = y_labels_graph[node_with_question_mark][str(node)] if ego_flag else y_labels_graph[str(node)]
+        if choice >= 6:
+            if str(node) in node_neighbors:
+                # node.attr['shape'] = 'square' 
+                node.attr['fontsize'] = '35pt'
+    for edge in graph.edges():
+        edge.attr['penwidth'] = 2
 
-        if str(node) in node_neighbors:
-            node.attr['fontsize'] = '35pt'
-
-    graph.draw(f'{result_location}/{index}_new.png', prog="neato")
+    graph.draw(f'{result_location}/{index}_modality.png', prog="neato")
 
 
 # think this does the same as the above function

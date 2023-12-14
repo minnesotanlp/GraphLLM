@@ -9,9 +9,10 @@ import csv
 import os
 from torch_geometric.utils import to_networkx
 from utils import load_dataset, save_response, create_log_dir
-from prompt_generation import get_image_completion_json
+from prompt_generation import get_image_completion_json, get_completion_json
 from response_parser import parse_response
 from metrics import is_failure,is_accurate, get_token_limit_fraction
+from plotting import plot_graphviz_graph
 from graph_assays import count_star_graphs, count_triangles_nx, find_3_cliques_connected_to_node, get_star_motifs_connected_to_node, get_count_and_cliques_of_node, find_cliques_connected_node
 
 # Function to encode the image
@@ -23,7 +24,10 @@ def process_text(prompt, base64_image, detail, ground_truth, node_with_question_
     error_count = 0
     while(error_count <= 3):
         try:
-            response_json = get_image_completion_json(prompt, model, base64_image, detail=detail)
+            if (base64_image != None):
+                response_json = get_image_completion_json(prompt, model, base64_image, detail=detail)
+            else:
+                response_json = get_completion_json(prompt, model)
             save_response(response_json, log_dir, log_sub_dir)
             usage = int(response_json.usage.total_tokens)
             response = response_json.choices[0].message["content"]
@@ -152,45 +156,6 @@ def get_node_label_question(graph, y_labels, node_with_question_mark):
         text+=f"Node {node}: Label {node_label_dict[node]}| "
     return text
 
-def generate_assays(G, node_with_question_mark, choice):
-    assay_dictionary = dict()
-    assay_text=f"Graph motif information: "
-    if choice == 1:
-        assay_dictionary['Number of star motifs'] = count_star_graphs(G)
-    elif choice == 2:
-        assay_dictionary['Number of triangle motifs'] = count_triangles_nx(G)
-    elif choice == 3:
-        assay_dictionary['Triangle motifs attached to ? node'] = find_3_cliques_connected_to_node(G, node_with_question_mark)
-    elif choice == 4:
-        assay_dictionary['Star motifs connected to ? node'] = get_star_motifs_connected_to_node(G, node_with_question_mark)
-    elif choice == 5:
-        assay_dictionary['Number of star motifs'] = count_star_graphs(G)
-        assay_dictionary['Number of triangle motifs'] = count_triangles_nx(G)
-    elif choice == 6:
-        assay_dictionary['Triangle motifs attached to ? node'] = find_3_cliques_connected_to_node(G, node_with_question_mark)
-        assay_dictionary['Star motifs connected to ? node'] = get_star_motifs_connected_to_node(G, node_with_question_mark)
-    elif choice == 7:
-        count, relevant_cliques = get_count_and_cliques_of_node(G, node_with_question_mark)
-        assay_dictionary['Number of cliques in graph'] = count
-        assay_dictionary['? Node is a part of these cliques'] = relevant_cliques
-
-    elif choice == 8:
-        assay_dictionary['? Node is attached to these cliques'] = find_cliques_connected_node(G, node_with_question_mark)
-    else:
-        assay_dictionary['Number of star motifs'] = count_star_graphs(G)
-        assay_dictionary['Number of triangle motifs'] = count_triangles_nx(G)
-        assay_dictionary['Triangle motifs attached to ? node'] = find_3_cliques_connected_to_node(G, node_with_question_mark)
-        assay_dictionary['Star motifs connected to ? node'] = get_star_motifs_connected_to_node(G, node_with_question_mark)
-        count, relevant_cliques = get_count_and_cliques_of_node(G, node_with_question_mark)
-        assay_dictionary['Number of cliques in graph'] = count
-        assay_dictionary['? Node is a part of these cliques'] = relevant_cliques
-        assay_dictionary['? Node is attached to these cliques'] = find_cliques_connected_node(G, node_with_question_mark)
-
-    for key in assay_dictionary:
-        assay_text+=f"{key}: {assay_dictionary[key]}| "
-    
-    return assay_text
-
 def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause, detail, choice):
     avg_accuracy_values = []
     avg_failure_values = []
@@ -215,28 +180,34 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
             for graph in ground_truth_info:
                 graph_id = graph['graph_id']
                 ground_truth = graph['label']
-                node_with_question_mark = str(graph['ques_node_id'])
+                node_with_question_mark = str(graph['ques_node_id'])  
                 # Constructing the filename based on the graph_id
                 edgelist_name = f"{graph_info_location}/{graph_id}_edgelist.txt"
                 ylabelsjson_name = f"{graph_info_location}/{graph_id}_ylabels.json"
                 G = load_edgelist(edgelist_name)
+                node_neighbors = list(G.adj[node_with_question_mark].keys())
+                G = nx.nx_agraph.to_agraph(G)
                 y_labels = load_graph_node_json(ylabelsjson_name)
                 connectivity_information = get_node_label_question(G, y_labels, node_with_question_mark)
                 if choice == 0:
-                    assay_info = ""
                     prompt = f"""Task : Node Label Prediction (Predict the label of the node marked with a ?, given the node-label mapping in the text enclosed in triple backticks). 
                     Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1"."""
                 else:
-                    prompt = f"""Task : Node Label Prediction (Predict the label of the node marked with a ?), given the node label mapping and graph motif information enclosed in triple backticks ```. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1"."""
-                    assay_info = generate_assays(G, node_with_question_mark, choice)
+                    prompt = f"""Task : Node Label Prediction (Predict the label of the node marked with a ?), given the node label mapping and graph image provided. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1"."""
+                    plot_graphviz_graph(G, y_labels, node_with_question_mark, graph_id, f'{setting}_graphsize_{no_of_samples}', graph_info_location, node_neighbors, ego_flag=False, choice=choice)
                 
                 image_path = f"{graph_info_location}/{graph_id}.png"
-                base64_image = encode_image(image_path)
-                
-                connectivity_information+="\n"+ assay_info
+                if choice == 0:
+                    base64_image = None
+                else:
+                    base64_image = encode_image(image_path)
+
                 text_for_prompt = prompt + f"```{connectivity_information}```"
 
                 #prompt the LLM for prediction
+                if (choice == 1):
+                    detail = 'low'
+
                 error_count, acc, fail, prompt, response, parsed_response, token_limit_fraction = process_text(text_for_prompt, base64_image, detail, ground_truth, node_with_question_mark, log_dir, log_sub_dir, model, rate_limit_pause)
                 csvwriter.writerow([setting, run, graph_id, node_with_question_mark, ground_truth, prompt, response, parsed_response, token_limit_fraction])
                 #check if the parsed prediction is correct compared to ground truth
@@ -259,7 +230,8 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
 
                     
             
-openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
+# openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
+openai.api_key = "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"
 
 with open('./config_imagemotif_encoder.json', 'r') as config_file:
     config = json.load(config_file)
@@ -278,23 +250,20 @@ input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'
 def main():
 
     print("Please choose the motif you want to test:")
-    print("0. Node label mapping only")
-    print("1. Count of star motifs")
-    print("2. Count of triangle motifs")
-    print("3. Triangle motifs attached")
-    print("4. Star motifs attached")
-    print("5. Triangle and star count")
-    print("6. Triangle and star attached")
-    print("7. When node is part of clique" )
-    print("8. When node is attached to clique")
-    print("9. All assays")
+    print("0. No image")
+    print("1. Resolution Low")
+    print("2. Resolution High")
+    print("3. Node Size Increase")
+    print("4. Constrasting Text Color")
+    print("5. Distinctive Node Color")
+    print("6. All Modalities")
 
-    choice = int(input("Enter your choice (1-5): "))
-    if choice>9:
+    choice = int(input("Enter your choice (1-6): "))
+    if choice>6:
         print("Invalid choice. Please try again.")
         main()
 
-    with open(f"{input_location}/motif_enc_rep_choice_{choice}_across_runs_metrics.csv", mode='w') as metrics_file:
+    with open(f"{input_location}/image_enc_rep_choice_{choice}_across_runs_metrics.csv", mode='w') as metrics_file:
             csvwriterf = csv.writer(metrics_file)
             csvwriterf.writerow(['setting', 'mean_accuracy', 'std_accuracy', 'mean_inaccuracy', 'std_inaccuracy', 'mean_failure', 'std_failure', 'mean_token_limit_fraction', 'std_token_limit_fraction'])
             for setting in settings:
