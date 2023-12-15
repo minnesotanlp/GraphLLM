@@ -42,7 +42,7 @@ def get_prompt(text):
 
  
 #-- params -- 
-openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+openai.api_key = os.environ["OPENAI_KEY"]
 data_dir = './data'
 dataset_name = 'pubmed'
 use_edge = False

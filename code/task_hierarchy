@@ -117,7 +117,7 @@ def process_graphs(folder_path, output_file, breakpoint):
     write_assignments(assignments, output_file)
 
 # Usage
-cora_path = 'results/cora/ishaan_plots/new_graph_images/sample_size_50/run_0/ego'
+cora_path = 'results/cora/graph_images/sample_size_50/run_0/ego'
 folder_path = cora_path
 
 #label_counts = read_graph_data(folder_path)

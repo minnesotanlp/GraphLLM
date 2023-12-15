@@ -14,7 +14,7 @@ from graph_sample_generation import generate_egograph_sample, generate_forestfir
 # ---- PARAMS --- #
 #-------------------------------------------------------------
 #random.seed(10)
-openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+openai.api_key = os.environ["OPENAI_KEY"]
 # Load configuration from the JSON file
 with open('code/config1.json', 'r') as config_file:
     config = json.load(config_file)

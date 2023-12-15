@@ -251,7 +251,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
 
                     
             
-openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
+openai.api_key = os.environ["OPENAI_KEY"] # organization api key
 
 with open('code/config_textmotif_encoder.json', 'r') as config_file:
     config = json.load(config_file)

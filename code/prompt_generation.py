@@ -228,8 +228,6 @@ def generate_textprompt_anygraph(graph, center_node, y_labels_dict, node_with_qu
     return text
 
 
-
-#Ishaan - modified this function to generate prompt for any graph
 def generate_text_for_prompt(i, nx_ids, graph, y_labels_dict, edge_text_flag, adjacency_flag, dataset_name):
     text = ""
     ground_truth = ""
