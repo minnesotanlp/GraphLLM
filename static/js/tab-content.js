@@ -48,7 +48,7 @@ function motifFunction(diff) {
         triangle = motif[i].match(/Triangle motifs attached to \? node:(.*)$/)[1].split('$')[0];
         star = motif[i].match(/Star motifs connected to \? node:(.*)$/)[1].split('$')[0];
         text_html +=
-            '<div class="card"><div class="row"><div class="col" style="border-right: 0cm"><img src="static\\images\\graph_images\\' + ids[i] + 
+            '<div class="card"><div class="row"><div class="col" style="border-right: 0cm"><img src="static\\images\\graph_images\\ego_graphs\\' + ids[i] + 
             '_new.png" alt="Placeholder image" style="height: 400px; padding-left: 0.5cm"/></div><div class="col" style="padding: 0%"><div class="row" style="height: 200px"><p style="overflow: auto"><b><u>Text Encoding:</u></b> <br /><b>Adjacency list: </b>' +
             text[2 * i] +
             "<br /><br /><b>Node to Label Mapping: </b>" +
