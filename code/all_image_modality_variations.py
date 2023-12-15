@@ -230,8 +230,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
 
                     
             
-# openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
-openai.api_key = "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"
+openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
 
 with open('./config_imagemotif_encoder.json', 'r') as config_file:
     config = json.load(config_file)
