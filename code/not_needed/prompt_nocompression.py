@@ -3,7 +3,7 @@ import numpy as np
 import random 
 from utils import load_dataset, save_response, create_log_dir
 from torch_geometric.utils import to_networkx
-from prompt_generation import get_completion_json, get_prompt, generate_textprompt_anygraph
+from prompt_generation import generate_textprompt_anygraph, get_completion_json, get_prompt
 from connection_information import get_y_labels_graph
 from metrics import is_failure,is_accurate
 from response_parser import parse_response
@@ -12,11 +12,10 @@ import csv
 import os
 import json
 
-
 # ---- PARAMS --- #
 #-------------------------------------------------------------
 random.seed(10)
-openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+openai.api_key = os.environ["OPENAI_KEY"]
 # Load configuration from the JSON file
 with open('code/config1.json', 'r') as config_file:
     config = json.load(config_file)
@@ -33,7 +32,6 @@ rate_limit_pause = config["rate_limit_pause"]
 data_dir = config["data_dir"]
 log_dir = config["log_dir"]
 result_location = config["result_location"]
-neighborhood_sampling_flag = config["neighborhood_sampling"]
 #-------------------------------------------------------------
 
 log_sub_dir = create_log_dir(log_dir)
@@ -49,24 +47,22 @@ X = to_networkx(data, to_undirected=True)
 
 avg_failure_values = []
 avg_accuracy_values = []
-avg_inaccuracy_values = []
 
 node_list = list(X.nodes())
 # Perform the experiment for N runs keeping hops and no of sampled ego graphs constant
 for run in range(0,no_of_runs):
     edges_list = []
-    res_filename = os.path.join(result_location,f'{dataset_name}_{no_of_hops}hops_{run}run_{num_samples}samples.csv')
+    res_filename = result_location + f'{dataset_name}_{no_of_hops}hops_{run}run_{num_samples}samples.csv'
     
     with open(res_filename, 'w', newline='') as f1:
         res_csv_writer = csv.writer(f1)        
         res_csv_writer.writerow(['GroundTruth', 'Parsed Value', 'Prompt', 'Response'])
-        #f1.flush() 
+        f1.flush() 
 
         error_count = 0
         token_err_count = 0
         accurate_labels = 0
         failure_labels = 0
-        inaccurate_labels = 0
 
         for _ in range(num_samples):
 
@@ -78,28 +74,10 @@ for run in range(0,no_of_runs):
                 if ego_graph.number_of_edges() < 100:
                     break  # Exit the loop if the ego graph has fewer than 100 edges
             
-          
-            #get labels for the subgraph 
-            y_labels_egograph = get_y_labels_graph(data, ego_graph, True, ego_node)
+            # Compute metrics on the ego graph
 
-            # first subgraph is taken out. Let us now randomly assign one node as ? and extract the 2 hop subgraph if needed
-            node_with_question_mark = random.choice(list(ego_graph.nodes()))
-            ground_truth = y_labels_egograph[ego_node][node_with_question_mark]
-            if neighborhood_sampling_flag:
-                print("neighborhood activated!")
-                # use 2 hop subgraph
-                # Randomly choose a node to have a "?" label
-                two_hop_ego_graph = nx.ego_graph(ego_graph, node_with_question_mark, radius=3)
-                prompt_graph = two_hop_ego_graph  
-            else:
-                # use original subgraph here (? node will be the ego node)
-                print("OG subgraph used")            
-                prompt_graph = ego_graph
-                
-                
-                
-                
-            text = generate_textprompt_anygraph(prompt_graph, ego_node, y_labels_egograph, node_with_question_mark, use_edge,  USE_ADJACENCY)
+            y_labels_egograph = get_y_labels_graph(data, ego_graph, True, ego_node)
+            text, node_with_question_mark, ground_truth = generate_textprompt_anygraph(ego_graph, ego_node, y_labels_egograph, ego_node, use_edge, USE_ADJACENCY, True)
             error = ""
             prompt = get_prompt(text, compression)
             
@@ -161,22 +139,18 @@ for run in range(0,no_of_runs):
         if accuracy == 1.0 :
             failure = 0
         else :
-            failure = failure_labels/(num_samples)
-            #failure = failure_labels/(num_samples-accurate_labels)
+            failure = failure_labels/(num_samples-accurate_labels)
 
         avg_failure_values.append(failure)
         avg_accuracy_values.append(accuracy)
-        avg_inaccuracy_values.append(1-accuracy)
 
 
 print("Accuracy", avg_accuracy_values)
 print("Failure", avg_failure_values)
-print("Inaccuracy", avg_inaccuracy_values)
 
 
 print("Average accuracy across runs:", np.mean(avg_accuracy_values)," Standard deviation of accuracy:", np.std(avg_accuracy_values))
 print("Average failure across runs:", np.mean(avg_failure_values)," Standard deviation of failure:", np.std(avg_failure_values))
-print("Average inaccuracy across runs:", np.mean(avg_inaccuracy_values)," Standard deviation of inaccuracy:", np.std(avg_inaccuracy_values))
 
 
                     

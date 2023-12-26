@@ -28,7 +28,7 @@ from prompt_generation import get_completion,generate_text_for_prompt,generate_t
 if __name__== '__main__':  
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     random.seed(10)
-    openai.api_key = os.environ["OPENAI_API_UMNKEY"]
+    openai.api_key = os.environ["OPENAI_KEY"]
 
     # ---- PARAMS --- #
     # Load configuration from the JSON file

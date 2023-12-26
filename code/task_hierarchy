@@ -83,8 +83,10 @@ def read_graph_data_homophily(folder_path, breakpoint):
     return label_counts, assignments
 
 def write_assignments(assignments, output_file):
+    sorted_assignments = dict(sorted(assignments.items(), key=lambda item: int(item[0].split('_')[0])))
+
     with open(output_file, 'w') as file:
-        for graph_id, assignment in assignments.items():
+        for graph_id, assignment in sorted_assignments.items():
             graph_id_no = graph_id.split('_')[0]
             file.write(f"{graph_id_no}, {assignment}\n")
 
@@ -117,18 +119,19 @@ def process_graphs(folder_path, output_file, breakpoint):
     write_assignments(assignments, output_file)
 
 # Usage
-cora_path = 'results/cora/ishaan_plots/new_graph_images/sample_size_50/run_0/ego'
-folder_path = cora_path
+#cora_path = 'results/cora/ishaan_plots/new_graph_images/sample_size_50/run_0/ego'
 
-#label_counts = read_graph_data(folder_path)
-#plot_histogram(label_counts)
-#output_file = 'results/cora/homophily_assignments.txt'
-#process_graphs(folder_path, output_file, breakpoint = 3)
+folder_path = "results/cora/graph_images/sample_size_50/run_0/ego"
+
+label_counts = read_graph_data(folder_path)
+plot_histogram(label_counts)
+output_file = 'results/cora/homophily_assignments.txt'
+process_graphs(folder_path, output_file, breakpoint = 3)
 
 output_file_motif = 'results/cora/motif_assignments.txt'
 
 
-#process_motifs_and_plot_histogram(folder_path)
+process_motifs_and_plot_histogram(folder_path)
 process_folder_and_assignments(folder_path, output_file_motif, breakpoint = 10)
 
 

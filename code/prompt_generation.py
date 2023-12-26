@@ -57,6 +57,56 @@ def get_completion_json(prompt, model):
     return response
 
 
+def get_image_completion_few_shot_json(text_prompt, model, example1_base64_image, example2_base64_image, example3_base64_image, base64_image, detail = "high"):
+    response = openai.ChatCompletion.create(
+        model = "gpt-4-vision-preview",
+        messages = [
+            {
+                "role": "user",
+                "content": [
+                {
+                    "type": "text",
+                    "text": text_prompt
+
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                    "url": f"data:image/jpeg;base64,{example1_base64_image}",
+                    "detail" : detail
+                    }
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                    "url": f"data:image/jpeg;base64,{example2_base64_image}",
+                    "detail" : detail
+                    }
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                    "url": f"data:image/jpeg;base64,{example3_base64_image}",
+                    "detail" : detail
+                    }
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                    "url": f"data:image/jpeg;base64,{base64_image}",
+                    "detail" : detail
+                    }
+                }
+                ]
+            }
+            ],
+            max_tokens = 300,
+    )
+
+    return response
+
+
+
 def get_image_completion_json(text_prompt, model, base64_image, detail = "high"):
     response = openai.ChatCompletion.create(
         model = "gpt-4-vision-preview",
@@ -111,11 +161,15 @@ def get_prompt_assays(connectivity_information, assay_information, flag = True, 
     return prompt
 
 def get_prompt_network_only(connectivity_information, flag = 1):
-    if flag == 2:
+    if flag == 2: # node label + graph motif information
         prompt = f"""Task : Node Label Prediction (Predict the label of the node marked with a ?), given the node label mapping and graph motif information enclosed in triple backticks ```. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1".  
            ```{connectivity_information}```
            """
-    else : #network only
+    elif flag ==3  :# adjacency + node label + graph motif information
+        prompt = f"""Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type "node:node neighborhood", node-label mapping and graph motif information in the text enclosed in triple backticks). Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1". 
+        ```{connectivity_information}```
+        """
+    else: # adjacency + node label 
         prompt = f"""Task : Node Label Prediction (Predict the label of the node marked with a ?, given the adjacency list information as a dictionary of type "node:node neighborhood" and node-label mapping in the text enclosed in triple backticks). Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1". 
         ```{connectivity_information}```
         """
@@ -160,7 +214,91 @@ def generate_textprompt_anygraph_labelmaps(graph, center_node, y_labels_dict, no
     for node in node_label_dict:
         text+=f"Node {node}: Label {node_label_dict[node]}| "
     return text
-    
+
+#text+motif encoder   
+def generate_textandmotif_encoder(graph, y_labels, assay_info, node_with_question_mark):
+    text = ""
+    edge_list = generate_edgelist(graph)
+    adjacency_list = edge_list_to_adjacency_list(edge_list)
+    text+="Adjacency list: "+str(adjacency_list)+"\n"
+    node_label_dict= {} # node: label
+    for node in graph.nodes():
+        if node == node_with_question_mark:
+            label = "?"
+        else:
+            label = y_labels[node]  # Extract node label
+        node_label_dict[node]=label
+    text+=f"Node to Label Mapping : "+"\n"
+    for node in node_label_dict:
+        text+=f"Node {node}: Label {node_label_dict[node]}| "
+
+    text+=f"Graph motif information: "
+    for key in assay_info:
+            text+=f"{key}: {assay_info[key]}| "
+    return text
+
+def generate_all_modality_encoder(graph, y_labels, assay_info, node_with_question_mark):
+    text = f'Your task is Node Label Prediction (Predict the label of the red node marked with a ?, given the graph structure information in the image, as well as the adjacency list information (dictionary of type "node:node neighborhood"), node-label mapping and graph motif information in the text enclosed in triple backticks. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1'+'\n'
+    text += f'```'
+    edge_list = generate_edgelist(graph)
+    adjacency_list = edge_list_to_adjacency_list(edge_list)
+    text+="Adjacency list: "+str(adjacency_list)+"\n"
+
+    node_label_dict= {} # node: label
+    for node in graph.nodes():
+        if node == node_with_question_mark:
+            label = "?"
+        else:
+            label = y_labels[node]  # Extract node label
+        node_label_dict[node]=label
+    text+=f"Node to Label Mapping : "+"\n"
+    for node in node_label_dict:
+        text+=f"Node {node}: Label {node_label_dict[node]}| "
+    text+=f"Graph motif information: "
+    for key in assay_info:
+        text+=f"{key}: {assay_info[key]}| "
+    text += f'```'
+    return text
+
+
+def generate_motifandimage_encoder(graph, y_labels, assay_info, node_with_question_mark):
+    text = f'Your task is Node Label Prediction (Predict the label of the red node marked with a ?, given the graph structure information in the image, as well as the node-label mapping and graph motif information in the text enclosed in triple backticks. Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1'+'\n'
+    text += f'```'
+    node_label_dict= {} # node: label
+    for node in graph.nodes():
+        if node == node_with_question_mark:
+            label = "?"
+        else:
+            label = y_labels[node]  # Extract node label
+        node_label_dict[node]=label
+    text+=f"Node to Label Mapping : "+"\n"
+    for node in node_label_dict:
+        text+=f"Node {node}: Label {node_label_dict[node]}| "
+    text+=f"Graph motif information: "
+    for key in assay_info:
+        text+=f"{key}: {assay_info[key]}| "
+    text += f'```'
+    return text
+
+def generate_textandimage_encoder(graph, y_labels, node_with_question_mark):
+    text =f'Your task is Node Label Prediction (Predict the label of the red node marked with a ?, given the graph structure information in the image, as well as the adjacency list information (dictionary of type "node:node neighborhood") and node-label mapping in the text enclosed in triple backticks.Response should be in the format "Label of Node = <predicted label>". If the predicted label cannot be determined, return "Label of Node = -1'+'\n'
+    text += f'```'
+    edge_list = generate_edgelist(graph)
+    adjacency_list = edge_list_to_adjacency_list(edge_list)
+    text+="Adjacency list: "+str(adjacency_list)+"\n"
+    node_label_dict= {} # node: label
+    for node in graph.nodes():
+        if node == node_with_question_mark:
+            label = "?"
+        else:
+            label = y_labels[node]  # Extract node label
+        node_label_dict[node]=label
+    text+=f"Node to Label Mapping : "+"\n"
+    for node in node_label_dict:
+        text+=f"Node {node}: Label {node_label_dict[node]}| "
+    text += f'```'
+    return text
+
 
 # text encoder which has the adjacency list and the node label mapping
 def generate_text_encoder(graph, y_labels, node_with_question_mark):
@@ -179,7 +317,8 @@ def generate_text_encoder(graph, y_labels, node_with_question_mark):
     for node in node_label_dict:
         text+=f"Node {node}: Label {node_label_dict[node]}| "
     return text
-    
+
+#motif encoder 
 def generate_text_motif_encoder(graph, assay_info, y_labels, node_with_question_mark):
     text = ""
     #edge_list = generate_edgelist(graph)

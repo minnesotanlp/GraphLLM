@@ -188,7 +188,9 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
         token_limit_fractions = []  
         # get the ground truth labels for the graphs in the setting
         ground_truth_filename = f'{setting}_run_{run}_graph_image_values.csv'
-        result_filename = f'{setting}_run_{run}_{setting}_text_rep_choice{choice}_results.csv'
+
+        #result_filename = f'{setting}_run_{run}_{setting}_text_rep_choice{choice}_results.csv'
+        result_filename = f'text_initial.csv'
         ground_truth_info = extract_columns_from_csv_dict(run_location, ground_truth_filename)
         graph_info_location = os.path.join(run_location, f'{setting}')
         with open(f"{run_location}/{result_filename}", mode='w') as result_file:
@@ -254,9 +256,9 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
 
                     
             
-openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
+openai.api_key = os.environ["OPENAI_KEY"] # organization api key
 
-with open('code/config_textencoder.json', 'r') as config_file:
+with open('code/config/config_textencoder.json', 'r') as config_file:
     config = json.load(config_file)
 dataset_name = config["dataset_name"]
 input_location = config["input_location"]
@@ -282,8 +284,8 @@ def main():
     if choice <0 or choice>5:
         print("Invalid choice. Please try again.")
         main()
-
-    with open(f"{input_location}/text_enc_rep_choice_{choice}_across_runs_metrics.csv", mode='w') as metrics_file:
+    #text_enc_rep_choice_{choice}_across_runs_metrics.csv
+    with open(f"{input_location}/text_initial.csv", mode='w') as metrics_file:
             csvwriterf = csv.writer(metrics_file)
             csvwriterf.writerow(['setting', 'mean_accuracy', 'std_accuracy', 'mean_inaccuracy', 'std_inaccuracy', 'mean_failure', 'std_failure', 'mean_token_limit_fraction', 'std_token_limit_fraction'])
             for setting in settings:

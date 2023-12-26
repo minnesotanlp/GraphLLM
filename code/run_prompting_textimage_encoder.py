@@ -118,6 +118,7 @@ def load_graph_node_json(json_file_path):
         print(f"JSON file not found at path: {json_file_path}")
         return None
     
+
     except json.JSONDecodeError:
         print(f"Error decoding JSON file at path: {json_file_path}")
         return None
@@ -135,6 +136,7 @@ def load_edgelist(filename):
     except FileNotFoundError:
         print(f"Graph File not found.")
     
+
     return G
 
 def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, log_sub_dir, model, rate_limit_pause, detail):
@@ -197,7 +199,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
 
                     
             
-openai.api_key = os.environ["OPENAI_API_UMNKEY"] # organization api key
+openai.api_key = os.environ["OPENAI_KEY"] # organization api key
 
 with open('code/config/config_textimage_encoder.json', 'r') as config_file:
     config = json.load(config_file)
