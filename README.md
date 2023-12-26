@@ -5,7 +5,7 @@ This repository provides code of the following paper:
 > [Debarati Das](https://debaratidas94.github.io/), Ishaan Gupta, Jaideep Srivasta, [Dongyeop Kang](https://dykang.github.io/) <br>
 
 <p align="center" >
-    <img src=assets/fig1_updated.pdf width="20%">
+    <img src=assets/main_fig.jpg width="20%">
 </p>
 
 
