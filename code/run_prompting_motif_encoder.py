@@ -156,7 +156,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
         token_limit_fractions = [] 
         # get the ground truth labels for the graphs in the setting
         ground_truth_filename = f'{setting}_run_{run}_graph_image_values.csv'
-        result_filename = f'{setting}_run_{run}_{setting}_text_motif_encoder_results.csv'
+        result_filename = f'{setting}_run_{run}_{setting}_motif_encoder_results.csv'
         ground_truth_info = extract_columns_from_csv_dict(run_location, ground_truth_filename)
         graph_info_location = os.path.join(run_location, f'{setting}')
         with open(f"{run_location}/{result_filename}", mode='w') as result_file:
@@ -200,7 +200,7 @@ openai.api_key = os.environ["OPENAI_API_MYKEY"]
 #openai.api_key = os.environ["OPENAI_ADI_KEY"]
 #print(openai.api_key)
 
-with open('code/config_textmotif_encoder.json', 'r') as config_file:
+with open('code/config/config_motif_encoder.json', 'r') as config_file:
     config = json.load(config_file)
 dataset_name = config["dataset_name"]
 input_location = config["input_location"]
@@ -214,7 +214,7 @@ log_sub_dir = create_log_dir(log_dir)
 input_location += f'{dataset_name}/graph_images/sample_size_{no_of_samples}/'    
 
 def main():
-    with open(f"{input_location}/text_motif_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
+    with open(f"{input_location}/motif_encoder_across_runs_metrics.csv", mode='w') as metrics_file:
             csvwriterf = csv.writer(metrics_file)
             csvwriterf.writerow(['setting', 'mean_accuracy', 'std_accuracy', 'mean_inaccuracy', 'std_inaccuracy', 'mean_failure', 'std_failure', 'mean_token_limit_fraction', 'std_token_limit_fraction'])
             for setting in settings:

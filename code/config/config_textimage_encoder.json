@@ -1,8 +1,8 @@
 {
-    "dataset_name": "cora",
+    "dataset_name": "pubmed",
     "no_of_runs": 2,
     "no_of_samples": 50,
-    "settings": ["ff"],
+    "settings": ["ego","ff"],
     "input_location": "./results/",
     "log_dir": "./logs/",
     "model": "gpt-4-vision-preview",

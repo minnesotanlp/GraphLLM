@@ -118,24 +118,24 @@ def find_cliques_connected_node(graph, node):
         return [] # The node is not attached to any clique
 
 # Example usage
-G = nx.Graph()
-G.add_edges_from([(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4), (3, 5)])
-print(find_cliques_connected_node(G, 5)) 
+#G = nx.Graph()
+#G.add_edges_from([(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4), (3, 5)])
+#print(find_cliques_connected_node(G, 5)) 
 
 # Example usage:
-G = nx.Graph()
-edges1 = [(1, 5), (2, 5), (3, 5), (7, 5), (6, 5), (4, 5)]
-G.add_edges_from(edges1)
-print(find_cliques_connected_node(G, 5))  # Output: 0, []
+#G = nx.Graph()
+#edges1 = [(1, 5), (2, 5), (3, 5), (7, 5), (6, 5), (4, 5)]
+#G.add_edges_from(edges1)
+#print(find_cliques_connected_node(G, 5))  # Output: 0, []
 
-G = nx.Graph()
-edges1 = [(1, 2), (1,4), (1,5),(2,1),(2,4),(2, 3),(2,5), (3,2), (4,1),(4,2),(4, 5), (5,1),(5,2),(5,4)]
-G.add_edges_from(edges1)
-print(find_cliques_connected_node(G, 3))  # Output: 0, []
+#G = nx.Graph()
+#edges1 = [(1, 2), (1,4), (1,5),(2,1),(2,4),(2, 3),(2,5), (3,2), (4,1),(4,2),(4, 5), (5,1),(5,2),(5,4)]
+#G.add_edges_from(edges1)
+#print(find_cliques_connected_node(G, 3))  # Output: 0, []
 
-edges = [(1, 2), (1, 3), (1, 4), (2, 3),(2, 4), (3, 4)]
-G.add_edges_from(edges)
-print(find_cliques_connected_node(G, 3))
+#edges = [(1, 2), (1, 3), (1, 4), (2, 3),(2, 4), (3, 4)]
+#G.add_edges_from(edges)
+#print(find_cliques_connected_node(G, 3))
 #print(get_star_motifs(G, 5))  # Output: [[5, 1, 2, 3, 7, 6, 4]]
 
 #G = nx.Graph()

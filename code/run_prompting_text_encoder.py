@@ -193,7 +193,7 @@ def run_experiment(input_location, no_of_samples, no_of_runs, setting, log_dir, 
             
 openai.api_key = os.environ["OPENAI_KEY"] # organization api key
 
-with open('code/config_textencoder.json', 'r') as config_file:
+with open('code/config/config_textencoder.json', 'r') as config_file:
     config = json.load(config_file)
 dataset_name = config["dataset_name"]
 input_location = config["input_location"]
