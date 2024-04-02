@@ -20,7 +20,7 @@ pip install pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv -
 pip install numpy pandas matplotlib seaborn scipy
 ```
 ## Generating Graph samples and associated information
-1. Sample the appropriate datasets with the graph sampling method, chooses N graphs and writes out the groundtruth, node with question mark, associated edgelist and y labels out. These are used to generate the text and motif modality. 
+1. Sample the appropriate datasets with the graph sampling method, chooses N graphs and writes out the groundtruth, node with question mark, associated edgelist and y labels. These are used to generate the text and motif modality. 
 ```
 code/generate_graph_edgelist_ylabel.py 
 ```
@@ -63,10 +63,16 @@ code/all_text_modality_variations.py
 code/all_motif_modality_variations.py
 code/all_image_modality_variations.py
 ```
-6. Experiments with few shot and few shot + rationale
+
+6. Some additional experiments :
+- Experiments with few-shot and few-shot + rationale
 ```
 code/run_few_shot_prompting.py
 ```
+- Majority voting baseline (predict node based on the majority of immediate neighbor labels)
+```
+code/majority_voting_baseline.py
+```  
 
 
 ## Citation
