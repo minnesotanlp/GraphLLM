@@ -1,6 +1,6 @@
 {
-    "dataset_name": "citeseer",
-    "no_of_runs": 2,
+    "dataset_name": "pubmed",
+    "no_of_runs": 3,
     "no_of_samples": 50,
     "settings": ["ego","ff"],
     "input_location": "./results/",
