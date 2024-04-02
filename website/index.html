@@ -68,12 +68,50 @@
               </h1>
               <div class="is-size-5 publication-authors">
                 <!-- Paper authors -->
-                <span class="author-block"> Debarati Das,</span>
-                <span class="author-block"> Ishaan Gupta</span>
+                <span class="author-block">
+                  <a href="https://debaratidas94.github.io" target="_blank"
+                    >Debarati Das</a
+                  ><sup>*†</sup>,</span
+                >
+                <span class="author-block">
+                  <a
+                    href="https://ishaang-1.github.io/portfolio/"
+                    target="_blank"
+                    >Ishaan Gupta</a
+                  ><sup>*</sup>,</span
+                >
+                <span class="author-block">
+                  <a
+                    href="https://scholar.google.com/citations?user=Y4J5SOwAAAAJ"
+                    target="_blank"
+                    >Jaideep Srivastava</a
+                  ><sup></sup>,</span
+                >
+                <span class="author-block">
+                  <a href="https://dykang.github.io" target="_blank"
+                    >Dongyeop Kang</a
+                  ><sup></sup
+                ></span>
               </div>
 
               <div class="is-size-5 publication-authors">
-                <span class="author-block">University of Minnesota</span>
+                <span class="author-block">
+                  <a
+                    class="subtitle"
+                    style="color: black !important"
+                    href="https://minnesotanlp.github.io/"
+                    >Minnesota NLP Lab<img
+                      src="static/images/mnnlp.png"
+                      style="height: 1em; margin-inline: 5px"
+                    />, University of Minnesota</a
+                  ></span
+                >
+                <span class="eql-cntrb">
+                  <small
+                    ><br /><sup>*</sup>Core Contributor <sup>†</sup>Project
+                    Lead</small
+                  >
+                </span>
               </div>
               <div class="column has-text-centered">
                 <div class="publication-links">
@@ -152,7 +190,7 @@
                 influence of different factors on each encoding modality's
                 performance. This study highlights the current limitations and
                 charts future directions for LLMs in graph understanding and
-                reasoning tasks
+                reasoning tasks.
               </p>
             </div>
             <div class="column">
@@ -161,25 +199,9 @@
           </div>
         </div>
       </div>
-    </section>
-    <!-- End paper abstract -->
-
-    <section class="section hero is-small">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column is-full">
-            <img
-              src="static/images/experiment.png"
-              alt="Normal and Anomalous Representations"
-              class="center-image"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contributions -->
-    <section class="section hero is-light">
+      <!-- End paper abstract -->
+      <br />
+      <!-- Contributions -->
       <div class="container is-max-desktop">
         <h2 class="title is-3">Main Contributions</h2>
         <div class="content has-text-justified">
@@ -209,7 +231,11 @@
     <div class="container is-max-desktop">
       <nav class="tabs is-boxed is-centered is-large">
         <div class="container" style="padding-top: 20px">
-          <h2 class="title is-3 is-centered">GraphTMI</h2>
+          <h2 class="title is-3 is-centered"><b>GraphTMI</b></h2>
+          <div class="level-set has-text-justified is-size-5">
+            <p>You can explore Graph TMI dataset below</p>
+            <br />
+          </div>
           <ul>
             <li class="tab is-active" onclick="openTab(event,'Easy')">
               <a>Easy</a>
@@ -441,91 +467,155 @@
 
     <!-- End Table showing Motifs -->
 
-    <!-- Image carousel -->
     <section class="section hero is-light">
       <div class="container is-max-desktop">
-        <div class="hero-body">
-          <h2 class="title is-3">Key Results and Findings</h2>
-          <div class="level-set has-text-justified">
-            <p>Scroll to see Graphics of Our Key Results and Findings</p>
+        <h2 class="title is-3">
+          Node classification on a Graph using Text, Graph and Image Modalities
+        </h2>
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <img
+              src="static/images/experiment.png"
+              alt="Normal and Anomalous Representations"
+              class="center-image"
+            />
           </div>
-          <div id="results-carousel" class="carousel results-carousel">
-            <div class="item blend-img-item center-item-carousel">
-              <!-- Your image here -->
-              <img
-                class="center-image-carousel blend-img-background"
-                src="static/images/result_images/metric_modality_updated.png"
-                alt="free-text"
-              />
-              <h2 class="subtitle has-text-centered">
-                <strong>Comparing Modality Type on Mean Metrics</strong>
-              </h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image carousel -->
+    <section class="section hero is-small">
+      <div class="container is-max-desktop">
+        <div class="content">
+          <h2 class="title is-3">Key Takeaways</h2>
+          <br />
+          <p class="subtitle">
+            Scroll to see Graphics of Our Key Results and Findings
+          </p>
+          <div class="container">
+            <p class="subtitle has-text-centered">
+              <b>Overall Results</b>
+            </p>
+            <div id="carousel1" class="carousel results-carousel">
+              <div class="item">
+                <div style="display: flex; justify-content: center">
+                  <img
+                    src="static/images/result_images/compare_datasets.png"
+                    style="max-height: 360px"
+                  />
+                </div>
+                <p class="subtitle is-6 has-text-centered">
+                  <span>
+                    Each dataset and sampling type (x-axis) is mapped against
+                    mean metrics (y-axis), with bar textures distinguishing
+                    between ego graph (ego) and forest fire (ff) sampling; the
+                    metrics include</span
+                  >
+                  <span style="color: green"> accuracy rate</span> (↑),
+                  <span style="color: blue">mismatch rate</span> (↓),
+                  <span style="color: red">denial rate</span> (↓), and
+                  <span style="color: purple">token limit fraction</span
+                  ><span>
+                    (↓), indicating the desired trends for each. Graph
+                    structures of different datasets and sampling strategies
+                    influence node classification performance.</span
+                  >
+                </p>
+              </div>
+
+              <div class="item">
+                <div style="display: flex; justify-content: center">
+                  <img
+                    src="static/images/result_images/edge_rep.png"
+                    style="max-height: 360px"
+                  />
+                </div>
+                <p class="subtitle is-6 has-text-centered">
+                  We compare the edge representation type (x-axis) with the
+                  value of the mean metrics (y-axis). The desired trend is given
+                  in brackets for each metric. The highest performing edge
+                  representation is the “adjacency list” representation with the
+                  highest accuracy (A ↑) and low mismatch rate (M ↓), denial
+                  rate (D ↓), and token limit fraction (T ↓).
+                </p>
+              </div>
+
+              <div class="item">
+                <div style="display: flex; justify-content: center">
+                  <img
+                    src="static/images/result_images/image_settings_squares.png"
+                    style="max-height: 360px"
+                  />
+                </div>
+                <p class="subtitle is-6 has-text-centered">
+                  Our comparison of image representations (x-axis) with mean
+                  metrics (y-axis) shows that human readability of images
+                  correlates with classification performance, considering
+                  Accuracy Rate (A ↑), Mismatch Rate (M ↓), and Denial Rate (D
+                  ↓), with desired trends indicated in brackets.
+                </p>
+              </div>
+
+              <div class="item">
+                <div style="display: flex; justify-content: center">
+                  <img
+                    src="static/images/result_images/modality.png"
+                    style="max-height: 360px"
+                  />
+                </div>
+                <p class="subtitle is-6 has-text-centered">
+                  We compare the motif information (x-axis) to the mean metrics
+                  (y-axis). Desired trends are denoted in brackets. Metrics
+                  considered are Accuracy Rate (A ↑), Mismatch Rate (M ↓), and
+                  Denial Rate (D ↓). The highest performing motif information
+                  change “triangle and star attached to ?” has higher accuracy
+                  and lower mismatch and denial rate.
+                </p>
+              </div>
             </div>
-            <div class="item blend-img-item center-item-carousel">
-              <!-- Your image here -->
-              <img
-                class="center-image-carousel blend-img-background"
-                src="static/images/result_images/combo_task_heirarchy_updated.png"
-                alt="free-text"
-              />
-              <h2 class="subtitle has-text-centered">
-                <strong
-                  >Modality Encoder Trends based on graph task
-                  difficulty</strong
-                >
-              </h2>
-            </div>
-            <div class="item blend-img-item center-item-carousel">
-              <!-- Your image here -->
-              <img
-                class="center-image-carousel blend-img-background"
-                src="static/images/result_images/edge_rep.png"
-                alt="free-text"
-              />
-              <h2 class="subtitle has-text-centered">
-                <strong>Comparing Edge Respresentations on Mean Metrics</strong>
-              </h2>
-            </div>
-            <div class="item blend-img-item center-item-carousel">
-              <!-- Your image here -->
-              <img
-                class="center-image-carousel blend-img-background"
-                src="static/images/result_images/compare_datasets.png"
-                alt="free-text"
-              />
-              <h2 class="subtitle has-text-centered">
-                <strong
-                  >Comparing Mean Metrics on each dataset. Green is accuracy,
-                  Blue is Mismatch, Red is Denial and Pink is token limit
-                  Fraction</strong
-                >
-              </h2>
-            </div>
-            <div class="item blend-img-item center-item-carousel">
-              <!-- Your image here -->
-              <img
-                class="center-image-carousel blend-img-background"
-                src="static/images/result_images/modality.png"
-                alt="free-text"
-              />
-              <h2 class="subtitle has-text-centered">
-                <strong
-                  >Comparing Motif Respresentations on Mean Metrics</strong
-                >
-              </h2>
-            </div>
-            <div class="item blend-img-itemcenter-item-carousel">
-              <!-- Your image here -->
-              <img
-                class="center-image-carousel blend-img-background"
-                src="static/images/result_images/image_settings_squares.png"
-                alt="free-text"
-              />
-              <h2 class="subtitle has-text-centered">
-                <strong
-                  >Comparing Image Respresentations on Mean Metrics</strong
-                >
-              </h2>
+          </div>
+        </div>
+        <div class="hero-body">
+          <div class="container">
+            <p class="subtitle has-text-centered">
+              <b>Specific Results</b>
+            </p>
+            <div id="carousel1" class="carousel results-carousel">
+              <div class="item">
+                <div style="display: flex; justify-content: center">
+                  <img
+                    src="static/images/result_images/combo_task_heirarchy_updated.png"
+                    style="max-height: 360px"
+                  />
+                </div>
+                <p class="subtitle is-6 has-text-centered">
+                  Modality encoder trends (T= Text, M= Motif, I= Image) with
+                  graph task difficulty based on homophily and no. of motifs,
+                  highlight the
+                  <i
+                    >significance of integrating local and global information in
+                    LLM processing</i
+                  >
+                </p>
+              </div>
+
+              <div class="item">
+                <div style="display: flex; justify-content: center">
+                  <img
+                    src="static/images/result_images/metric_modality_updated.png"
+                    style="max-height: 360px"
+                  />
+                </div>
+                <p class="subtitle is-6 has-text-centered">
+                  We observe that while the text and image modalities have
+                  similar accuracy rates, the motif modality exhibits the
+                  highest mismatch rate, and the image modality stands out with
+                  the lowest denial rate and token limit fraction, as depicted
+                  along the mean metrics (y-axis) against each modality type
+                  (x-axis)
+                </p>
+              </div>
             </div>
           </div>
         </div>

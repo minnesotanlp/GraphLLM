@@ -1,3 +1,8 @@
 results/
 backup_code/
 logs/
+notebooks/
+code/
+assets/
+.conda/
+
